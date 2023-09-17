@@ -28,13 +28,40 @@ Inside of your Astro project, you'll see the following folders and files:
 ```text
 ├── public/
 ├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
+│   ├── components/
+│   │   ├── BaseHead.astro
+│   │   ├── Footer.astro
+│   │   ├── FormattedDate.astro
+│   │   ├── Header.astro
+│   │   ├── HeaderLink.astro
+│   │   └── WordPressPosts.astro
+│   ├── content/
+│   │   ├── blog/
+│   │   │   ├── first-post.md
+│   │   │   ├── markdown-style-guide.md
+│   │   │   ├── second-post.md
+│   │   │   ├── third-post.md
+│   │   │   └── using-mdx.mdx
+│   │   └── config.ts
+│   ├── layouts/
+│   │   └── BlogPost.astro
+│   ├── pages/
+│   │   ├── blog/
+│   │   │   ├── [...slug].astro
+│   │   │   └── Index.astro
+│   │   ├── about.astro
+│   │   ├── index.astro
+│   │   └── rss.xml.js
+│   ├── styles/
+│   │   └── global.css
+│   ├── consts.ts
+│   ├── env.d.ts
 ├── astro.config.mjs
 ├── README.md
 ├── package.json
+├── package-lock.json
+├── tsconfig.json
+├── tailwind.config.cjs
 └── tsconfig.json
 ```
 
@@ -66,3 +93,43 @@ Check out [our documentation](https://docs.astro.build) or jump into our [Discor
 ## Credit
 
 This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+
+
+## Notes
+•	public/
+•	src/
+    o	components/
+        	BaseHead.astro
+        	Footer.astro
+        	FormattedDate.astro
+        	Header.astro
+        	HeaderLink.astro
+        	WordPressPosts.astro
+    o	content/
+        	blog
+            •	first-post.md
+            •	markdown-style-guide.md
+            •	second-post.md
+            •	third-post.md
+            •	using-mdx.mdx
+        	config.ts
+    o	layouts/
+        	BlogPost.astro
+    o	pages/
+        	blog
+            •	[…slug].astro
+            •	Index.astro
+        	about.astro
+        	index.astro
+        	rss.xml.js
+    o	styles
+        	global.css
+    o	consts.ts
+    o	env.d.ts
+•	astro.config.mjs
+•	README.md
+•	package.json
+•	package-lock.json
+•	tsconfig.json
+•	tailwind.config.cjs
+•	tsconfig.json
