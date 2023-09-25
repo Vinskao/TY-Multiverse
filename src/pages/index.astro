@@ -26,6 +26,7 @@ const projects = (await getCollection('work'))
 ---
 
 <BaseLayout>
+	
 	<div class="stack gap-20 lg:gap-48">
 		<div class="wrapper stack gap-8 lg:gap-20">
 			<header class="hero">
@@ -39,9 +40,13 @@ const projects = (await getCollection('work'))
 						<Pill><Icon icon="microphone-stage" size="1.33em" /> Toastmaster</Pill>
 						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
 					</div>
+					<div class="roles-image" style="width: 300px; height: 270px; border: 2px solid purple; border-radius: 10%; overflow: hidden;">
+						<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vinskao" alt="Top Languages" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0;">
+					</div>
+					
 				</Hero>
 				<div class="video-container">
-					<video autoplay loop muted width="480" height="615" style="border-radius: 2.5rem; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4); ">
+					<video autoplay loop muted width="479" height="613" style="border-radius: 2.5rem; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4); ">
 						<source src="/assets/protrait.mp4" type="video/mp4">
 						Your browser does not support the video tag.
 					</video>
@@ -251,3 +256,5 @@ const projects = (await getCollection('work'))
 		}
 	}
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" async></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js" async></script>
