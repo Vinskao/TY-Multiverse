@@ -24,15 +24,14 @@ const projects = (await getCollection('work'))
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kalam&display=swap">
 <BaseLayout>
-	
 	<div class="stack gap-20 lg:gap-48">
 		<div class="wrapper stack gap-8 lg:gap-20">
 			<header class="hero">
 				<Hero
-					title="Welcome to TY Multiverse!"
-					tagline="I am your host TY who is currently based in Taipei, Taiwan."
+					title="Welcome to TY's home!"
+					tagline="I'm Tianyi, your friendly tour guide, currently residing in Taipei, Taiwan."
 					align="start"
 				>
 					<div class="roles">
@@ -50,6 +49,11 @@ const projects = (await getCollection('work'))
 						<source src="/assets/protrait.mp4" type="video/mp4">
 						Your browser does not support the video tag.
 					</video>
+					<div class="text-overlay">
+						"I aim to be a valuable developer, part of an exceptional team, using technology and a passion for innovation to make a difference in the world."
+						
+					</div>
+					
 				</div>
 
 			</header>
@@ -112,7 +116,54 @@ const projects = (await getCollection('work'))
 </BaseLayout>
 
 <style>
+	.video-container {
+		position: relative; 
+	}
+	
+	.text-overlay {
+		position: absolute; 
+		top: 25%; 
+		left: 64%; 
+		transform: translate(-135%, -42%); 
+		color: #fafafa;  
+		padding: 10px; 
+		z-index: 1; 
+		font-size: 20px;
+		width: 55%;
+		font-weight: bold;
+		font-family: 'Kalam', cursive;
+		opacity: 0; 
+		background: linear-gradient(
+        166deg, 
+        rgba(128, 0, 128, 0.65) 0%, 
+        rgba(128, 0, 128, 0.25) 15%, 
+        rgba(128, 0, 128, 0.55) 30%, 
+        rgba(128, 0, 128, 0.15) 45%, 
+        rgba(128, 0, 128, 0.65) 60%, 
+        rgba(128, 0, 128, 0.40) 75%, 
+        rgba(128, 0, 128, 0.90) 100%
+    	);
+		background-size: cover; 
+		background-repeat: no-repeat; 
+		border-radius: 30px; 
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+   		animation: fadeIn 1s ease-in forwards;
+		backdrop-filter: blur(10px);
+		padding: 25px;
+		word-spacing: 10px;
+		box-shadow: 0 0 40px rgba(128, 0, 128, 0.5);
+		transition: top 0.5s ease, left 10s ease;
+		letter-spacing: 1.5px;
+	}
 
+	@keyframes fadeIn {
+		from {
+			opacity: 0; /* 从透明度 0 开始 */
+		}
+		to {
+			opacity: 1; /* 渐变到完全不透明 */
+		}
+	}
 	.hero {
 		display: flex;
 		flex-direction: column;
@@ -259,6 +310,7 @@ const projects = (await getCollection('work'))
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" async></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js" async></script>
 <script>
+
 const dataPoints = [];
 const dateValues = [];
 
@@ -266,9 +318,8 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	$(document).ready(function() {
 		let jsonData; 
-		// 这是在 DOM 加载完成后运行的代码
 		$.getJSON("https://firebasestorage.googleapis.com/v0/b/graph-2cfc7.appspot.com/o/graph.json?alt=media&token=fae35fec-40f6-4244-a299-ff484d94bedc", function(response) {
-			jsonData = response; // 将 response 赋值给 jsonData
+			jsonData = response; 
 			const contributionDays = jsonData.data.user.contributionsCollection.contributionCalendar.weeks
 				.flatMap(week => week.contributionDays);
 			let month;
