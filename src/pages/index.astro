@@ -40,13 +40,13 @@ const projects = (await getCollection('work'))
 						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
 					</div>
 				</Hero>
+				<div class="video-container">
+					<video autoplay loop muted width="480" height="615" style="border-radius: 2.5rem; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4); ">
+						<source src="/assets/protrait.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+				</div>
 
-				<img
-					alt="TY smiling"
-					width="480"
-					height="620"
-					src="/assets/portrait.jpg"
-				/>
 			</header>
 
 			<Skills />
@@ -107,6 +107,7 @@ const projects = (await getCollection('work'))
 </BaseLayout>
 
 <style>
+
 	.hero {
 		display: flex;
 		flex-direction: column;
