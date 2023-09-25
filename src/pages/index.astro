@@ -40,7 +40,7 @@ const projects = (await getCollection('work'))
 						<Pill><Icon icon="microphone-stage" size="1.33em" /> Toastmaster</Pill>
 						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
 					</div>
-					<div class="roles-image" style="width: 300px; height: 270px; border: 2px solid purple; border-radius: 10%; overflow: hidden;">
+					<div id="roles-image" class="roles-image" style="width: 300px; height: 270px; border: 5px solid purple; border-radius: 10%; overflow: hidden;">
 						<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vinskao" alt="Top Languages" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0; opacity: 0.9;">
 					</div>
 					
@@ -258,3 +258,75 @@ const projects = (await getCollection('work'))
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" async></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js" async></script>
+<script>
+const dataPoints = [];
+const dateValues = [];
+
+window.addEventListener('DOMContentLoaded', function() {
+
+	$(document).ready(function() {
+		let jsonData; 
+		// 这是在 DOM 加载完成后运行的代码
+		$.getJSON("https://firebasestorage.googleapis.com/v0/b/graph-2cfc7.appspot.com/o/graph.json?alt=media&token=fae35fec-40f6-4244-a299-ff484d94bedc", function(response) {
+			jsonData = response; // 将 response 赋值给 jsonData
+			const contributionDays = jsonData.data.user.contributionsCollection.contributionCalendar.weeks
+				.flatMap(week => week.contributionDays);
+			let month;
+			let dayOfMonth;
+			let year;
+			let fullDate;
+			contributionDays.forEach(day => {
+				const date = new Date(day.date);
+				month = date.toLocaleString('default', { month: 'short' });
+				dayOfMonth = date.getDate(); 
+				year = date.getFullYear(); 
+				fullDate = month + dayOfMonth +' '+ year;
+				const contributionCount = day.contributionCount;
+				dataPoints.push([fullDate, contributionCount]);
+			});
+			
+			console.log(dataPoints);
+
+
+			let heightScale
+			let xScale
+			let xAxisScale
+			let yAxisScale
+
+			let width = 800
+			let height = 600
+			let padding = 40
+
+			let svg = d3.select('svg')
+
+			let drawCanvas = () => {
+				svg.attr('width', width)
+				svg.attr('height', height)
+			}
+
+			let generateScales = () => {
+
+			}
+
+			let drawBars = () => {
+
+			}
+
+			let generateAxes = () => {
+
+			}
+
+			
+		
+		});
+		
+	});
+});
+
+</script>
+
+
+
+
+
+
