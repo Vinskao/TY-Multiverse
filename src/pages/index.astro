@@ -52,8 +52,9 @@ const projects = (await getCollection('work'))
 					<div id="roles-image" class="roles-image" style="width: 300px; height: 270px; border: 5px solid purple; border-radius: 10%; overflow: hidden;">
 						<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vinskao" alt="Top Languages" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0; opacity: 0.9;">
 					</div>
-					<iframe src="https://git-hub-contribution-bar-chart.vercel.app" width="600" height="320" frameborder="0"></iframe>
-
+					<div id="barchart" class="barchart" style="width: 600px; height: 320px; background-color: rgba(206, 191, 228, 0.9); border-radius: 10%; overflow: hidden;">
+						<iframe src="https://git-hub-contribution-bar-chart.vercel.app" width="600" height="320" frameborder="0" frameborder="0" scrolling="no"></iframe>
+					</div>
 
 				</Hero>
 				<div class="video-container">
@@ -129,6 +130,19 @@ const projects = (await getCollection('work'))
 </BaseLayout>
 
 <style>
+	.barchart {
+		width: 600px;
+		height: 320px;
+		background-color: #AB83E5;
+		border-radius: 10%;
+		overflow: hidden;
+		transition: border 0.5s ease;
+		border: 15px solid transparent; 
+	}
+
+	.barchart:hover {
+		border: 5px solid #AB83E5; /* 鼠标悬停时显示边框 */
+	}
 	.video-container {
 		position: relative; 
 	}
