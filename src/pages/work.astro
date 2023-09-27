@@ -12,6 +12,7 @@ const projects = (await getCollection('work')).sort(
 	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
 ---
+<body>
 <!-- Messenger Chat Plugin Code -->
 <div id="fb-root"></div>
 
@@ -65,3 +66,4 @@ const projects = (await getCollection('work')).sort(
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
 	</script>
+</body>
