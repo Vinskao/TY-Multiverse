@@ -29,16 +29,15 @@ const projects = (await getCollection('work'))
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" async></script>
 <script src="https://d3js.org/d3.v5.min.js" async></script>
 </head>
+
 <body>
-	<div class="container">
-
-		<svg id="canvas" width="600" height="300" class="contri">
-			<text id="title" x="300" y="40" fill="blue" font-size="20" text-anchor="middle">Github Contributions</text>
-		</svg>
-	</div>
-
+	<svg id="canvas" width="600" height="300" class="contri">
+		<text id="title" x="300" y="40" fill="blue" font-size="20" text-anchor="middle">Github Contributions</text>
+	</svg>
 	
 <BaseLayout>
+	
+	
 	<div class="stack gap-20 lg:gap-48">
 		
 		<div class="wrapper stack gap-8 lg:gap-20">
@@ -72,6 +71,7 @@ const projects = (await getCollection('work'))
 						"I aim to be a valuable developer, part of an exceptional team, using technology and a passion for innovation to make a difference in the world."
 					</div>
 				</div>
+				
 				
 
 			</header>
@@ -135,23 +135,12 @@ const projects = (await getCollection('work'))
 
 <style>
 	.contri {
-		position: absolute;
+		/* position: absolute; */
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(50%, 50%);
         z-index: 999; 
     }
-
-	.container {
-		display: absolute;
-		flex-direction: column;
-		align-items: flex-start;
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 999;
-		padding: 20px; 
-	}
 
 	#canvas {
 		min-height: 300px;
@@ -373,7 +362,9 @@ const monthMap = {
   '11月': 'Nov',
   '12月': 'Dec',
 };
-window.addEventListener('DOMContentLoaded', function() {
+addEventListener('load', () => {
+
+if (typeof window !== 'undefined') {
 	console.log('DOM已加載');
 	$(document).ready(function() {
 		let jsonData; 
@@ -512,7 +503,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		});
 		
 	});
-});
+};
+})
 
 </script>
 

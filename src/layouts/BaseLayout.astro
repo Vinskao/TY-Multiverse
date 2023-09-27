@@ -7,17 +7,23 @@ import MainHead from '../components/MainHead.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
+
 interface Props {
 	title?: string | undefined;
 	description?: string | undefined;
 }
 
 const { title, description } = Astro.props;
+
+
+
+
 ---
 
 <html lang="en">
 	<head>
 		<MainHead title={title} description={description} />
+		
 	</head>
 	<body>
 		<div class="stack backgrounds">
@@ -115,4 +121,5 @@ const { title, description } = Astro.props;
 			}
 		</style>
 	</body>
+	
 </html>
