@@ -10,7 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^3.1.2"
+    "astro": "^3.1.4"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.19"
