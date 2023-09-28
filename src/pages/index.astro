@@ -30,6 +30,42 @@ const projects = (await getCollection('work'))
 <script src="https://d3js.org/d3.v5.min.js" async></script>
 </head>
 
+<!-- CORS -->
+<script>
+import express from 'express';
+import cors from 'cors';
+const app = express();
+app.use(cors());
+
+const corsOptions = {
+  origin: '*',
+  methods: '*', 
+  allowedHeaders: 'X-Custom-Header',
+  maxAge: 86400, // 24 hours in seconds
+};
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://www.facebook.com' );
+
+  next();
+});
+
+// 处理您的路由和请求
+app.get('/your-endpoint', (req, res) => {
+  // 处理请求并向客户端发送响应
+  res.json({ message: 'Hello from the server!' });
+});
+
+// 启动服务器
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+</script>
+<!-- CORS -->
+
+
 <body>
 <!-- Messenger Chat Plugin Code -->
 <div id="fb-root"></div>
@@ -53,7 +89,7 @@ const projects = (await getCollection('work'))
 					<div class="roles">
 						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
 						<Pill><Icon icon="microphone-stage" size="1.33em" /> Toastmaster</Pill>
-						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
+						<Pill><Icon icon="pencil-line" size="1.33em" /> Former Project Manager</Pill>
 					</div>
 					<div id="roles-image" class="roles-image" style="width: 300px; height: 270px; border: 5px solid purple; border-radius: 10%; overflow: hidden;">
 						<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vinskao" alt="Top Languages" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0; opacity: 0.9;">
