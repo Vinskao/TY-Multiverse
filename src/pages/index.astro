@@ -32,35 +32,11 @@ const projects = (await getCollection('work'))
 
 <!-- CORS -->
 <script>
+
 import express from 'express';
 import cors from 'cors';
 const app = express();
 app.use(cors());
-
-const corsOptions = {
-  origin: '*',
-  methods: '*', 
-  allowedHeaders: 'X-Custom-Header',
-  maxAge: 86400, // 24 hours in seconds
-};
-
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.facebook.com' );
-
-  next();
-});
-
-// 处理您的路由和请求
-app.get('/your-endpoint', (req, res) => {
-  // 处理请求并向客户端发送响应
-  res.json({ message: 'Hello from the server!' });
-});
-
-// 启动服务器
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 
 </script>
 <!-- CORS -->
@@ -71,7 +47,7 @@ app.listen(PORT, () => {
 <div id="fb-root"></div>
 
 <!-- Your Chat Plugin code -->
-<div id="fb-customer-chat" class="fb-customerchat">
+<div id="fb-customer-chat" class="fb-customerchat" page_id="123241060880206">
 </div>
 <BaseLayout>
 	<div class="stack gap-20 lg:gap-48">
