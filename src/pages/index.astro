@@ -72,7 +72,7 @@ app.use(cors());
 						<Pill><Icon icon="pencil-line" size="1.33em" /> Former Project Manager</Pill>
 					</div>
 					<div style="display: flex; align-items: center;" >
-						<div id="roles-image" class="roles-image" style="width: 300px; height: 270px; border: 5px solid purple; border-radius: 10%; overflow: hidden;">
+						<div class="roles-image" style="width: 300px; height: 270px; border: 5px solid purple; border-radius: 10%; overflow: hidden;">
 						  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vinskao" alt="Top Languages" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0; opacity: 0.9;">
 						</div>
 						<div class="icon-container" >
@@ -264,7 +264,7 @@ app.use(cors());
 		top: 5px;
 		left: 110%; 
 		transition: opacity 0.3s ease;
-		z-index: 2;
+		z-index: 999;
 	}
 
 	.horizontal-icons div:hover .tooltip {
@@ -277,6 +277,7 @@ app.use(cors());
 		background-color: rgba(200, 150, 255, 0.3); 
 		border-radius: 10%;
 		margin-top: 1px;
+		z-index: 999;
 	}
 
 	.horizontal-icons:hover {
@@ -291,8 +292,7 @@ app.use(cors());
 		flex-direction: column;
 		justify-content: flex-start;
 		position: relative;
-		
-		
+			
 	}
 
 	.icon-container img {
@@ -329,8 +329,8 @@ app.use(cors());
 	
 	.text-overlay {
 		position: absolute; 
-		top: 25%; 
-		left: 64%; 
+		top: 3%; 
+		left: -10%; 
 		transform: translate(-135%, -42%); 
 		color: #fafafa;  
 		padding: 10px; 
@@ -361,6 +361,26 @@ app.use(cors());
 		box-shadow: 0 0 40px rgba(128, 0, 128, 0.5);
 		transition: top 0.5s ease, left 10s ease;
 		letter-spacing: 1.5px;
+		transform: scale(1); 
+   		transition: transform 0.3s ease, top 0.5s ease, left 10s ease; 
+		
+	}
+
+	.text-overlay:hover {
+		
+		transform: scale(1.2);
+		transition: transform 0.3s ease;
+		top: 3%; 
+    	left: -10%; 
+	}
+	
+	.roles-image {
+		transition: transform 0.3s ease, top 0.5s ease, left 10s ease; 
+	}
+	
+	.roles-image:hover {
+		transform: scale(1.2);
+		transition: transform 0.3s ease;
 	}
 
 	@keyframes fadeIn {
