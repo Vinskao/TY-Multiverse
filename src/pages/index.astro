@@ -71,15 +71,15 @@ app.use(cors());
 						<Pill><Icon icon="microphone-stage" size="1.33em" /> Toastmaster</Pill>
 						<Pill><Icon icon="pencil-line" size="1.33em" /> Former Project Manager</Pill>
 					</div>
-					<div style="display: flex; align-items: center;">
+					<div style="display: flex; align-items: center;" >
 						<div id="roles-image" class="roles-image" style="width: 300px; height: 270px; border: 5px solid purple; border-radius: 10%; overflow: hidden;">
 						  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vinskao" alt="Top Languages" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0; opacity: 0.9;">
 						</div>
-						<div class="icon-container">
+						<div class="icon-container" >
 							<div class='0' class="icon-wrapper" >
 								<div class="horizontal-icons">
 									<div>
-										<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+										<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" >
 										<div class="tooltip">Java</div>
 									</div>
 								</div>
@@ -87,7 +87,7 @@ app.use(cors());
 							<div class='1'>
 								<div class="horizontal-icons">
 									<div>
-									<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+									<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" >
 									<div class="tooltip">JavaScript</div>
 									</div>
 									<div>
@@ -137,8 +137,8 @@ app.use(cors());
 									<div class="tooltip">PostgreSQL</div>
 									</div>
 									<div>
-									<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg">
-									<div class="tooltip">Microsoft SQL Server</div>
+										<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" >
+										<div class="tooltip">Microsoft SQL Server</div>
 									</div>
 								</div>
 							</div>
@@ -157,10 +157,11 @@ app.use(cors());
 									</div>
 								</div>
 							</div>
+
 							<div class='5'>
 								<div class="horizontal-icons">
 									<div>
-									<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original-wordmark.svg">
+									<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg">
 									<div class="tooltip">Jira</div>
 									</div>
 									<div>
@@ -250,73 +251,64 @@ app.use(cors());
 </BaseLayout>
 
 <style>
-.icon-container {
-    display: flex;
-    align-items: flex-start;
-}
 
-.horizontal-icons div {
-    position: relative;
-    margin-right: 10px; 
-}
+  	.icon-container div .tooltip {
+		opacity: 0; 
+		position: absolute;
+		background-color: rgba(75, 0, 130, 0.7);
+		color: white;
+		padding: 4px 8px;
+		border-radius: 10px;
+		font-size: 18px;
+		white-space: nowrap;
+		top: 5px;
+		left: 110%; 
+		transition: opacity 0.3s ease;
+		z-index: 2;
+	}
 
-.tooltip {
-    opacity: 0;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    top: -25px; 
-    left: 50%;
-    transform: translateX(-50%);
-    transition: opacity 0.3s ease;
-}
-
-.horizontal-icons div:hover .tooltip {
-    opacity: 1;
-}
-
-
+	.horizontal-icons div:hover .tooltip {
+		opacity: 1;
+	}
 
 	.horizontal-icons {
 		display: flex;
+		position: relative;
+		background-color: rgba(200, 150, 255, 0.3); 
+		border-radius: 10%;
+		margin-top: 1px;
+	}
+
+	.horizontal-icons:hover {
+		transform: scale(1.2);
+		transition: transform 0.3s ease;
 	}
 
 	.icon-container {
+		position: relative; 
 		margin-left: 20px;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
+		position: relative;
+		
+		
 	}
 
 	.icon-container img {
 		width: 30px;
 		margin-left: 5px;
-		border-radius: 30%;
 		transition: transform 0.3s ease;
 		cursor: pointer;
+		margin: px;
+		
 	}
 
 	.icon-container img:hover {
 		transform: scale(1.5); 
 	}
 
-	.icon-container div .tooltip {
-		opacity: 0; 
-		position: absolute;
-		background-color: rgba(0, 0, 0, 0.7);
-		color: white;
-		padding: 4px 8px;
-		border-radius: 4px;
-		font-size: 12px;
-		white-space: nowrap;
-		left: -35px;
-		top: -50px; 
-		transition: opacity 0.3s ease;
-	}
+	
 
 	.barchart {
 		width: 600px;
