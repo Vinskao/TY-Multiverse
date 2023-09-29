@@ -173,7 +173,7 @@ app.use(cors());
 						</div>
 					</div>
 
-					<div id="barchart" class="barchart" style="width: 600px; height: 330px; background-color: rgba(206, 191, 228, 0.9); border-radius: 10%; overflow: hidden;">
+					<div class="barchart" style="width: 600px; height: 330px; background-color: rgba(206, 191, 228, 0.9); border-radius: 10%; overflow: hidden;">
 						<iframe src="https://git-hub-contribution-bar-chart.vercel.app" width="600" height="320" frameborder="0" frameborder="0" scrolling="no"></iframe>
 					</div>
 					
@@ -318,10 +318,14 @@ app.use(cors());
 		overflow: hidden;
 		transition: border 0.3s ease;
 		border: 10px solid transparent; 
+		transition: transform 0.3s ease, top 0.5s ease, left 10s ease;
 	}
 
 	.barchart:hover {
 		border: 10px solid #AB83E5; 
+		transform: scale(1.3); 
+		z-index: 999;
+		transition: transform 0.3s ease;
 	}
 	.video-container {
 		position: relative; 
