@@ -26,8 +26,12 @@ const projects = (await getCollection('work'))
 ---
 <head>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kalam&display=swap">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+          
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" async></script>
 <script src="https://d3js.org/d3.v5.min.js" async></script>
+
 </head>
 
 <!-- CORS -->
@@ -47,7 +51,7 @@ app.use(cors());
 <div id="fb-root"></div>
 
 <!-- Your Chat Plugin code -->
-<div id="fb-customer-chat" class="fb-customerchat" page_id="123241060880206">
+<div id="fb-customer-chat" class="fb-customerchat">
 </div>
 <BaseLayout>
 	<div class="stack gap-20 lg:gap-48">
@@ -67,12 +71,56 @@ app.use(cors());
 						<Pill><Icon icon="microphone-stage" size="1.33em" /> Toastmaster</Pill>
 						<Pill><Icon icon="pencil-line" size="1.33em" /> Former Project Manager</Pill>
 					</div>
-					<div id="roles-image" class="roles-image" style="width: 300px; height: 270px; border: 5px solid purple; border-radius: 10%; overflow: hidden;">
-						<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vinskao" alt="Top Languages" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0; opacity: 0.9;">
-					</div>
+					<div style="display: flex; align-items: center;">
+						<div id="roles-image" class="roles-image" style="width: 300px; height: 270px; border: 5px solid purple; border-radius: 10%; overflow: hidden;">
+						  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vinskao" alt="Top Languages" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0; opacity: 0.9;">
+						</div>
+						
+						<div style="display: flex; flex-direction: column; justify-content: flex-start; margin-left: 20px;">
+						  <div style="display: flex; align-items: center; margin-top: 2px;">
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java Icon" style="width: 30px; margin-left: 5px; border-radius: 30%">
+						  </div>
+						  <div style="display: flex; align-items: center; margin-top: 2px;">
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" style="width: 30px; margin-left: 5px; border-radius: 30%"/>
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" style="width: 30px; margin-left: 5px; border-radius: 30%" />
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/d3js/d3js-original.svg" style="width: 30px; margin-left: 5px; border-radius: 30%" />
+							
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg"style="width: 30px; margin-left: 5px; border-radius: 30%" />
+
+						  </div>
+						  <div style="display: flex; align-items: center; margin-top: 2px;">
+							
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"style="width: 30px; margin-left: 5px; border-radius: 30%" />
+							
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"style="width: 30px; margin-left: 5px; border-radius: 30%" />
+          
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" style="width: 30px; margin-left: 5px; border-radius: 30%" />
+          
+          
+						  </div>
+						  <div style="display: flex; align-items: center; margin-top: 2px;">
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" style="width: 30px; margin-left: 5px; border-radius: 30%"/>
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"style="width: 30px; margin-left: 5px; border-radius: 30%" />
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" style="width: 30px; margin-left: 5px; border-radius: 30%"/>		
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"style="width: 30px; margin-left: 5px; border-radius: 30%" />
+
+						  </div>
+						  <div style="display: flex; align-items: center; margin-top: 2px;">
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg" style="width: 30px; margin-left: 5px; border-radius: 30%"/>
+                    
+						  </div>
+						  <div style="display: flex; align-items: center; margin-top: 2px;">
+
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original-wordmark.svg" style="width: 30px; margin-left: 5px; border-radius: 30%" />
+                              
+						  </div>
+						</div>
+					  </div>
+
 					<div id="barchart" class="barchart" style="width: 600px; height: 330px; background-color: rgba(206, 191, 228, 0.9); border-radius: 10%; overflow: hidden;">
 						<iframe src="https://git-hub-contribution-bar-chart.vercel.app" width="600" height="320" frameborder="0" frameborder="0" scrolling="no"></iframe>
 					</div>
+					
 
 				</Hero>
 				<div class="video-container">
