@@ -21,22 +21,51 @@ const links = [
 ---
 
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <html>
 <head>
     <style>
         /* 全屏遮罩 */
         .overlay {
-            display: none; /* 初始时不显示 */
+            display: none; 
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9); /* 深黑色背景 */
+            background: rgba(0, 0, 0, 0.9);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 999; /* 确保在最顶层 */
+            z-index: 999; 
+        }
+        
+        /* 图像容器 */
+        .image-container {
+            overflow: auto; /* 启用滚动条 */
+            white-space: nowrap; /* 防止换行 */
+        }
+        
+        /* 图像样式 */
+        .image-container img {
+            width: 240px;
+            height: auto;
+            margin-right: 20px; /* 图像之间的间距 */
+        }
+		/* 使用Webkit前缀创建自定义滚动条 */
+		.scrollbar {
+            width: 100%;
+            height: 20px;
+            background: black;
+            overflow-x: auto; /* 使用overflow-x来控制横向滚动条 */
+            -webkit-overflow-scrolling: touch; /* 启用平滑滚动（仅适用于WebKit浏览器） */
+        }
+
+        .scroll-thumb {
+            width: 20px;
+            height: 20px;
+            background: pink;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -50,25 +79,60 @@ const links = [
         <main class="wrapper stack gap-8">
             <Hero
                 title="Palais"
-                tagline="See my most recent projects below to get an idea of my past experience."
+                tagline="Welcome to Lily Palais."
                 align="start"
             />
-            
+			<h1>八食</h1>
+			<h1>初桑</h1>
+			<h1>肆門</h1>
+			<h1>Phénix</h1>
+			<h1>Buse</h1>
+			<h1>家累</h1>
+			<h1>塵民</h1>
+			<h1>古女</h1>
+			<h1>獄女</h1>
+			<div class="image-container">
+				<img alt="Wavo" src="/assets/Wavo.png">
+                <img alt="Chiaki" src="/assets/Chiaki.png">
+				<img alt="Sayuri" src="/assets/Sayuri.png">
+                <img alt="Hitomi" src="/assets/Hitomi.png">
+				<img alt="Akimoto_Yuko" src="/assets/Akimoto_Yuko.png">
+                <img alt="Etsuko" src="/assets/Etsuko.png">
+                <img alt="Masako" src="/assets/Masako.png">
+				
+            </div>
+			<div class="image-container">
+				<img alt="Sorane" src="/assets/Sorane.png">
+                <img alt="Kyu" src="/assets/Kyu.png">
+				<img alt="Riuri" src="/assets/Riuri.png">
+				<img alt="Kamira" src="/assets/Kamira.png">
+                <img alt="Valmet" src="/assets/Valmet.png">
+
+
+            </div>
+
+            <div class="image-container">
+                <img alt="samui" src="/assets/Samui.png">
+                <img alt="Doire_Evewch" src="/assets/Doire_Evewch.png">
+				<img alt="Branwen" src="/assets/Branwen.png">
+				<img alt="Uiobbeci" src="/assets/Uiobbeci.png">
+                <img alt="Draeny_Chevrem" src="/assets/Draeny_Chevrem.png">
+				<img alt="Yui" src="/assets/Yui.png">
+            </div>
         </main>
     </div>
 </BaseLayout>
 
 <!-- 全屏遮罩 -->
+
 <div class="overlay" id="passwordOverlay">
     <script>
-        // Check if the user has already been authenticated
-        var isAuthenticated = false; // Initially set to false
+        var isAuthenticated = false; 
       
         if (!isAuthenticated) {
           var password = prompt("請輸入密碼", "")
-          if (password === "123") {
-            isAuthenticated = true; // Set the isAuthenticated flag to true
-            // 隐藏遮罩
+          if (password === "1") {
+            isAuthenticated = true; 
             document.getElementById('passwordOverlay').style.display = 'none';
           } else {
             alert('請再輸入一次密碼');
