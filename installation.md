@@ -1,4 +1,6 @@
 npm install
+npm install dotenv
+npm install axios
 npm install astro
 
 npm install express

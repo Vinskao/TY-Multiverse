@@ -23,43 +23,36 @@ const links = [
 <body>
 
 <BaseLayout
-	title="My Work | Tianyi Kao"
+	title="Palais | Wavo Yuropha"
 	description="Learn about TY's most recent projects"
 >
 	<div class="stack gap-20">
 		<main class="wrapper stack gap-8">
 			<Hero
-				title="My Work"
+				title="Palais"
 				tagline="See my most recent projects below to get an idea of my past experience."
 				align="start"
 			/>
-			<Grid variant="offset">
-				{
-					projects.map((project, index) => (
-						<li>
-							<a href={links[index]}>
-								<PortfolioPreview project={project} />
-							</a>
-						</li>
-					))
-				}
-			</Grid>
+			
 			
 		</main>
-		<ContactCTA />
 	</div>
 </BaseLayout>
 
 </body>
 
 <script>
-    var password = prompt("請輸入密碼","")
-    if (password=="123"){
-        alert('Welcome!');
-        location.href='.';
-        return;
-    } else {
-    alert('請再輸入一次密碼');
-    location.href='examples/javascript/16ex2.html';
-    }
-</script>
+	// Check if the user has already been authenticated
+	var isAuthenticated = false; // Initially set to false
+  
+	if (!isAuthenticated) {
+	  var password = prompt("請輸入密碼", "")
+	  if (password === "123") {
+		isAuthenticated = true; // Set the isAuthenticated flag to true
+		alert('Welcome!');
+	  } else {
+		alert('請再輸入一次密碼');
+		location.href = 'examples/javascript/16ex2.html';
+	  }
+	}
+  </script>
