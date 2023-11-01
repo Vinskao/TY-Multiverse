@@ -19,7 +19,16 @@ const projects = (await getCollection('work')).sort(
 <html>
 <head>
     <style>
-        /* 全屏遮罩 */
+        main.wrapper {
+            margin: 5%; 
+            padding: 0; 
+            max-width: 100%; 
+        }
+
+        main.wrapper .stack {
+            gap: 10px;
+        }
+
         .overlay {
             display: none; 
             position: fixed;
@@ -61,6 +70,20 @@ const projects = (await getCollection('work')).sort(
             background: pink;
             cursor: pointer;
         }
+
+        .image-text {
+            background-image: url('/path-to-your-image.png'); /* 设置背景图像的路径 */
+            background-size: contain; /* 根据容器大小自适应缩放背景图像 */
+            background-repeat: no-repeat;
+            width: 240px; /* 与图像宽度一致 */
+            height: auto; /* 自适应高度 */
+        }
+
+.image-text-content {
+    color: transparent; /* 隐藏文本内容 */
+    text-align: center; /* 文本水平居中 */
+    padding: 10px; /* 调整文本与边界的间距 */
+}
     </style>
 </head>
 <body>
@@ -86,7 +109,12 @@ const projects = (await getCollection('work')).sort(
 			<h1>古女</h1>
 			<h1>獄女</h1>
 			<div class="image-container">
-				<img alt="Wavo" src="/assets/Wavo.png">
+                <div class="image-text">
+                    <div class="image-text-content">
+                        八食
+                    </div>
+                </div>
+                <img alt="Wavo" src="/assets/Wavo.png">
                 <img alt="Chiaki" src="/assets/Chiaki.png">
 				<img alt="Sayuri" src="/assets/Sayuri.png">
                 <img alt="Hitomi" src="/assets/Hitomi.png">
@@ -95,24 +123,43 @@ const projects = (await getCollection('work')).sort(
                 <img alt="Masako" src="/assets/Masako.png">
 				
             </div>
+
+            <div class="image-container">
+                <img alt="Médicis_Monroe" src="/assets/Médicis_Monroe.png">
+
+            </div>
+
 			<div class="image-container">
 				<img alt="Sorane" src="/assets/Sorane.png">
                 <img alt="Kyu" src="/assets/Kyu.png">
 				<img alt="Riuri" src="/assets/Riuri.png">
+                <img alt="Natsumi" src="/assets/Natsumi.png">
 				<img alt="Kamira" src="/assets/Kamira.png">
+                <img alt="Kazuko" src="/assets/Kazuko.png">
+                <img alt="Miyu" src="/assets/Miyu.png">
                 <img alt="Valmet" src="/assets/Valmet.png">
+                <img alt="Mayo" src="/assets/Mayo.png">
+
 
 
             </div>
 
             <div class="image-container">
                 <img alt="samui" src="/assets/Samui.png">
+                <img alt="Paprika" src="/assets/Paprika.png">
+				<img alt="Caleigh" src="/assets/Caleigh.png">
                 <img alt="Doire_Evewch" src="/assets/Doire_Evewch.png">
+                <img alt="Z" src="/assets/Z.png">
 				<img alt="Branwen" src="/assets/Branwen.png">
+                <img alt="Lucrece_Yurophas" src="/assets/Lucrece_Yurophas.png">
 				<img alt="Uiobbeci" src="/assets/Uiobbeci.png">
                 <img alt="Draeny_Chevrem" src="/assets/Draeny_Chevrem.png">
+                <img alt="Nianca_K794" src="/assets/Nianca_K794.png">
 				<img alt="Yui" src="/assets/Yui.png">
+
             </div>
+
+
         </main>
     </div>
 </BaseLayout>
