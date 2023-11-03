@@ -1,131 +1,259 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 
-import ContactCTA from '../components/ContactCTA.astro';
-import Hero from '../components/Hero.astro';
+import ContactCTA from "../components/ContactCTA.astro";
+import Hero from "../components/Hero.astro";
 ---
-<body>
-
-<BaseLayout title="About | Tianyi Kao" description="About Tianyi Kao">
-	
-
-	<div class="stack gap-20">
-		<main class="wrapper about">
-			<Hero
-				title="About"
-				tagline="Thanks for stopping by. Read below to learn more about myself and my background."
-			>
-				<img
-					width="1553"
-					height="873"
-					src="/assets/at-work.jpg"
-					alt="Tianyi Kao at work with a colleague"
-				/>
-			</Hero>
-
-			<section>
-				<h2 class="section-title">Background</h2>
-				<div class="content">
-					<p>
-						Working on it...
-					</p>
-				</div>
-			</section>
-			<section>
-				<h2 class="section-title">Education</h2>
-				<div class="content">
-					<div class="education-item">
-						<h3>iSpan</h3>
-						<p>Java Web Software Engineer Career Development Program</p>
-					</div>
-					<div class="education-item">
-						<h3>FreeCodeCamp.com</h3>
-						<p>JavaScript Algorithms and Data Structures</p>
-						<p>Data Visualization</p>
-					</div>
-					<div class="education-item">
-						<h3>Hong Kong Polytechnic University</h3>
-						<p>Master of Finance in Investment Management</p>
-					</div>
-					<div class="education-item">
-						<h3>Fu Jen Catholic University</h3>
-						<p>B.B.A. in Finance and International Business</p>
-					</div>
-					<div class="education-item">
-						<h3>Temple University</h3>
-						<p>Global Exchange Program</p>
-					</div>
-				</div>
-			</section>
-			<section>
-				<h2 class="section-title">Skills</h2>
-				<div class="content">
-					<p>Working on it...</p>
-				</div>
-			</section>
-		</main>
-
-		<ContactCTA />
-	</div>
-</BaseLayout>
 
 <style>
-	.about {
-		display: flex;
-		flex-direction: column;
-		gap: 3.5rem;
-	}
+  h3 {
+    color: #514695;
+  }
+  .item:hover::before {
+    display: none;
+  }
+  .item:hover {
+    display: block;
+  }
+  .collapsible {
+    display: none;
+    cursor: pointer;
+    transition: color 0.3s;
+    text-align: left;
+    padding: 10px;
+    font-weight: bolder;
+    font-size: 20px;
+    display: list-item;
+    list-style-type: none;
+    padding-left: -1.2em;
+  }
+  .collapsible:hover {
+    color: #b133ff;
+    cursor: pointer;
+  }
+  .collapsible:hover::after {
+    display: inline;
+    white-space: nowrap;
+  }
 
-	img {
-		margin-top: 1.5rem;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
+  .collapsible-text {
+    padding-left: 0.8em;
+    font-size: 24px;
+    display: block;
+  }
 
-	section {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		color: var(--gray-200);
-	}
+  .collapsible-text:hover::after {
+    content: " ▼";
+    display: inline;
+    white-space: nowrap;
+  }
 
-	.section-title {
-		grid-column-start: 1;
-		font-size: var(--text-xl);
-		color: var(--gray-0);
-	}
+  .collapsible + .content[data-state="folded"] {
+    display: block;
+  }
 
-	.content {
-		grid-column: 2 / 4;
-	}
+  .collapsible + .content[data-state="unfolded"] {
+    display: none;
+  }
 
-	.content :global(a) {
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
 
-	.content :global(a:hover),
-	.content :global(a:focus) {
-		text-decoration-color: currentColor;
-	}
+  img {
+    margin-top: 1.5rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-md);
+  }
 
-	@media (min-width: 50em) {
-		.about {
-			display: grid;
-			grid-template-columns: 1fr 60% 1fr;
-		}
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--gray-200);
+  }
 
-		.about > :global(:first-child) {
-			grid-column-start: 2;
-		}
+  .section-title {
+    grid-column-start: 1;
+    font-size: var(--text-xl);
+    color: var(--gray-0);
+  }
 
-		section {
-			display: contents;
-			font-size: var(--text-lg);
-		}
-	}
+  .content {
+    grid-column: 2 / 4;
+  }
+
+  .content :global(a) {
+    text-decoration: 1px solid underline transparent;
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color var(--theme-transition);
+  }
+
+  .content :global(a:hover),
+  .content :global(a:focus) {
+    text-decoration-color: currentColor;
+  }
+
+  @media (min-width: 50em) {
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 60% 1fr;
+    }
+
+    .about > :global(:first-child) {
+      grid-column-start: 2;
+    }
+
+    section {
+      display: contents;
+      font-size: var(--text-lg);
+    }
+  }
 </style>
+<body>
+  <BaseLayout title="About | Tianyi Kao" description="About Tianyi Kao">
+    <div class="stack gap-20">
+      <main class="wrapper about">
+        <Hero
+          title="About"
+          tagline="Thanks for stopping by. Read below to learn more about myself and my background."
+        >
+          <img
+            width="1553"
+            height="873"
+            src="/assets/at-work.jpg"
+            alt="Tianyi Kao at work with a colleague"
+          />
+        </Hero>
 
+        <section>
+          <h2 class="section-title">Background</h2>
+          <div class="content">
+            <p>
+              In the financial industry, as the trend towards transforming into
+              a technology-driven sector through data empowerment continues, I
+              believe that moving towards becoming a developer is more like
+              enhancing my own abilities. While my Fintech background helps with
+              my choice of web-based backend and cloud development, my real
+              drive comes from years of self-exploration and a passion for
+              technology. I look forward to collaborating with you to overcome
+              any challenges and create something exceptional.
+            </p>
+          </div>
+        </section>
+        <section>
+          <h2 class="section-title">Education</h2>
+          <div class="content">
+            <div class="education-item" id="iSpan">
+              <h3>iSpan</h3>
+              <dl>
+                <dt
+                  class="collapsible"
+                  id="collapsible-1"
+                  style="list-style-type: none; text-indent: -1.2em;"
+                  data-state="folded"
+                >
+                  <span class="collapsible-text"
+                    >JavaEE Career Development Program</span
+                  >
+                </dt>
+                <div class="content" data-state="folded" id="subfolder">
+                  <li class="collapsible">Database</li>
+                  <div class="content" data-state="folded">
+                    <ul>
+                      <li class="item">T-SQL</li>
+                      <li class="item">Stored Procedure</li>
+                      <li class="item">Transaction</li>
+                    </ul>
+                  </div>
+                  <li class="collapsible">Java</li>
 
+                  <div class="content" data-state="folded">
+                    <ul>
+                      <li class="item">JBDC</li>
+                      <li class="item">Maven</li>
+                    </ul>
+                  </div>
+                </div>
+              </dl>
+            </div>
+            <div class="education-item">
+              <h3>FreeCodeCamp.com</h3>
+              <p>JavaScript Algorithms and Data Structures</p>
+              <p>Data Visualization</p>
+            </div>
+            <div class="education-item">
+              <h3>Hong Kong Polytechnic University</h3>
+              <p>Master of Finance in Investment Management</p>
+            </div>
+            <div class="education-item">
+              <h3>Fu Jen Catholic University</h3>
+              <p>B.B.A. in Finance and International Business</p>
+            </div>
+            <div class="education-item">
+              <h3>Temple University</h3>
+              <p>Global Exchange Program</p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2 class="section-title">Skills</h2>
+          <div class="content">
+            <p>Working on it...</p>
+          </div>
+        </section>
+      </main>
+
+      <ContactCTA />
+    </div>
+  </BaseLayout>
+
+  <script>
+    //EventTarget.addEventListener() 方法将指定的监听器注册到 EventTarget 上，当该对象触发指定的事件时，指定的回调函数就会被执行。
+    const subfolder = document.getElementById("subfolder");
+    subfolder.style.display = "none";
+
+    const UNFOLDED_STATE = "unfolded";
+    const FOLDED_STATE = "folded";
+    const delay = 0;
+
+    const educationItems = document.querySelectorAll(".education-item");
+
+    educationItems.forEach((educationItem) => {
+      const collapsible = educationItem.querySelector(
+        ".collapsible"
+      ) as HTMLElement;
+      const content = educationItem.querySelector(".content") as HTMLElement;
+
+      let timeoutId: number | undefined;
+
+      educationItem.addEventListener("mouseenter", () => {
+        if (collapsible.dataset.state === UNFOLDED_STATE) {
+          collapsible.dataset.state = FOLDED_STATE;
+          content.dataset.state = FOLDED_STATE;
+        }
+      });
+
+      educationItem.addEventListener("mouseleave", () => {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        timeoutId = window.setTimeout(() => {
+          collapsible.dataset.state = UNFOLDED_STATE;
+          content.dataset.state = UNFOLDED_STATE;
+        }, delay);
+      });
+    });
+
+    const iSpan = document.getElementById("iSpan");
+
+    iSpan.addEventListener("mouseenter", () => {
+      subfolder.style.display = "block";
+    });
+    iSpan.addEventListener("mouseleave", () => {
+      subfolder.style.display = "none";
+    });
+  </script>
 </body>
