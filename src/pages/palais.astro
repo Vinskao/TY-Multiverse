@@ -1,187 +1,175 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 
-import ContactCTA from '../components/ContactCTA.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
-import Hero from '../components/Hero.astro';
-import Grid from '../components/Grid.astro';
+import ContactCTA from "../components/ContactCTA.astro";
+import PortfolioPreview from "../components/PortfolioPreview.astro";
+import Hero from "../components/Hero.astro";
+import Grid from "../components/Grid.astro";
 
-const projects = (await getCollection('work')).sort(
-	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+const projects = (await getCollection("work")).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
-
 ---
 
 <!DOCTYPE html>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <html>
-<head>
+  <head>
     <style>
-        main.wrapper {
-            margin: 5%; 
-            padding: 0; 
-            max-width: 100%; 
-        }
+      main.wrapper {
+        margin: 5%;
+        padding: 0;
+        max-width: 100%;
+      }
 
-        main.wrapper .stack {
-            gap: 10px;
-        }
+      main.wrapper .stack {
+        gap: 10px;
+      }
 
-        .overlay {
-            display: none; 
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 999; 
-        }
-        
-        /* 图像容器 */
-        .image-container {
-            overflow: auto; /* 启用滚动条 */
-            white-space: nowrap; /* 防止换行 */
-        }
-        
-        /* 图像样式 */
-        .image-container img {
-            width: 240px;
-            height: auto;
-            margin-right: -95px; /* 图像之间的间距 */
-        }
-		/* 使用Webkit前缀创建自定义滚动条 */
-		.scrollbar {
-            width: 100%;
-            height: 20px;
-            background: rgba(0, 0, 0, 0);
-            overflow-x: scroll; /* 使用overflow-x来控制横向滚动条 */
-            -webkit-overflow-scrolling: touch; /* 启用平滑滚动（仅适用于WebKit浏览器） */
-        }
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+      }
 
-        .scroll-thumb {
-            width: 20px;
-            height: 20px;
-            background: pink;
-            cursor: pointer;
-        }
+      /* 图像容器 */
+      .image-container {
+        overflow: auto; /* 启用滚动条 */
+        white-space: nowrap; /* 防止换行 */
+      }
 
-        .image-text {
-            background-image: url('/path-to-your-image.png'); /* 设置背景图像的路径 */
-            background-size: contain; /* 根据容器大小自适应缩放背景图像 */
-            background-repeat: no-repeat;
-            width: 240px; /* 与图像宽度一致 */
-            height: auto; /* 自适应高度 */
-        }
+      /* 图像样式 */
+      .image-container img {
+        width: 240px;
+        height: auto;
+        margin-right: -95px; /* 图像之间的间距 */
+      }
+      /* 使用Webkit前缀创建自定义滚动条 */
+      .scrollbar {
+        width: 100%;
+        height: 20px;
+        background: rgba(0, 0, 0, 0);
+        overflow-x: scroll; /* 使用overflow-x来控制横向滚动条 */
+        -webkit-overflow-scrolling: touch; /* 启用平滑滚动（仅适用于WebKit浏览器） */
+      }
 
-.image-text-content {
-    color: transparent; /* 隐藏文本内容 */
-    text-align: center; /* 文本水平居中 */
-    padding: 10px; /* 调整文本与边界的间距 */
-}
+      .scroll-thumb {
+        width: 20px;
+        height: 20px;
+        background: pink;
+        cursor: pointer;
+      }
+
+      .image-text {
+        background-image: url("/path-to-your-image.png"); /* 设置背景图像的路径 */
+        background-size: contain; /* 根据容器大小自适应缩放背景图像 */
+        background-repeat: no-repeat;
+        width: 240px; /* 与图像宽度一致 */
+        height: auto; /* 自适应高度 */
+      }
+
+      .image-text-content {
+        color: transparent; /* 隐藏文本内容 */
+        text-align: center; /* 文本水平居中 */
+        padding: 10px; /* 调整文本与边界的间距 */
+      }
     </style>
-</head>
-<body>
-
-<BaseLayout
-    title="Palais | Wavo Yuropha"
-    description="Learn about TY's most recent projects"
->
-    <div class="stack gap-20">
+  </head>
+  <body>
+    <BaseLayout
+      title="Palais | Wavo Yuropha"
+      description="Learn about TY's most recent projects"
+    >
+      <div class="stack gap-20">
         <main class="wrapper stack gap-8">
-            <Hero
-                title="Palais"
-                tagline="Welcome to Lily Palais."
-                align="start"
-            />
-			<h1>八食</h1>
-			<h1>初桑</h1>
-			<h1>肆門</h1>
-			<h1>Phénix</h1>
-			<h1>Buse</h1>
-			<h1>家累</h1>
-			<h1>塵民</h1>
-			<h1>古女</h1>
-			<h1>獄女</h1>
-			<div class="image-container">
-                <div class="image-text">
-                    <div class="image-text-content">
-                        八食
-                    </div>
-                </div>
-                <img alt="Wavo" src="/assets/Wavo.png">
-                <img alt="Chiaki" src="/assets/Chiaki.png">
-				<img alt="Sayuri" src="/assets/Sayuri.png">
-                <img alt="Hitomi" src="/assets/Hitomi.png">
-				<img alt="Akimoto_Yuko" src="/assets/Akimoto_Yuko.png">
-                <img alt="Etsuko" src="/assets/Etsuko.png">
-                <img alt="Masako" src="/assets/Masako.png">
-				
+          <Hero
+            title="Palais"
+            tagline="Welcome to Lily Palais."
+            align="start"
+          />
+          <h1>八食</h1>
+          <h1>初桑</h1>
+          <h1>肆門</h1>
+          <h1>Phénix</h1>
+          <h1>Buse</h1>
+          <h1>家累</h1>
+          <h1>塵民</h1>
+          <h1>古女</h1>
+          <h1>獄女</h1>
+          <div class="image-container">
+            <div class="image-text">
+              <div class="image-text-content">八食</div>
             </div>
+            <img alt="Wavo" src="/assets/Wavo.png" />
+            <img alt="Chiaki" src="/assets/Chiaki.png" />
+            <img alt="Sayuri" src="/assets/Sayuri.png" />
+            <img alt="Hitomi" src="/assets/Hitomi.png" />
+            <img alt="Akimoto_Yuko" src="/assets/Akimoto_Yuko.png" />
+            <img alt="Etsuko" src="/assets/Etsuko.png" />
+            <img alt="Masako" src="/assets/Masako.png" />
+          </div>
 
-            <div class="image-container">
-                <img alt="Médicis_Monroe" src="/assets/Médicis_Monroe.png">
+          <div class="image-container">
+            <img alt="Médicis_Monroe" src="/assets/Médicis_Monroe.png" />
+          </div>
 
-            </div>
+          <div class="image-container">
+            <img alt="Sorane" src="/assets/Sorane.png" />
+            <img alt="Kyu" src="/assets/Kyu.png" />
+            <img alt="Riuri" src="/assets/Riuri.png" />
+            <img alt="Natsumi" src="/assets/Natsumi.png" />
+            <img alt="Kamira" src="/assets/Kamira.png" />
+            <img alt="Kazuko" src="/assets/Kazuko.png" />
+            <img alt="Miyu" src="/assets/Miyu.png" />
+            <img alt="Valmet" src="/assets/Valmet.png" />
+            <img alt="Mayo" src="/assets/Mayo.png" />
+          </div>
 
-			<div class="image-container">
-				<img alt="Sorane" src="/assets/Sorane.png">
-                <img alt="Kyu" src="/assets/Kyu.png">
-				<img alt="Riuri" src="/assets/Riuri.png">
-                <img alt="Natsumi" src="/assets/Natsumi.png">
-				<img alt="Kamira" src="/assets/Kamira.png">
-                <img alt="Kazuko" src="/assets/Kazuko.png">
-                <img alt="Miyu" src="/assets/Miyu.png">
-                <img alt="Valmet" src="/assets/Valmet.png">
-                <img alt="Mayo" src="/assets/Mayo.png">
-
-
-
-            </div>
-
-            <div class="image-container">
-                <img alt="samui" src="/assets/Samui.png">
-                <img alt="Paprika" src="/assets/Paprika.png">
-				<img alt="Caleigh" src="/assets/Caleigh.png">
-                <img alt="Doire_Evewch" src="/assets/Doire_Evewch.png">
-                <img alt="Z" src="/assets/Z.png">
-				<img alt="Branwen" src="/assets/Branwen.png">
-                <img alt="Lucrece_Yurophas" src="/assets/Lucrece_Yurophas.png">
-				<img alt="Uiobbeci" src="/assets/Uiobbeci.png">
-                <img alt="Draeny_Chevrem" src="/assets/Draeny_Chevrem.png">
-                <img alt="Nianca_K794" src="/assets/Nianca_K794.png">
-				<img alt="Yui" src="/assets/Yui.png">
-
-            </div>
-
-
+          <div class="image-container">
+            <img alt="samui" src="/assets/Samui.png" />
+            <img alt="Paprika" src="/assets/Paprika.png" />
+            <img alt="Caleigh" src="/assets/Caleigh.png" />
+            <img alt="Doire_Evewch" src="/assets/Doire_Evewch.png" />
+            <img alt="Z" src="/assets/Z.png" />
+            <img alt="Branwen" src="/assets/Branwen.png" />
+            <img alt="Lucrece_Yurophas" src="/assets/Lucrece_Yurophas.png" />
+            <img alt="Uiobbeci" src="/assets/Uiobbeci.png" />
+            <img alt="Draeny_Chevrem" src="/assets/Draeny_Chevrem.png" />
+            <img alt="Nianca_K794" src="/assets/Nianca_K794.png" />
+            <img alt="Yui" src="/assets/Yui.png" />
+            <img alt="Yui" src="/assets/Mesoyei.png" />
+          </div>
         </main>
-    </div>
-</BaseLayout>
+      </div>
+    </BaseLayout>
 
-<!-- 全屏遮罩 -->
+    <!-- 全屏遮罩 -->
 
-<div class="overlay" id="passwordOverlay">
-    <script>
-        var isAuthenticated = false; 
-      
+    <div class="overlay" id="passwordOverlay">
+      <script>
+        var isAuthenticated = false;
+
         if (!isAuthenticated) {
-          var password = prompt("請輸入密碼", "")
+          var password = prompt("請輸入密碼", "");
           if (password === "1") {
-            isAuthenticated = true; 
-            document.getElementById('passwordOverlay').style.display = 'none';
+            isAuthenticated = true;
+            document.getElementById("passwordOverlay").style.display = "none";
           } else {
-            alert('請再輸入一次密碼');
-            location.href = 'examples/javascript/16ex2.html';
+            alert("請再輸入一次密碼");
+            location.href = "examples/javascript/16ex2.html";
           }
         }
-    </script>
-</div>
-
-</body>
+      </script>
+    </div>
+  </body>
 </html>
