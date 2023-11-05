@@ -22,22 +22,48 @@ const projects = (await getCollection("work")).sort(
         margin-right: 10px;
       }
       #output {
-        font-size: 24px;
-        color: red;
+        font-size: 50px;
+        color: rgb(247, 81, 164);
         text-align: center;
-        position: absolute;
+        font-weight: bold;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        background-color: rgba(49, 6, 58, 0.096);
+        border-radius: 10px;
+        padding: 10px;
       }
       #rule {
         text-align: center;
+        margin: -10px 0;
       }
       #buttoms {
         text-align: center;
       }
+      #buttoms button {
+        font-size: 20px;
+        color: rgb(247, 81, 164);
+        text-align: center;
+        background-color: rgba(49, 6, 58, 0.096);
+        border-radius: 10px;
+        border: none;
+        padding: 10px 20px;
+        margin: 5px;
+        transition: transform 0.3s;
+      }
+      #buttoms button:hover {
+        background-color: rgba(49, 6, 58, 0.3);
+        font-weight: bold;
+        transform: scale(1.2);
+      }
       #system {
         text-align: center;
+      }
+      #settle {
+        font-size: 100px;
+        font-weight: bold;
+        color: rgb(81, 167, 247);
       }
     </style>
   </head>
@@ -50,7 +76,7 @@ const projects = (await getCollection("work")).sort(
         <main class="wrapper stack gap-8">
           <Hero
             title="Black Jack"
-            tagline="Welcome to Lily Palais."
+            tagline="Designed by Tianyi in Taipei."
             align="start"
           />
           <div id="buttoms">
@@ -60,32 +86,48 @@ const projects = (await getCollection("work")).sort(
             >
             <button id="getOneCardButton" onclick="getOneCard()">加1張牌</button
             >
-            <button id="totalScoreButton" onclick="totalScore()">總分</button>
+            <button id="totalScoreButton" onclick="totalScore()">計分</button>
+            <button id="stand" onclick="soraneGetCards()">停牌</button>
+            <button id="settleButton" onclick="settle()">結算</button>
             <button
               id="displayRemainingCardsButton"
               onclick="displayRemainingCards()">剩下的牌</button
             >
           </div>
+          <h5 id="rule">規則：</h5>
           <p id="rule">
-            規則：將網頁重新整理以重新開始，先後按下"洗牌"及"
-            首次發牌"，視需要決定是否加牌，如不加牌按下"總分"。
+            將網頁重新整理以重新開始，先後按下"洗牌"及"
+            首次發牌"，視需要決定是否加牌，
           </p>
-
+          <p id="rule">
+            如不加牌按下"停牌"，對方玩家將開始取牌，您可反覆按下"計分"查看雙方當前分數，
+          </p>
+          <p id="rule">
+            待對方玩家取牌完畢，您可以再次決定是否加牌，如不加牌按下"結算"。
+          </p>
           <div id="system">
             <h2>您的手牌:</h2>
             <div id="cardImages"></div>
             <div id="output"></div>
+            <div id="settle"></div>
+          </div>
+          <div id="system">
+            <h2>Sorane的手牌:</h2>
+            <div id="cardImagesSorane"></div>
+            <div id="outputSorane"></div>
           </div>
         </main>
       </div>
       <script>
         document.addEventListener("DOMContentLoaded", function () {
-          // Your JavaScript code here
           var getCardArray = [];
           var getCardArrayX2 = [];
           var cardImages = "";
+          var cardImagesSorane = "";
           var playOneDeck = [];
+          var playTwoDeck = [];
           var totalScoreValue = 0;
+          var totalScoreValue2 = 0;
           var cardScores = [
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 1, 2, 3, 4, 5, 6, 7, 8,
             9, 10, 10, 10, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 1, 2,
@@ -95,6 +137,12 @@ const projects = (await getCollection("work")).sort(
             .getElementById("totalScoreButton")
             .addEventListener("click", function () {
               totalScore();
+            });
+
+          document
+            .getElementById("settleButton")
+            .addEventListener("click", function () {
+              settle();
             });
 
           document
@@ -121,6 +169,19 @@ const projects = (await getCollection("work")).sort(
               displayRemainingCards();
             });
 
+          document
+            .getElementById("stand")
+            .addEventListener("click", function () {
+              soraneGetCards();
+            });
+
+          function soraneGetCards() {
+            var getSoraneCardsElement = document.createElement("p");
+            getSoraneCardsElement.textContent =
+              "Sorane的手牌: " + giveSoraneCards();
+            document.body.appendChild(getSoraneCardsElement);
+          }
+
           function shuffle() {
             var shuffle52 = document.createElement("p");
             shuffle52.textContent = "牌組: " + cardShuffleX2();
@@ -145,10 +206,13 @@ const projects = (await getCollection("work")).sort(
             document.body.appendChild(remainingCardsElement);
           }
 
+          var scoreElement = document.createElement("p");
           function totalScore() {
-            var myScore = playerScore();
-            var scoreElement = document.createElement("p");
-            scoreElement.textContent = "總分: " + myScore;
+            var myScore = playerOneScore();
+            var soraneScore = playerTwoScore();
+            scoreElement.textContent =
+              "您的分數: " + myScore + "，" + "Sorane的分數: " + soraneScore;
+
             document.body.appendChild(scoreElement);
 
             var underScore = "您還可以繼續加牌";
@@ -162,6 +226,27 @@ const projects = (await getCollection("work")).sort(
               outputElement.innerHTML = equalScore;
             } else {
               outputElement.innerHTML = overScore;
+            }
+          }
+
+          var scoreElementSettle = document.createElement("p");
+          function settle() {
+            var myScore = playerOneScore();
+            var soraneScore = playerTwoScore();
+
+            document.body.appendChild(scoreElementSettle);
+
+            var youWin = "您擊敗了Sorane";
+            var youlose = "Sorane掠奪了您";
+            var draw = "您與Sorane難分上下";
+
+            var outputElement = document.getElementById("settle");
+            if (myScore > soraneScore) {
+              outputElement.innerHTML = youWin;
+            } else if (myScore < soraneScore) {
+              outputElement.innerHTML = youlose;
+            } else {
+              outputElement.innerHTML = draw;
             }
           }
 
@@ -212,6 +297,25 @@ const projects = (await getCollection("work")).sort(
             }
             return playOneDeck;
           }
+          //給Sorane牌
+          var cardImagesContainerSorane =
+            document.getElementById("cardImagesSorane");
+
+          function giveSoraneCards() {
+            for (var i = 0; i < 2; i++) {
+              if (getCardArrayX2.length >= 2) {
+                var selectedCard = getCardArrayX2.shift();
+                var cardIndex = selectedCard;
+                var imageUrl = `/assets/${cardIndex}.jpg`;
+                cardImagesSorane += `<img src='${imageUrl}' alt='Card'>`;
+
+                cardImagesContainerSorane.innerHTML = cardImagesSorane;
+
+                playTwoDeck.push(selectedCard);
+              }
+            }
+            return playTwoDeck;
+          }
           //加1張牌
           function giveOneCard() {
             if (getCardArrayX2.length >= 1) {
@@ -226,7 +330,7 @@ const projects = (await getCollection("work")).sort(
             return playOneDeck;
           }
           //手牌分數
-          function playerScore() {
+          function playerOneScore() {
             totalScoreValue = 0;
             var aceCount = 0;
             for (var i = 0; i < playOneDeck.length; i++) {
@@ -235,11 +339,28 @@ const projects = (await getCollection("work")).sort(
               if (cardValue === 1) {
                 aceCount++;
               }
-              if (totalScoreValue <= 11 && aceCount > 0) {
-                totalScoreValue += 10;
-              }
+            }
+            while (aceCount > 0 && totalScoreValue <= 11) {
+              totalScoreValue += 9;
+              aceCount--;
             }
             return totalScoreValue;
+          }
+          function playerTwoScore() {
+            totalScoreValue2 = 0;
+            var aceCount = 0;
+            for (var i = 0; i < playTwoDeck.length; i++) {
+              var cardValue = cardScores[playTwoDeck[i]];
+              totalScoreValue2 += cardValue; // 更新總分值
+              if (cardValue === 1) {
+                aceCount++;
+              }
+            }
+            while (aceCount > 0 && totalScoreValue <= 11) {
+              totalScoreValue2 += 9;
+              aceCount--;
+            }
+            return totalScoreValue2;
           }
 
           function remainCards() {
