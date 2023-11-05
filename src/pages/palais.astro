@@ -1,13 +1,8 @@
 ---
-import { getCollection } from "astro:content";
-
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 import Hero from "../components/Hero.astro";
 
-const projects = (await getCollection("work")).sort(
-  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
-);
 ---
 
 <!DOCTYPE html>
@@ -15,16 +10,42 @@ const projects = (await getCollection("work")).sort(
 <html>
   <head>
     <style>
+      .powers-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      #totalPhysicPowerHagishi,
+      #totalMagicPowerHagishi,
+      #totalUtilityPowerHagishi,
+      #totalPhysicPowerHagisun,
+      #totalMagicPowerHagisun,
+      #totalUtilityPowerHagisun,
+      #totalPhysicPowerForthgate,
+      #totalMagicPowerForthgate,
+      #totalUtilityPowerForthgate,
+      #totalPhysicPowerMutav,
+      #totalMagicPowerMutav,
+      #totalUtilityPowerMutav,
+      #totalHagishi,
+      #totalHagisun,
+      #totalForthgate,
+      #totalMutav {
+        flex: 1;
+        font-size: 12px; 
+      }
+
+
+      h6 {
+        padding-left: 50px;
+      }
       main.wrapper {
         margin: 5%;
         padding: 0;
         max-width: 100%;
       }
-
       main.wrapper .stack {
         gap: 10px;
       }
-
       .overlay {
         display: none;
         position: fixed;
@@ -38,11 +59,17 @@ const projects = (await getCollection("work")).sort(
         align-items: center;
         z-index: 999;
       }
-
-      #cardImages {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow: auto;
+      #cardImagesForthgate {
+        white-space: nowrap;
+        overflow-x: auto;
+      }
+      #cardImagesAll {
+        white-space: nowrap;
+        overflow-x: auto;
+      }
+      #cardImagesHagishi #cardImagesHagisun #cardImagesMutav {
+        white-space: nowrap;
+        overflow-x: auto;
       }
     </style>
   </head>
@@ -69,21 +96,68 @@ const projects = (await getCollection("work")).sort(
           <h1>獄女</h1>
           <div id="buttoms">
             <button id="shuffleButton" onclick="shuffle()">洗牌</button>
-            <button id="getHagisunButton" onclick="getHagisun()"
+            <button id="getHagishiButton" onclick="getHagishi()"
               >八食戰隊</button
             >
-            <button id="stand" onclick="soraneGetCards()">初桑戰隊</button>
+            <button id="getHagisunButton" onclick="getHagisun()"
+              >初桑戰隊</button
+            >
+            <button id="getForthgateButton" onclick="getForthgate()"
+              >肆門戰隊</button
+            >
+            <button id="getMutavButton" onclick="getMutav()">Phénix戰隊</button>
+            <button id="getAllButton" onclick="getAll()">隨機戰隊</button>
           </div>
-          <h2>八食戰隊:</h2>
+          <h6>八食戰隊:</h6>
           <div id="system">
-            <div id="cardImages"></div>
-            <div id="output"></div>
-            <div id="settle"></div>
+            <div id="cardImagesHagishi"></div>
           </div>
-          <h2>初桑戰隊:</h2>
+          <div class="powers-container">
+            <div id="totalPhysicPowerHagishi">Hagishi 的物理能力：0</div>
+            <div id="totalMagicPowerHagishi">Hagishi 的魔法能力：0</div>
+            <div id="totalUtilityPowerHagishi">Hagishi 的戰術能力：0</div>
+            <div id="totalHagishi">Hagishi 的總能力：0</div>
+
+          </div>
+          <h6>初桑戰隊:</h6>
           <div id="system">
-            <div id="cardImagesSorane"></div>
-            <div id="outputSorane"></div>
+            <div id="cardImagesHagisun"></div>
+          </div>
+          <div class="powers-container">
+            <div id="totalPhysicPowerHagisun">Hagisun 的物理能力：0</div>
+            <div id="totalMagicPowerHagisun">Hagisun 的魔法能力：0</div>
+            <div id="totalUtilityPowerHagisun">Hagisun 的戰術能力：0</div>
+            <div id="totalHagisun">Hagisun 的總能力：0</div>
+
+          </div>
+
+          <h6>肆門戰隊:</h6>
+          <div id="system">
+            <div id="cardImagesForthgate"></div>
+          </div>
+          <div class="powers-container">
+            <div id="totalPhysicPowerForthgate">Forthgate 的物理能力：0</div>
+            <div id="totalMagicPowerForthgate">Forthgate 的魔法能力：0</div>
+            <div id="totalUtilityPowerForthgate">Forthgate 的戰術能力：0</div>
+            <div id="totalForthgate">Forthgate 的總能力：0</div>
+
+          </div>
+
+          <h6>Phénix戰隊:</h6>
+          <div id="system">
+            <div id="cardImagesMutav"></div>
+          </div>
+          <div class="powers-container">
+            <div id="totalPhysicPowerMutav">Mutav 的物理能力：0</div>
+            <div id="totalMagicPowerMutav">Mutav 的魔法能力：0</div>
+            <div id="totalUtilityPowerMutav">Mutav 的戰術能力：0</div>
+            <div id="totalMutav">Mutav 的總能力：0</div>
+
+          </div>
+
+          <h6>隨機戰隊:</h6>
+          <div id="system">
+            <div id="cardImagesAll"></div>
           </div>
           <!-- <div class="image-container">
             <img alt="Wavo" src="/assets/Wavo.png" />
@@ -131,7 +205,7 @@ const projects = (await getCollection("work")).sort(
 
     <!-- 全屏遮罩 -->
 
-    <div class="overlay" id="passwordOverlay">
+    <!-- <div class="overlay" id="passwordOverlay">
       <script>
         var isAuthenticated = false;
 
@@ -146,11 +220,43 @@ const projects = (await getCollection("work")).sort(
           }
         }
       </script>
-    </div>
+    </div> -->
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var imageNames = [
+        const cards = [
+          { name: "Wavo", physicPower: 55, magicPower: 2999, utilityPower: 46 },
+          { name: "Chiaki", physicPower: 876, magicPower: 513, utilityPower: 764 },
+          { name: "Sayuri", physicPower: 916, magicPower: 456, utilityPower: 695 },
+          { name: "Hitomi", physicPower: 892, magicPower: 349, utilityPower: 632 },
+          { name: "Akimoto_Yuko", physicPower: 246, magicPower: 0, utilityPower: 1201 },
+          { name: "Etsuko", physicPower: 769, magicPower: 0, utilityPower: 1164 },
+          { name: "Masako", physicPower: 1453, magicPower: 131, utilityPower: 0 },
+          { name: "Sorane", physicPower: 859, magicPower: 461, utilityPower: 603 },
+          { name: "Kyu", physicPower: 311, magicPower: 843, utilityPower: 0 },
+          { name: "Riuri", physicPower: 689, magicPower: 0, utilityPower: 431 },
+          { name: "Natsumi", physicPower: 653, magicPower: 0, utilityPower: 649 },
+          { name: "Kamira", physicPower: 390, magicPower: 886, utilityPower: 60 },
+          { name: "Kazuko", physicPower: 714, magicPower: 564, utilityPower: 243 },
+          { name: "Miyu", physicPower: 346, magicPower: 864, utilityPower: 0 },
+          { name: "Valmet", physicPower: 594, magicPower: 0, utilityPower: 623 },
+          { name: "Mayo", physicPower: 564, magicPower: 411, utilityPower: 925 },
+          { name: "Samui", physicPower: 395, magicPower: 516, utilityPower: 511 },
+          { name: "Paprika", physicPower: 154, magicPower: 431, utilityPower: 131 },
+          { name: "Caleigh", physicPower: 601, magicPower: 26, utilityPower: 201 },
+          { name: "Doire_Evewch", physicPower: 567, magicPower: 32, utilityPower: 165 },
+          { name: "Z", physicPower: 423, magicPower: 0, utilityPower: 246 },
+          { name: "Branwen", physicPower: 372, magicPower: 419, utilityPower: 294 },
+          { name: "Lucrece_Yurophas", physicPower: 531, magicPower: 13, utilityPower: 264 },
+          { name: "Uiobbeci", physicPower: 32, magicPower: 503, utilityPower: 61 },
+          { name: "Draeny_Chevrem", physicPower: 583, magicPower: 94, utilityPower: 394 },
+          { name: "Nianca_K794", physicPower: 53, magicPower: 0, utilityPower: 241 },
+          { name: "Yui", physicPower: 16, magicPower: 0, utilityPower: 164 },
+          { name: "Mesoyei", physicPower: 565, magicPower: 43, utilityPower: 349 },
+          { name: "Médicis_Monroe", physicPower: 1264, magicPower: 261, utilityPower: 110 },
+        ];
+
+        var imageNamesAll = [
           "Wavo.png",
           "Chiaki.png",
           "Sayuri.png",
@@ -158,7 +264,6 @@ const projects = (await getCollection("work")).sort(
           "Akimoto_Yuko.png",
           "Etsuko.png",
           "Masako.png",
-          "Médicis_Monroe.png",
           "Sorane.png",
           "Kyu.png",
           "Riuri.png",
@@ -180,36 +285,284 @@ const projects = (await getCollection("work")).sort(
           "Nianca_K794.png",
           "Yui.png",
           "Mesoyei.png",
+          "Médicis_Monroe.png",
         ];
-        var randomIndex = getRandomIndex();
+        var imageNamesHagishi = [
+          "Wavo.png",
+          "Chiaki.png",
+          "Sayuri.png",
+          "Hitomi.png",
+          "Akimoto_Yuko.png",
+          "Etsuko.png",
+          "Masako.png",
+        ];
+        var imageNamesHagisun = [
+          "Sorane.png",
+          "Kyu.png",
+          "Riuri.png",
+          "Natsumi.png",
+          "Kamira.png",
+          "Kazuko.png",
+          "Miyu.png",
+          "Valmet.png",
+          "Mayo.png",
+        ];
+        var imageNamesForthgate = [
+          "Samui.png",
+          "Paprika.png",
+          "Caleigh.png",
+          "Doire_Evewch.png",
+          "Z.png",
+          "Branwen.png",
+          "Lucrece_Yurophas.png",
+          "Uiobbeci.png",
+          "Draeny_Chevrem.png",
+          "Nianca_K794.png",
+          "Yui.png",
+          "Mesoyei.png",
+        ];
+        var imageNamesMutav = ["Médicis_Monroe.png"];
 
-        function getRandomIndex() {
-          return Math.floor(Math.random() * imageNames.length);
+        var containerIdAll = "cardImagesAll";
+        var containerIdHagisun = "cardImagesHagisun";
+        var containerIdForthgate = "cardImagesForthgate";
+        var containerIdMutav = "cardImagesMutav";
+        var containerIdHagishi = "cardImagesHagishi";
+
+        function getForthgate() {
+          var cardImagesContainer = document.getElementById(containerIdForthgate);
+          cardImagesContainer.innerHTML = "";
+          var totalPhysicPower = 0;
+          var totalMagicPower = 0;
+          var totalUtilityPower = 0;
+
+          var availableImages = imageNamesForthgate.slice();
+          for (var i = 0; i < 6; i++) {
+            var randomIndex = Math.floor(Math.random() * availableImages.length);
+            var selectedImageName = availableImages[randomIndex];
+            availableImages.splice(randomIndex, 1);
+
+            // 根据选中的图片名称找到对应的卡片信息
+            var selectedCard = cards.find(
+              (card) => card.name === selectedImageName.split(".")[0]
+            );
+
+            if (selectedCard) {
+              // 更新总的物理和魔法能力值
+              totalPhysicPower += selectedCard.physicPower;
+              totalMagicPower += selectedCard.magicPower;
+              totalUtilityPower += selectedCard.utilityPower;
+
+              var imageUrl = `/assets/${selectedImageName}`;
+              var imageContainer = document.getElementById(containerIdForthgate);
+              var image = document.createElement("img");
+              image.src = imageUrl;
+              image.alt = "Card";
+              image.style.width = "200px";
+              image.style.height = "auto";
+              image.style.marginRight = "-95px";
+              imageContainer.appendChild(image);
+            }
+          }
+
+          var totalPhysicPowerElement = document.getElementById("totalPhysicPowerForthgate");
+          var totalMagicPowerElement = document.getElementById("totalMagicPowerForthgate");
+          var totalUtilityPowerElement = document.getElementById("totalUtilityPowerForthgate");
+          var totalForthgateElement = document.getElementById("totalForthgate"); // 新增的元素
+
+          // 更新 Forthgate 的物理和魔法能力值
+          totalPhysicPowerElement.textContent = "Forthgate 的物理能力：" + totalPhysicPower;
+          totalMagicPowerElement.textContent = "Forthgate 的魔法能力：" + totalMagicPower;
+          totalUtilityPowerElement.textContent = "Forthgate 的戰術能力：" + totalUtilityPower;
+
+          // 计算并更新总能力值
+          var totalPower = totalPhysicPower + totalMagicPower + totalUtilityPower;
+          totalForthgateElement.textContent = "Forthgate 的總能力：" + totalPower;
         }
-        function displayRandomImage(imageNames, containerId) {
-          var randomIndex = Math.floor(Math.random() * imageNames.length);
-          var selectedImageName = imageNames[randomIndex];
-          var imageUrl = `/assets/${selectedImageName}`;
 
-          var imageContainer = document.getElementById(containerId);
-          var image = document.createElement("img");
-          image.src = imageUrl;
-          image.alt = "Card";
-          image.style.width = "120px";
-          image.style.height = "auto";
-          image.style.marginRight = "10px";
-          imageContainer.appendChild(image);
+        var getForthgateButton = document.getElementById("getForthgateButton");
+        getForthgateButton.addEventListener("click", function () {
+          getForthgate();
+        });
+
+        function getMutav() {
+          var cardImagesContainer = document.getElementById(containerIdMutav);
+          cardImagesContainer.innerHTML = "";
+          var totalPhysicPower = 0;
+          var totalMagicPower = 0;
+          var totalUtilityPower = 0;
+
+          var availableImages = imageNamesMutav.slice();
+          for (var i = 0; i < 1; i++) {
+            var randomIndex = Math.floor(Math.random() * availableImages.length);
+            var selectedImageName = availableImages[randomIndex];
+            availableImages.splice(randomIndex, 1);
+
+            // 根据选中的图片名称找到对应的卡片信息
+            var selectedCard = cards.find(
+              (card) => card.name === selectedImageName.split(".")[0]
+            );
+
+            if (selectedCard) {
+              // 更新总的物理和魔法能力值
+              totalPhysicPower += selectedCard.physicPower;
+              totalMagicPower += selectedCard.magicPower;
+              totalUtilityPower += selectedCard.utilityPower;
+
+              var imageUrl = `/assets/${selectedImageName}`;
+              var imageContainer = document.getElementById(containerIdMutav);
+              var image = document.createElement("img");
+              image.src = imageUrl;
+              image.alt = "Card";
+              image.style.width = "200px";
+              image.style.height = "auto";
+              image.style.marginRight = "-95px";
+              imageContainer.appendChild(image);
+            }
+          }
+
+          var totalPhysicPowerElement = document.getElementById("totalPhysicPowerMutav");
+          var totalMagicPowerElement = document.getElementById("totalMagicPowerMutav");
+          var totalUtilityPowerElement = document.getElementById("totalUtilityPowerMutav");
+          var totalMutavElement = document.getElementById("totalMutav"); // 新增的元素
+
+          // 更新 Mutav 的物理和魔法能力值
+          totalPhysicPowerElement.textContent = "Mutav 的物理能力：" + totalPhysicPower;
+          totalMagicPowerElement.textContent = "Mutav 的魔法能力：" + totalMagicPower;
+          totalUtilityPowerElement.textContent = "Mutav 的戰術能力：" + totalUtilityPower;
+
+          // 计算并更新总能力值
+          var totalPower = totalPhysicPower + totalMagicPower + totalUtilityPower;
+          totalMutavElement.textContent = "Mutav 的總能力：" + totalPower;
         }
 
-        var containerId = "cardImages";
+        var getMutavButton = document.getElementById("getMutavButton");
+        getMutavButton.addEventListener("click", function () {
+          getMutav();
+        });
+
+        
 
         function getHagisun() {
-          var cardImagesContainer = document.getElementById(containerId);
+          var cardImagesContainer = document.getElementById(containerIdHagisun);
           cardImagesContainer.innerHTML = "";
+          var totalPhysicPower = 0;
+          var totalMagicPower = 0;
+          var totalUtilityPower = 0;
 
-          var availableImages = imageNames.slice();
+          var availableImages = imageNamesHagisun.slice();
+          for (var i = 0; i < 5; i++) {
+            var randomIndex = Math.floor(Math.random() * availableImages.length);
+            var selectedImageName = availableImages[randomIndex];
+            availableImages.splice(randomIndex, 1);
 
-          for (var i = 0; i < 8; i++) {
+            // 根据选中的图片名称找到对应的卡片信息
+            var selectedCard = cards.find(
+              (card) => card.name === selectedImageName.split(".")[0]
+            );
+
+            if (selectedCard) {
+              // 更新总的物理和魔法能力值
+              totalPhysicPower += selectedCard.physicPower;
+              totalMagicPower += selectedCard.magicPower;
+              totalUtilityPower += selectedCard.utilityPower;
+
+              var imageUrl = `/assets/${selectedImageName}`;
+              var imageContainer = document.getElementById(containerIdHagisun);
+              var image = document.createElement("img");
+              image.src = imageUrl;
+              image.alt = "Card";
+              image.style.width = "200px";
+              image.style.height = "auto";
+              image.style.marginRight = "-95px";
+              imageContainer.appendChild(image);
+            }
+          }
+
+          var totalPhysicPowerElement = document.getElementById("totalPhysicPowerHagisun");
+          var totalMagicPowerElement = document.getElementById("totalMagicPowerHagisun");
+          var totalUtilityPowerElement = document.getElementById("totalUtilityPowerHagisun");
+          var totalHagisunElement = document.getElementById("totalHagisun"); // 新增的元素
+
+          // 更新 Hagisun 的物理和魔法能力值
+          totalPhysicPowerElement.textContent = "Hagisun 的物理能力：" + totalPhysicPower;
+          totalMagicPowerElement.textContent = "Hagisun 的魔法能力：" + totalMagicPower;
+          totalUtilityPowerElement.textContent = "Hagisun 的戰術能力：" + totalUtilityPower;
+
+          // 计算并更新总能力值
+          var totalPower = totalPhysicPower + totalMagicPower + totalUtilityPower;
+          totalHagisunElement.textContent = "Hagisun 的總能力：" + totalPower;
+        }
+
+
+        var getHagisunButton = document.getElementById("getHagisunButton");
+        getHagisunButton.addEventListener("click", function () {
+          getHagisun();
+        });
+
+        function getHagishi() {
+          var cardImagesContainer = document.getElementById(containerIdHagishi);
+          cardImagesContainer.innerHTML = "";
+          var totalPhysicPower = 0;
+          var totalMagicPower = 0;
+          var totalUtilityPower = 0;
+
+          var availableImages = imageNamesHagishi.slice();
+          for (var i = 0; i < 4; i++) {
+            var randomIndex = Math.floor(Math.random() * availableImages.length);
+            var selectedImageName = availableImages[randomIndex];
+            availableImages.splice(randomIndex, 1);
+
+            // 根据选中的图片名称找到对应的卡片信息
+            var selectedCard = cards.find(
+              (card) => card.name === selectedImageName.split(".")[0]
+            );
+
+            if (selectedCard) {
+              // 更新总的物理和魔法能力值
+              totalPhysicPower += selectedCard.physicPower;
+              totalMagicPower += selectedCard.magicPower;
+              totalUtilityPower += selectedCard.utilityPower;
+
+              var imageUrl = `/assets/${selectedImageName}`;
+              var imageContainer = document.getElementById(containerIdHagishi);
+              var image = document.createElement("img");
+              image.src = imageUrl;
+              image.alt = "Card";
+              image.style.width = "200px";
+              image.style.height = "auto";
+              image.style.marginRight = "-95px";
+              imageContainer.appendChild(image);
+            }
+          }
+
+          var totalPhysicPowerElement = document.getElementById("totalPhysicPowerHagishi");
+          var totalMagicPowerElement = document.getElementById("totalMagicPowerHagishi");
+          var totalUtilityPowerElement = document.getElementById("totalUtilityPowerHagishi");
+          var totalHagishiElement = document.getElementById("totalHagishi"); // 新增的元素
+
+          // 更新 Hagishi 的物理和魔法能力值
+          totalPhysicPowerElement.textContent = "Hagishi 的物理能力：" + totalPhysicPower;
+          totalMagicPowerElement.textContent = "Hagishi 的魔法能力：" + totalMagicPower;
+          totalUtilityPowerElement.textContent = "Hagishi 的戰術能力：" + totalUtilityPower;
+
+          // 计算并更新总能力值
+          var totalPower = totalPhysicPower + totalMagicPower + totalUtilityPower;
+          totalHagishiElement.textContent = "Hagishi 的總能力：" + totalPower;
+        }
+
+
+        var getHagishiButton = document.getElementById("getHagishiButton");
+        getHagishiButton.addEventListener("click", function () {
+          getHagishi();
+        });
+
+
+        function getAll() {
+          var cardImagesContainer = document.getElementById(containerIdAll);
+          cardImagesContainer.innerHTML = "";
+          var availableImages = imageNamesAll.slice();
+          for (var i = 0; i < 7; i++) {
             var randomIndex = Math.floor(
               Math.random() * availableImages.length
             );
@@ -217,7 +570,7 @@ const projects = (await getCollection("work")).sort(
             availableImages.splice(randomIndex, 1);
 
             var imageUrl = `/assets/${selectedImageName}`;
-            var imageContainer = document.getElementById(containerId);
+            var imageContainer = document.getElementById(containerIdAll);
             var image = document.createElement("img");
             image.src = imageUrl;
             image.alt = "Card";
@@ -227,12 +580,13 @@ const projects = (await getCollection("work")).sort(
             imageContainer.appendChild(image);
           }
         }
-
-        var getHagisunButton = document.getElementById("getHagisunButton");
-
-        getHagisunButton.addEventListener("click", function () {
-          getHagisun();
+        var getAllButton = document.getElementById("getAllButton");
+        getAllButton.addEventListener("click", function () {
+          getAll();
         });
+
+
+        
       });
     </script>
   </body>
