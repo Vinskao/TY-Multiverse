@@ -87,7 +87,7 @@ const projects = (await getCollection("work")).sort(
             <button id="getOneCardButton" onclick="getOneCard()">加1張牌</button
             >
             <button id="totalScoreButton" onclick="totalScore()">計分</button>
-            <button id="stand" onclick="soraneGetCards()">停牌</button>
+            <button id="stand" onclick="soraneGetCards()">對手加牌</button>
             <button id="settleButton" onclick="settle()">結算</button>
             <button
               id="displayRemainingCardsButton"
@@ -100,7 +100,7 @@ const projects = (await getCollection("work")).sort(
             首次發牌"，視需要決定是否加牌，
           </p>
           <p id="rule">
-            如不加牌按下"停牌"，對方玩家將開始取牌，您可反覆按下"計分"查看雙方當前分數，
+            如不加牌按下"對手加牌"(只需按一次)，對方玩家將開始取牌，您可反覆按下"計分"查看雙方當前分數，
           </p>
           <p id="rule">
             待對方玩家取牌完畢，您可以再次決定是否加牌，如不加牌按下"結算"。
@@ -241,12 +241,16 @@ const projects = (await getCollection("work")).sort(
             var draw = "您與Sorane難分上下";
 
             var outputElement = document.getElementById("settle");
-            if (myScore > soraneScore) {
+            if (myScore <= 21 && myScore > soraneScore) {
               outputElement.innerHTML = youWin;
-            } else if (myScore < soraneScore) {
+            } else if (soraneScore <= 21 && soraneScore > myScore) {
               outputElement.innerHTML = youlose;
-            } else {
+            } else if (myScore === soraneScore) {
               outputElement.innerHTML = draw;
+            } else if (myScore > 21 && soraneScore <= 21) {
+              outputElement.innerHTML = youlose;
+            } else if (myScore <= 21 && soraneScore > 21) {
+              outputElement.innerHTML = youWin;
             }
           }
 
@@ -308,12 +312,22 @@ const projects = (await getCollection("work")).sort(
                 var cardIndex = selectedCard;
                 var imageUrl = `/assets/${cardIndex}.jpg`;
                 cardImagesSorane += `<img src='${imageUrl}' alt='Card'>`;
-
-                cardImagesContainerSorane.innerHTML = cardImagesSorane;
-
                 playTwoDeck.push(selectedCard);
               }
             }
+            var soraneScore = playerTwoScore();
+            while (soraneScore < 16) {
+              if (getCardArrayX2.length >= 1) {
+                var selectedCard = getCardArrayX2.shift();
+                var cardIndex = selectedCard;
+                var imageUrl = `/assets/${cardIndex}.jpg`;
+                cardImagesSorane += `<img src='${imageUrl}' alt='Card'>`;
+                playTwoDeck.push(selectedCard);
+                soraneScore = playerTwoScore();
+              }
+            }
+            cardImagesContainerSorane.innerHTML = cardImagesSorane;
+
             return playTwoDeck;
           }
           //加1張牌
@@ -346,6 +360,7 @@ const projects = (await getCollection("work")).sort(
             }
             return totalScoreValue;
           }
+          //Sorane分數
           function playerTwoScore() {
             totalScoreValue2 = 0;
             var aceCount = 0;
@@ -356,7 +371,7 @@ const projects = (await getCollection("work")).sort(
                 aceCount++;
               }
             }
-            while (aceCount > 0 && totalScoreValue <= 11) {
+            while (aceCount > 0 && totalScoreValue2 <= 11) {
               totalScoreValue2 += 9;
               aceCount--;
             }
