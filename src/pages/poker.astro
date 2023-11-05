@@ -3,10 +3,7 @@ import { getCollection } from "astro:content";
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-import ContactCTA from "../components/ContactCTA.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
 import Hero from "../components/Hero.astro";
-import Grid from "../components/Grid.astro";
 
 const projects = (await getCollection("work")).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
@@ -304,8 +301,12 @@ const projects = (await getCollection("work")).sort(
           //給Sorane牌
           var cardImagesContainerSorane =
             document.getElementById("cardImagesSorane");
+          var soraneScore = playerTwoScore();
 
           function giveSoraneCards() {
+            if (soraneScore >= 16) {
+              return playTwoDeck;
+            }
             for (var i = 0; i < 2; i++) {
               if (getCardArrayX2.length >= 2) {
                 var selectedCard = getCardArrayX2.shift();
@@ -315,7 +316,6 @@ const projects = (await getCollection("work")).sort(
                 playTwoDeck.push(selectedCard);
               }
             }
-            var soraneScore = playerTwoScore();
             while (soraneScore < 16) {
               if (getCardArrayX2.length >= 1) {
                 var selectedCard = getCardArrayX2.shift();
@@ -332,6 +332,9 @@ const projects = (await getCollection("work")).sort(
           }
           //加1張牌
           function giveOneCard() {
+            if (totalScoreValue > 21) {
+              return playOneDeck;
+            }
             if (getCardArrayX2.length >= 1) {
               var selectedCard = getCardArrayX2.shift();
               var cardIndex = selectedCard;
@@ -340,6 +343,7 @@ const projects = (await getCollection("work")).sort(
               cardImages += `<img src="${imageUrl}" alt="Card">`;
               cardImagesContainer.innerHTML = cardImages;
               playOneDeck.push(selectedCard);
+              totalScoreValue = playerOneScore();
             }
             return playOneDeck;
           }

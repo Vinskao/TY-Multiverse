@@ -3,10 +3,7 @@ import { getCollection } from "astro:content";
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-import ContactCTA from "../components/ContactCTA.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
 import Hero from "../components/Hero.astro";
-import Grid from "../components/Grid.astro";
 
 const projects = (await getCollection("work")).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
@@ -42,18 +39,11 @@ const projects = (await getCollection("work")).sort(
         z-index: 999;
       }
 
-      .image-container {
-        overflow: auto; 
-        white-space: nowrap; 
+      #cardImages {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: auto;
       }
-
-      .image-container img {
-        width: 240px;
-        height: auto;
-        margin-right: -95px;
-      }
-
-
     </style>
   </head>
   <body>
@@ -77,10 +67,25 @@ const projects = (await getCollection("work")).sort(
           <h1>塵民</h1>
           <h1>古女</h1>
           <h1>獄女</h1>
-          <div class="image-container">
-            <div class="image-text">
-              <div class="image-text-content">八食</div>
-            </div>
+          <div id="buttoms">
+            <button id="shuffleButton" onclick="shuffle()">洗牌</button>
+            <button id="getHagisunButton" onclick="getHagisun()"
+              >八食戰隊</button
+            >
+            <button id="stand" onclick="soraneGetCards()">初桑戰隊</button>
+          </div>
+          <h2>八食戰隊:</h2>
+          <div id="system">
+            <div id="cardImages"></div>
+            <div id="output"></div>
+            <div id="settle"></div>
+          </div>
+          <h2>初桑戰隊:</h2>
+          <div id="system">
+            <div id="cardImagesSorane"></div>
+            <div id="outputSorane"></div>
+          </div>
+          <!-- <div class="image-container">
             <img alt="Wavo" src="/assets/Wavo.png" />
             <img alt="Chiaki" src="/assets/Chiaki.png" />
             <img alt="Sayuri" src="/assets/Sayuri.png" />
@@ -119,7 +124,7 @@ const projects = (await getCollection("work")).sort(
             <img alt="Nianca_K794" src="/assets/Nianca_K794.png" />
             <img alt="Yui" src="/assets/Yui.png" />
             <img alt="Yui" src="/assets/Mesoyei.png" />
-          </div>
+          </div> -->
         </main>
       </div>
     </BaseLayout>
@@ -142,5 +147,93 @@ const projects = (await getCollection("work")).sort(
         }
       </script>
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var imageNames = [
+          "Wavo.png",
+          "Chiaki.png",
+          "Sayuri.png",
+          "Hitomi.png",
+          "Akimoto_Yuko.png",
+          "Etsuko.png",
+          "Masako.png",
+          "Médicis_Monroe.png",
+          "Sorane.png",
+          "Kyu.png",
+          "Riuri.png",
+          "Natsumi.png",
+          "Kamira.png",
+          "Kazuko.png",
+          "Miyu.png",
+          "Valmet.png",
+          "Mayo.png",
+          "Samui.png",
+          "Paprika.png",
+          "Caleigh.png",
+          "Doire_Evewch.png",
+          "Z.png",
+          "Branwen.png",
+          "Lucrece_Yurophas.png",
+          "Uiobbeci.png",
+          "Draeny_Chevrem.png",
+          "Nianca_K794.png",
+          "Yui.png",
+          "Mesoyei.png",
+        ];
+        var randomIndex = getRandomIndex();
+
+        function getRandomIndex() {
+          return Math.floor(Math.random() * imageNames.length);
+        }
+        function displayRandomImage(imageNames, containerId) {
+          var randomIndex = Math.floor(Math.random() * imageNames.length);
+          var selectedImageName = imageNames[randomIndex];
+          var imageUrl = `/assets/${selectedImageName}`;
+
+          var imageContainer = document.getElementById(containerId);
+          var image = document.createElement("img");
+          image.src = imageUrl;
+          image.alt = "Card";
+          image.style.width = "120px";
+          image.style.height = "auto";
+          image.style.marginRight = "10px";
+          imageContainer.appendChild(image);
+        }
+
+        var containerId = "cardImages";
+
+        function getHagisun() {
+          var cardImagesContainer = document.getElementById(containerId);
+          cardImagesContainer.innerHTML = "";
+
+          var availableImages = imageNames.slice();
+
+          for (var i = 0; i < 8; i++) {
+            var randomIndex = Math.floor(
+              Math.random() * availableImages.length
+            );
+            var selectedImageName = availableImages[randomIndex];
+            availableImages.splice(randomIndex, 1);
+
+            var imageUrl = `/assets/${selectedImageName}`;
+            var imageContainer = document.getElementById(containerId);
+            var image = document.createElement("img");
+            image.src = imageUrl;
+            image.alt = "Card";
+            image.style.width = "200px";
+            image.style.height = "auto";
+            image.style.marginRight = "-95px";
+            imageContainer.appendChild(image);
+          }
+        }
+
+        var getHagisunButton = document.getElementById("getHagisunButton");
+
+        getHagisunButton.addEventListener("click", function () {
+          getHagisun();
+        });
+      });
+    </script>
   </body>
 </html>
