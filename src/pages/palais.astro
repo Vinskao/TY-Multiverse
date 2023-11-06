@@ -1,13 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Hero from "../components/Hero.astro";
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set } from 'firebase/database';
-import { getStorage, ref as storageRef, uploadString, getDownloadURL } from 'firebase/storage';
-import dotenv from 'dotenv';
-import axios from 'axios';
-import * as fs from 'fs';
 
+import Hero from "../components/Hero.astro";
 
 ---
 
@@ -65,10 +59,11 @@ import * as fs from 'fs';
         align-items: center;
         z-index: 999;
       }
-      #cardImagesForthgate,#cardImagesHagisun,#cardImagesHagishi,#cardImagesMutav {
+      #cardImagesForthgate, #cardImagesHagisun, #cardImagesHagishi, #cardImagesMutav, {
         white-space: nowrap;
         overflow-x: auto;
       }
+      
       #cardImagesAll {
         white-space: nowrap;
         overflow-x: auto;
@@ -78,9 +73,10 @@ import * as fs from 'fs';
         overflow-x: auto;
       }
     </style>
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+
   </head>
   <body>
     <BaseLayout
@@ -122,10 +118,10 @@ import * as fs from 'fs';
             <div id="cardImagesHagishi"></div>
           </div>
           <div class="powers-container">
-            <div id="totalPhysicPowerHagishi">Hagishi物理能力：0</div>
-            <div id="totalMagicPowerHagishi">Hagishi魔法能力：0</div>
-            <div id="totalUtilityPowerHagishi">Hagishi戰術能力：0</div>
-            <div id="totalHagishi">Hagishi總能力：0</div>
+            <div id="totalPhysicPowerHagishi">Hagishi 的物理能力：0</div>
+            <div id="totalMagicPowerHagishi">Hagishi 的魔法能力：0</div>
+            <div id="totalUtilityPowerHagishi">Hagishi 的戰術能力：0</div>
+            <div id="totalHagishi">Hagishi 的總能力：0</div>
 
           </div>
           <h6>初桑戰隊:</h6>
@@ -133,10 +129,10 @@ import * as fs from 'fs';
             <div id="cardImagesHagisun"></div>
           </div>
           <div class="powers-container">
-            <div id="totalPhysicPowerHagisun">Hagisun物理能力：0</div>
-            <div id="totalMagicPowerHagisun">Hagisun魔法能力：0</div>
-            <div id="totalUtilityPowerHagisun">Hagisun戰術能力：0</div>
-            <div id="totalHagisun">Hagisun總能力：0</div>
+            <div id="totalPhysicPowerHagisun">Hagisun 的物理能力：0</div>
+            <div id="totalMagicPowerHagisun">Hagisun 的魔法能力：0</div>
+            <div id="totalUtilityPowerHagisun">Hagisun 的戰術能力：0</div>
+            <div id="totalHagisun">Hagisun 的總能力：0</div>
 
           </div>
 
@@ -145,10 +141,10 @@ import * as fs from 'fs';
             <div id="cardImagesForthgate"></div>
           </div>
           <div class="powers-container">
-            <div id="totalPhysicPowerForthgate">Forthgate物理能力：0</div>
-            <div id="totalMagicPowerForthgate">Forthgate魔法能力：0</div>
-            <div id="totalUtilityPowerForthgate">Forthgate戰術能力：0</div>
-            <div id="totalForthgate">Forthgate總能力：0</div>
+            <div id="totalPhysicPowerForthgate">Forthgate 的物理能力：0</div>
+            <div id="totalMagicPowerForthgate">Forthgate 的魔法能力：0</div>
+            <div id="totalUtilityPowerForthgate">Forthgate 的戰術能力：0</div>
+            <div id="totalForthgate">Forthgate 的總能力：0</div>
 
           </div>
 
@@ -157,10 +153,10 @@ import * as fs from 'fs';
             <div id="cardImagesMutav"></div>
           </div>
           <div class="powers-container">
-            <div id="totalPhysicPowerMutav">Mutav物理能力：0</div>
-            <div id="totalMagicPowerMutav">Mutav魔法能力：0</div>
-            <div id="totalUtilityPowerMutav">Mutav戰術能力：0</div>
-            <div id="totalMutav">Mutav總能力：0</div>
+            <div id="totalPhysicPowerMutav">Mutav 的物理能力：0</div>
+            <div id="totalMagicPowerMutav">Mutav 的魔法能力：0</div>
+            <div id="totalUtilityPowerMutav">Mutav 的戰術能力：0</div>
+            <div id="totalMutav">Mutav 的總能力：0</div>
 
           </div>
 
@@ -214,7 +210,7 @@ import * as fs from 'fs';
 
     <!-- 全屏遮罩 -->
 
-    <div class="overlay" id="passwordOverlay">
+    <!-- <div class="overlay" id="passwordOverlay">
       <script>
         var isAuthenticated = false;
 
@@ -229,21 +225,18 @@ import * as fs from 'fs';
           }
         }
       </script>
-    </div>
+    </div> -->
 
     <script>
-      // const firebaseConfig = {
-      //   apiKey: process.env.FIREBASE_API_KEY,
-      //   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-      //   databaseURL: process.env.FIREBASE_DATABASE_URL,
-      //   projectId: process.env.FIREBASE_PROJECT_ID,
-      //   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-      //   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-      //   appId: process.env.FIREBASE_APP_ID,
-      //   measurementId: process.env.FIREBASE_MEASUREMENT_ID
-      // };
-
+      let jsonData;
       document.addEventListener("DOMContentLoaded", function () {
+        var dataPoints = [];
+        $.getJSON("https://firebasestorage.googleapis.com/v0/b/graph-2cfc7.appspot.com/o/palais.json?alt=media&token=a12f751a-3a31-4931-ab7e-b5de12e85015&_gl=1*u5u5sm*_ga*MTYxNzczOTU2MC4xNjk1MzQ5OTI4*_ga_CW55HF8NVT*MTY5OTI3NTE2Mi45LjEuMTY5OTI3NTk2MS40MS4wLjA.", function(response) {
+            jsonData = response;
+            console.log("JSON data:", jsonData);
+            console.log(dataPoints);
+        });
+
         const cards = [
           { name: "Wavo", physicPower: 55, magicPower: 2999, utilityPower: 46 },
           { name: "Chiaki", physicPower: 876, magicPower: 513, utilityPower: 764 },
@@ -275,36 +268,6 @@ import * as fs from 'fs';
           { name: "Mesoyei", physicPower: 565, magicPower: 43, utilityPower: 349 },
           { name: "Médicis_Monroe", physicPower: 1264, magicPower: 261, utilityPower: 110 },
         ];
-
-        // const cards = [];
-        // // 读取palais.json文件
-        // fs.readFile('palais.json', 'utf8', (err, data) => {
-        //   if (err) {
-        //     console.error('读取文件时出错：', err);
-        //     return;
-        //   }
-
-        //   try {
-        //     // 将JSON数据解析为JavaScript对象
-        //     const palaisData = JSON.parse(data);
-
-        //     // 循环遍历palaisData数组，提取所需的数据并添加到cards数组
-        //     for (const item of palaisData) {
-        //       const card = {
-        //         name: item.name,
-        //         physicPower: item.physicPower,
-        //         magicPower: item.magicPower,
-        //         utilityPower: item.utilityPower,
-        //       };
-        //       cards.push(card);
-        //     }
-
-        //     // 打印提取的数据
-        //     console.log(cards);
-        //   } catch (error) {
-        //     console.error('解析JSON时出错：', error);
-        //   }
-        // });
 
         var imageNamesAll = [
           "Wavo.png",
@@ -421,13 +384,13 @@ import * as fs from 'fs';
           var totalForthgateElement = document.getElementById("totalForthgate"); // 新增的元素
 
           // 更新 Forthgate 的物理和魔法能力值
-          totalPhysicPowerElement.textContent = "Forthgate物理能力：" + totalPhysicPower;
-          totalMagicPowerElement.textContent = "Forthgate魔法能力：" + totalMagicPower;
-          totalUtilityPowerElement.textContent = "Forthgate戰術能力：" + totalUtilityPower;
+          totalPhysicPowerElement.textContent = "Forthgate 的物理能力：" + totalPhysicPower;
+          totalMagicPowerElement.textContent = "Forthgate 的魔法能力：" + totalMagicPower;
+          totalUtilityPowerElement.textContent = "Forthgate 的戰術能力：" + totalUtilityPower;
 
           // 计算并更新总能力值
           var totalPower = totalPhysicPower + totalMagicPower + totalUtilityPower;
-          totalForthgateElement.textContent = "Forthgate總能力：" + totalPower;
+          totalForthgateElement.textContent = "Forthgate 的總能力：" + totalPower;
         }
 
         var getForthgateButton = document.getElementById("getForthgateButton");
@@ -477,13 +440,13 @@ import * as fs from 'fs';
           var totalMutavElement = document.getElementById("totalMutav"); // 新增的元素
 
           // 更新 Mutav 的物理和魔法能力值
-          totalPhysicPowerElement.textContent = "Mutav物理能力：" + totalPhysicPower;
-          totalMagicPowerElement.textContent = "Mutav魔法能力：" + totalMagicPower;
-          totalUtilityPowerElement.textContent = "Mutav戰術能力：" + totalUtilityPower;
+          totalPhysicPowerElement.textContent = "Mutav 的物理能力：" + totalPhysicPower;
+          totalMagicPowerElement.textContent = "Mutav 的魔法能力：" + totalMagicPower;
+          totalUtilityPowerElement.textContent = "Mutav 的戰術能力：" + totalUtilityPower;
 
           // 计算并更新总能力值
           var totalPower = totalPhysicPower + totalMagicPower + totalUtilityPower;
-          totalMutavElement.textContent = "Mutav總能力：" + totalPower;
+          totalMutavElement.textContent = "Mutav 的總能力：" + totalPower;
         }
 
         var getMutavButton = document.getElementById("getMutavButton");
@@ -535,13 +498,13 @@ import * as fs from 'fs';
           var totalHagisunElement = document.getElementById("totalHagisun"); // 新增的元素
 
           // 更新 Hagisun 的物理和魔法能力值
-          totalPhysicPowerElement.textContent = "Hagisun物理能力：" + totalPhysicPower;
-          totalMagicPowerElement.textContent = "Hagisun魔法能力：" + totalMagicPower;
-          totalUtilityPowerElement.textContent = "Hagisun戰術能力：" + totalUtilityPower;
+          totalPhysicPowerElement.textContent = "Hagisun 的物理能力：" + totalPhysicPower;
+          totalMagicPowerElement.textContent = "Hagisun 的魔法能力：" + totalMagicPower;
+          totalUtilityPowerElement.textContent = "Hagisun 的戰術能力：" + totalUtilityPower;
 
           // 计算并更新总能力值
           var totalPower = totalPhysicPower + totalMagicPower + totalUtilityPower;
-          totalHagisunElement.textContent = "Hagisun總能力：" + totalPower;
+          totalHagisunElement.textContent = "Hagisun 的總能力：" + totalPower;
         }
 
 
@@ -592,13 +555,13 @@ import * as fs from 'fs';
           var totalHagishiElement = document.getElementById("totalHagishi"); // 新增的元素
 
           // 更新 Hagishi 的物理和魔法能力值
-          totalPhysicPowerElement.textContent = "Hagishi物理能力：" + totalPhysicPower;
-          totalMagicPowerElement.textContent = "Hagishi魔法能力：" + totalMagicPower;
-          totalUtilityPowerElement.textContent = "Hagishi戰術能力：" + totalUtilityPower;
+          totalPhysicPowerElement.textContent = "Hagishi 的物理能力：" + totalPhysicPower;
+          totalMagicPowerElement.textContent = "Hagishi 的魔法能力：" + totalMagicPower;
+          totalUtilityPowerElement.textContent = "Hagishi 的戰術能力：" + totalUtilityPower;
 
           // 计算并更新总能力值
           var totalPower = totalPhysicPower + totalMagicPower + totalUtilityPower;
-          totalHagishiElement.textContent = "Hagishi總能力：" + totalPower;
+          totalHagishiElement.textContent = "Hagishi 的總能力：" + totalPower;
         }
 
 

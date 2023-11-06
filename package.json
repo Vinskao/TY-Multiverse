@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.14",
-    "@types/jquery": "^3.5.19",
+    "@types/jquery": "^3.5.25",
     "@types/node": "^20.7.1"
   },
   "description": "All commands are run from the root of the project, from a terminal:",
