@@ -13,6 +13,13 @@ import Hero from "../components/Hero.astro";
         display: flex;
         justify-content: space-between;
       }
+      #attrHagisun,
+      #attrHagishi,
+      #attrForthgate,
+      #attrMutav {
+        margin: 0;
+        padding: 0;
+      }
       #totalPhysicPowerHagishi,
       #totalMagicPowerHagishi,
       #totalUtilityPowerHagishi,
@@ -28,9 +35,15 @@ import Hero from "../components/Hero.astro";
       #totalHagishi,
       #totalHagisun,
       #totalForthgate,
-      #totalMutav {
+      #totalMutav,
+      #attrHagisun,
+      #attrHagishi,
+      #attrForthgate,
+      #attrMutav {
         flex: 1;
         font-size: 12px;
+        margin: 0;
+        padding: 0;
       }
 
       h6 {
@@ -126,6 +139,8 @@ import Hero from "../components/Hero.astro";
             <div id="totalUtilityPowerHagishi">Hagishi 的戰術能力：0</div>
             <div id="totalHagishi">Hagishi 的總能力：0</div>
           </div>
+          <div id="attrHagishi">Hagishi 屬性：</div>
+
           <h6>初桑戰隊:</h6>
           <div id="system">
             <div id="cardImagesHagisun"></div>
@@ -136,6 +151,7 @@ import Hero from "../components/Hero.astro";
             <div id="totalUtilityPowerHagisun">Hagisun 的戰術能力：0</div>
             <div id="totalHagisun">Hagisun 的總能力：0</div>
           </div>
+          <div id="attrHagisun">Hagisun 屬性：</div>
 
           <h6>肆門戰隊:</h6>
           <div id="system">
@@ -147,6 +163,7 @@ import Hero from "../components/Hero.astro";
             <div id="totalUtilityPowerForthgate">Forthgate 的戰術能力：0</div>
             <div id="totalForthgate">Forthgate 的總能力：0</div>
           </div>
+          <div id="attrForthgate">Forthgate 屬性：</div>
 
           <h6>Phénix戰隊:</h6>
           <div id="system">
@@ -158,6 +175,7 @@ import Hero from "../components/Hero.astro";
             <div id="totalUtilityPowerMutav">Mutav 的戰術能力：0</div>
             <div id="totalMutav">Mutav 的總能力：0</div>
           </div>
+          <div id="attrMutav">Mutav 屬性：</div>
 
           <h6>隨機戰隊:</h6>
           <div id="system">
@@ -209,7 +227,7 @@ import Hero from "../components/Hero.astro";
 
     <!-- 全屏遮罩 -->
 
-    <!-- <div class="overlay" id="passwordOverlay">
+    <div class="overlay" id="passwordOverlay">
       <script>
         var isAuthenticated = false;
 
@@ -224,7 +242,7 @@ import Hero from "../components/Hero.astro";
           }
         }
       </script>
-    </div> -->
+    </div>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -238,10 +256,27 @@ import Hero from "../components/Hero.astro";
             console.log(dataPoints);
 
             const cards = jsonData.map((item) => ({
+              id: item.id,
+              nameOriginal: item.nameOriginal,
+              codeName: item.codeName,
               name: item.name,
               physicPower: item.physicPower,
               magicPower: item.magicPower,
               utilityPower: item.utilityPower,
+              dob: item.dob,
+              race: item.race,
+              attributes: item.attributes,
+              gender: item.gender,
+              assSize: item.assSize,
+              boobsSize: item.boobsSize,
+              heightCm: item.heightCm,
+              weightKg: item.weightKg,
+              command: item.command,
+              group: item.group,
+              profession: item.profession,
+              combat: item.combat,
+              favoriteFoods: item.favoriteFoods,
+              age: item.age,
             }));
 
             // Now you can use 'cards' inside this callback function
@@ -327,6 +362,8 @@ import Hero from "../components/Hero.astro";
               var totalPhysicPower = 0;
               var totalMagicPower = 0;
               var totalUtilityPower = 0;
+              var selectedCardNames = [];
+              var selectedCardAttributes = [];
 
               var availableImages = imageNamesForthgate.slice();
               for (var i = 0; i < 6; i++) {
@@ -336,13 +373,11 @@ import Hero from "../components/Hero.astro";
                 var selectedImageName = availableImages[randomIndex];
                 availableImages.splice(randomIndex, 1);
 
-                // 根据选中的图片名称找到对应的卡片信息
                 var selectedCard = cards.find(
                   (card) => card.name === selectedImageName.split(".")[0]
                 );
 
                 if (selectedCard) {
-                  // 更新总的物理和魔法能力值
                   totalPhysicPower += selectedCard.physicPower;
                   totalMagicPower += selectedCard.magicPower;
                   totalUtilityPower += selectedCard.utilityPower;
@@ -357,6 +392,9 @@ import Hero from "../components/Hero.astro";
                   image.style.height = "auto";
                   image.style.marginRight = "-95px";
                   imageContainer.appendChild(image);
+
+                  selectedCardNames.push(selectedCard.name);
+                  selectedCardAttributes.push(selectedCard.attributes);
                 }
               }
 
@@ -370,9 +408,11 @@ import Hero from "../components/Hero.astro";
                 "totalUtilityPowerForthgate"
               );
               var totalForthgateElement =
-                document.getElementById("totalForthgate"); // 新增的元素
+                document.getElementById("totalForthgate");
+              var attrForthgateElement =
+                document.getElementById("attrForthgate");
 
-              // 更新 Forthgate 的物理和魔法能力值
+              // Update Forthgate's physical, magic, and utility power values
               totalPhysicPowerElement.textContent =
                 "Forthgate 的物理能力：" + totalPhysicPower;
               totalMagicPowerElement.textContent =
@@ -380,7 +420,10 @@ import Hero from "../components/Hero.astro";
               totalUtilityPowerElement.textContent =
                 "Forthgate 的戰術能力：" + totalUtilityPower;
 
-              // 计算并更新总能力值
+              attrForthgateElement.textContent =
+                "Forthgate 屬性：" + selectedCardAttributes.join(", ");
+
+              // Calculate and update the total power value
               var totalPower =
                 totalPhysicPower + totalMagicPower + totalUtilityPower;
               totalForthgateElement.textContent =
@@ -400,6 +443,8 @@ import Hero from "../components/Hero.astro";
               var totalPhysicPower = 0;
               var totalMagicPower = 0;
               var totalUtilityPower = 0;
+              var selectedCardNames = [];
+              var selectedCardAttributes = [];
 
               var availableImages = imageNamesMutav.slice();
               for (var i = 0; i < 1; i++) {
@@ -409,13 +454,11 @@ import Hero from "../components/Hero.astro";
                 var selectedImageName = availableImages[randomIndex];
                 availableImages.splice(randomIndex, 1);
 
-                // 根据选中的图片名称找到对应的卡片信息
                 var selectedCard = cards.find(
                   (card) => card.name === selectedImageName.split(".")[0]
                 );
 
                 if (selectedCard) {
-                  // 更新总的物理和魔法能力值
                   totalPhysicPower += selectedCard.physicPower;
                   totalMagicPower += selectedCard.magicPower;
                   totalUtilityPower += selectedCard.utilityPower;
@@ -430,6 +473,8 @@ import Hero from "../components/Hero.astro";
                   image.style.height = "auto";
                   image.style.marginRight = "-95px";
                   imageContainer.appendChild(image);
+
+                  selectedCardNames.push(selectedCard.name);
                 }
               }
 
@@ -442,9 +487,9 @@ import Hero from "../components/Hero.astro";
               var totalUtilityPowerElement = document.getElementById(
                 "totalUtilityPowerMutav"
               );
-              var totalMutavElement = document.getElementById("totalMutav"); // 新增的元素
+              var totalMutavElement = document.getElementById("totalMutav");
+              var attrMutavElement = document.getElementById("attrMutav");
 
-              // 更新 Mutav 的物理和魔法能力值
               totalPhysicPowerElement.textContent =
                 "Mutav 的物理能力：" + totalPhysicPower;
               totalMagicPowerElement.textContent =
@@ -452,7 +497,12 @@ import Hero from "../components/Hero.astro";
               totalUtilityPowerElement.textContent =
                 "Mutav 的戰術能力：" + totalUtilityPower;
 
-              // 计算并更新总能力值
+              selectedCardAttributes = cards
+                .filter((card) => selectedCardNames.includes(card.name))
+                .map((card) => card.attributes);
+              attrMutavElement.textContent =
+                "Mutav 屬性：" + selectedCardAttributes.join(", ");
+
               var totalPower =
                 totalPhysicPower + totalMagicPower + totalUtilityPower;
               totalMutavElement.textContent = "Mutav 的總能力：" + totalPower;
@@ -470,6 +520,8 @@ import Hero from "../components/Hero.astro";
               var totalPhysicPower = 0;
               var totalMagicPower = 0;
               var totalUtilityPower = 0;
+              var selectedCardNames = [];
+              var selectedCardAttributes = [];
 
               var availableImages = imageNamesHagisun.slice();
               for (var i = 0; i < 5; i++) {
@@ -479,13 +531,11 @@ import Hero from "../components/Hero.astro";
                 var selectedImageName = availableImages[randomIndex];
                 availableImages.splice(randomIndex, 1);
 
-                // 根据选中的图片名称找到对应的卡片信息
                 var selectedCard = cards.find(
                   (card) => card.name === selectedImageName.split(".")[0]
                 );
 
                 if (selectedCard) {
-                  // 更新总的物理和魔法能力值
                   totalPhysicPower += selectedCard.physicPower;
                   totalMagicPower += selectedCard.magicPower;
                   totalUtilityPower += selectedCard.utilityPower;
@@ -500,6 +550,8 @@ import Hero from "../components/Hero.astro";
                   image.style.height = "auto";
                   image.style.marginRight = "-95px";
                   imageContainer.appendChild(image);
+
+                  selectedCardNames.push(selectedCard.name);
                 }
               }
 
@@ -512,9 +564,9 @@ import Hero from "../components/Hero.astro";
               var totalUtilityPowerElement = document.getElementById(
                 "totalUtilityPowerHagisun"
               );
-              var totalHagisunElement = document.getElementById("totalHagisun"); // 新增的元素
+              var totalHagisunElement = document.getElementById("totalHagisun");
+              var attrHagisunElement = document.getElementById("attrHagisun");
 
-              // 更新 Hagisun 的物理和魔法能力值
               totalPhysicPowerElement.textContent =
                 "Hagisun 的物理能力：" + totalPhysicPower;
               totalMagicPowerElement.textContent =
@@ -522,7 +574,12 @@ import Hero from "../components/Hero.astro";
               totalUtilityPowerElement.textContent =
                 "Hagisun 的戰術能力：" + totalUtilityPower;
 
-              // 计算并更新总能力值
+              selectedCardAttributes = cards
+                .filter((card) => selectedCardNames.includes(card.name))
+                .map((card) => card.attributes);
+              attrHagisunElement.textContent =
+                "Hagisun 屬性：" + selectedCardAttributes.join(", ");
+
               var totalPower =
                 totalPhysicPower + totalMagicPower + totalUtilityPower;
               totalHagisunElement.textContent =
@@ -541,6 +598,8 @@ import Hero from "../components/Hero.astro";
               var totalPhysicPower = 0;
               var totalMagicPower = 0;
               var totalUtilityPower = 0;
+              var selectedCardNames = []; // 存储选中的卡片名称
+              var selectedCardAttributes = []; // 存储选中的卡片属性
 
               var availableImages = imageNamesHagishi.slice();
               for (var i = 0; i < 4; i++) {
@@ -549,14 +608,13 @@ import Hero from "../components/Hero.astro";
                 );
                 var selectedImageName = availableImages[randomIndex];
                 availableImages.splice(randomIndex, 1);
+                selectedCardNames.push(selectedImageName.split(".")[0]);
 
-                // 根据选中的图片名称找到对应的卡片信息
                 var selectedCard = cards.find(
                   (card) => card.name === selectedImageName.split(".")[0]
                 );
 
                 if (selectedCard) {
-                  // 更新总的物理和魔法能力值
                   totalPhysicPower += selectedCard.physicPower;
                   totalMagicPower += selectedCard.magicPower;
                   totalUtilityPower += selectedCard.utilityPower;
@@ -583,7 +641,8 @@ import Hero from "../components/Hero.astro";
               var totalUtilityPowerElement = document.getElementById(
                 "totalUtilityPowerHagishi"
               );
-              var totalHagishiElement = document.getElementById("totalHagishi"); // 新增的元素
+              var totalHagishiElement = document.getElementById("totalHagishi");
+              var attrHagishiElement = document.getElementById("attrHagishi");
 
               // 更新 Hagishi 的物理和魔法能力值
               totalPhysicPowerElement.textContent =
@@ -592,6 +651,13 @@ import Hero from "../components/Hero.astro";
                 "Hagishi 的魔法能力：" + totalMagicPower;
               totalUtilityPowerElement.textContent =
                 "Hagishi 的戰術能力：" + totalUtilityPower;
+
+              // 获取选中卡片的属性
+              selectedCardAttributes = cards
+                .filter((card) => selectedCardNames.includes(card.name))
+                .map((card) => card.attributes);
+              attrHagishiElement.textContent =
+                "Hagishi 屬性：" + selectedCardAttributes.join(", ");
 
               // 计算并更新总能力值
               var totalPower =
