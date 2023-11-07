@@ -8,7 +8,44 @@ import Hero from "../components/Hero.astro";
 <meta charset="UTF-8" />
 <html>
   <head>
+    <script></script>
     <style>
+      .container {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        /* justify-content: space-between; */
+        /* border: 1px solid white; */
+        columns: 2;
+      }
+
+      .left-container {
+        width: 50%;
+        position: static;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        border: 1px solid rgb(70, 147, 80);
+      }
+      .right-container {
+        width: 40%;
+        position: relative;
+        z-index: 0;
+        border: 1px solid rgb(141, 38, 38);
+        columns: 3;
+        font-size: smaller;
+        column-gap: 0px;
+        font-size: 1.5vw;
+      }
+      .right-container ul {
+        width: 120%;
+        position: relative;
+        margin-left: 0;
+        list-style-type: none;
+      }
+      .right-container p:hover {
+        background-color: aqua;
+      }
       .powers-container {
         display: flex;
         justify-content: space-between;
@@ -106,10 +143,22 @@ import Hero from "../components/Hero.astro";
             tagline="Welcome to Lily Palais."
             align="start"
           />
-          <h1>八食</h1>
-          <h1>初桑</h1>
-          <h1>肆門</h1>
-          <h1>Phénix</h1>
+          <div class="container">
+            <div class="left-container">
+              <div id="cardInfoContainer">
+                <!-- 卡片信息将在这里生成 -->
+              </div>
+            </div>
+            <div class="right-container">
+              <ul id="cardList">
+                <!-- 卡片将在这里生成 -->
+              </ul>
+            </div>
+          </div>
+          <h2>HAGISUN</h2>
+
+          <h2>肆門</h2>
+          <h2>Phénix</h2>
           <h1>Buse</h1>
           <h1>家累</h1>
           <h1>塵民</h1>
@@ -227,7 +276,7 @@ import Hero from "../components/Hero.astro";
 
     <!-- 全屏遮罩 -->
 
-    <div class="overlay" id="passwordOverlay">
+    <!-- <div class="overlay" id="passwordOverlay">
       <script>
         var isAuthenticated = false;
 
@@ -242,7 +291,7 @@ import Hero from "../components/Hero.astro";
           }
         }
       </script>
-    </div>
+    </div> -->
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -254,6 +303,54 @@ import Hero from "../components/Hero.astro";
             var jsonData = response;
             console.log("JSON data:", jsonData);
             console.log(dataPoints);
+            // 生成卡牌名字
+            const cardList = document.getElementById("cardList");
+            const cardInfoContainer =
+              document.getElementById("cardInfoContainer");
+
+            jsonData.forEach((item) => {
+              const listItem = document.createElement("li");
+              listItem.textContent = item.nameOriginal;
+
+              // 鼠标悬停时显示卡片信息
+              listItem.addEventListener("mouseover", function () {
+                displayCardInfo(item);
+              });
+
+              // 鼠标移出时清空卡片信息
+              listItem.addEventListener("mouseout", function () {
+                clearCardInfo();
+              });
+
+              cardList.appendChild(listItem);
+            });
+
+            function displayCardInfo(card) {
+              const cardInfoElement = document.createElement("div");
+              cardInfoElement.className = "card-info";
+              cardInfoElement.innerHTML = `
+              <p style="font-size: 40px">${card.command}</p>
+              <p style="font-weight: bold">${card.nameOriginal}</p>
+              <p>Physic Power: ${card.physicPower}</p>
+              <p>Magic Power: ${card.magicPower}</p>
+              <p>Utility Power: ${card.utilityPower}</p>
+              <p>Attributes: ${card.attributes}</p>
+              <p>Ass Size: ${card.assSize}</p>
+              <p>Boobs Size: ${card.boobsSize}</p>
+              <p>Height (cm): ${card.heightCm}</p>
+              <p>Weight (kg): ${card.weightKg}</p>
+              <p>${card.profession}</p>
+              <p>Combat: ${card.combat}</p>
+              <p>Age: ${card.age}</p>
+              <img src="/assets/${card.name}.png" alt="${card.name}" style="width: 200px; height: auto; margin: -380px 0 0 0; float: right; position: static">
+            `;
+              cardInfoContainer.innerHTML = ""; // 清空容器
+              cardInfoContainer.appendChild(cardInfoElement);
+            }
+
+            function clearCardInfo() {
+              cardInfoContainer.innerHTML = ""; // 清空卡片信息容器
+            }
 
             const cards = jsonData.map((item) => ({
               id: item.id,
