@@ -10,17 +10,19 @@ import Hero from "../components/Hero.astro";
   <head>
     <script></script>
     <style>
+      #cardList li {
+        margin: 0;
+        list-style-type: none;
+      }
       .container {
         display: flex;
         flex-direction: row;
         position: relative;
-        /* justify-content: space-between; */
-        /* border: 1px solid white; */
         columns: 2;
       }
 
       .left-container {
-        width: 50%;
+        width: 40%;
         position: static;
         top: 0;
         left: 0;
@@ -44,7 +46,6 @@ import Hero from "../components/Hero.astro";
         list-style-type: none;
       }
       .right-container p:hover {
-        background-color: aqua;
       }
       .powers-container {
         display: flex;
@@ -155,15 +156,7 @@ import Hero from "../components/Hero.astro";
               </ul>
             </div>
           </div>
-          <h2>HAGISUN</h2>
 
-          <h2>肆門</h2>
-          <h2>Phénix</h2>
-          <h1>Buse</h1>
-          <h1>家累</h1>
-          <h1>塵民</h1>
-          <h1>古女</h1>
-          <h1>獄女</h1>
           <div id="buttoms">
             <button id="shuffleButton" onclick="shuffle()">洗牌</button>
             <button id="getHagishiButton" onclick="getHagishi()"
@@ -230,53 +223,13 @@ import Hero from "../components/Hero.astro";
           <div id="system">
             <div id="cardImagesAll"></div>
           </div>
-          <!-- <div class="image-container">
-            <img alt="Wavo" src="/assets/Wavo.png" />
-            <img alt="Chiaki" src="/assets/Chiaki.png" />
-            <img alt="Sayuri" src="/assets/Sayuri.png" />
-            <img alt="Hitomi" src="/assets/Hitomi.png" />
-            <img alt="Akimoto_Yuko" src="/assets/Akimoto_Yuko.png" />
-            <img alt="Etsuko" src="/assets/Etsuko.png" />
-            <img alt="Masako" src="/assets/Masako.png" />
-          </div>
-
-          <div class="image-container">
-            <img alt="Médicis_Monroe" src="/assets/Médicis_Monroe.png" />
-          </div>
-
-          <div class="image-container">
-            <img alt="Sorane" src="/assets/Sorane.png" />
-            <img alt="Kyu" src="/assets/Kyu.png" />
-            <img alt="Riuri" src="/assets/Riuri.png" />
-            <img alt="Natsumi" src="/assets/Natsumi.png" />
-            <img alt="Kamira" src="/assets/Kamira.png" />
-            <img alt="Kazuko" src="/assets/Kazuko.png" />
-            <img alt="Miyu" src="/assets/Miyu.png" />
-            <img alt="Valmet" src="/assets/Valmet.png" />
-            <img alt="Mayo" src="/assets/Mayo.png" />
-          </div>
-
-          <div class="image-container">
-            <img alt="samui" src="/assets/Samui.png" />
-            <img alt="Paprika" src="/assets/Paprika.png" />
-            <img alt="Caleigh" src="/assets/Caleigh.png" />
-            <img alt="Doire_Evewch" src="/assets/Doire_Evewch.png" />
-            <img alt="Z" src="/assets/Z.png" />
-            <img alt="Branwen" src="/assets/Branwen.png" />
-            <img alt="Lucrece_Yurophas" src="/assets/Lucrece_Yurophas.png" />
-            <img alt="Uiobbeci" src="/assets/Uiobbeci.png" />
-            <img alt="Draeny_Chevrem" src="/assets/Draeny_Chevrem.png" />
-            <img alt="Nianca_K794" src="/assets/Nianca_K794.png" />
-            <img alt="Yui" src="/assets/Yui.png" />
-            <img alt="Yui" src="/assets/Mesoyei.png" />
-          </div> -->
         </main>
       </div>
     </BaseLayout>
 
     <!-- 全屏遮罩 -->
 
-    <!-- <div class="overlay" id="passwordOverlay">
+    <div class="overlay" id="passwordOverlay">
       <script>
         var isAuthenticated = false;
 
@@ -291,7 +244,7 @@ import Hero from "../components/Hero.astro";
           }
         }
       </script>
-    </div> -->
+    </div>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -311,15 +264,29 @@ import Hero from "../components/Hero.astro";
             jsonData.forEach((item) => {
               const listItem = document.createElement("li");
               listItem.textContent = item.nameOriginal;
-
-              // 鼠标悬停时显示卡片信息
+              listItem.style.cursor = "pointer";
+              listItem.style.paddingLeft = "5px";
+              listItem.style.listStyleType = "none";
+              listItem.style.marginRight = "auto";
+              listItem.style.border = "1px solid #ffffff";
+              listItem.style.display = "block";
+              listItem.style.marginBottom = "0px";
+              listItem.style.float = "right";
+              listItem.style.lineHeight = "1";
+              listItem.style.letterSpacing = "0px";
+              listItem.style.textAlign = "left";
+              listItem.style.textIndent = "-10px";
               listItem.addEventListener("mouseover", function () {
                 displayCardInfo(item);
+                listItem.style.backgroundColor = "rgba(78, 112, 112, 0.304)";
+                listItem.style.color = "orange";
               });
 
               // 鼠标移出时清空卡片信息
               listItem.addEventListener("mouseout", function () {
                 clearCardInfo();
+                listItem.style.backgroundColor = "";
+                listItem.style.color = "";
               });
 
               cardList.appendChild(listItem);
@@ -342,7 +309,7 @@ import Hero from "../components/Hero.astro";
               <p>${card.profession}</p>
               <p>Combat: ${card.combat}</p>
               <p>Age: ${card.age}</p>
-              <img src="/assets/${card.name}.png" alt="${card.name}" style="width: 200px; height: auto; margin: -380px 0 0 0; float: right; position: static">
+              <img src="/assets/person/${card.name}.png" alt="${card.name}" style="width: 200px; height: auto; margin: -380px 0 0 0; float: right; position: static">
             `;
               cardInfoContainer.innerHTML = ""; // 清空容器
               cardInfoContainer.appendChild(cardInfoElement);
@@ -479,7 +446,7 @@ import Hero from "../components/Hero.astro";
                   totalMagicPower += selectedCard.magicPower;
                   totalUtilityPower += selectedCard.utilityPower;
 
-                  var imageUrl = `/assets/${selectedImageName}`;
+                  var imageUrl = `/assets/person/${selectedImageName}`;
                   var imageContainer =
                     document.getElementById(containerIdForthgate);
                   var image = document.createElement("img");
@@ -560,7 +527,7 @@ import Hero from "../components/Hero.astro";
                   totalMagicPower += selectedCard.magicPower;
                   totalUtilityPower += selectedCard.utilityPower;
 
-                  var imageUrl = `/assets/${selectedImageName}`;
+                  var imageUrl = `/assets/person/${selectedImageName}`;
                   var imageContainer =
                     document.getElementById(containerIdMutav);
                   var image = document.createElement("img");
@@ -637,7 +604,7 @@ import Hero from "../components/Hero.astro";
                   totalMagicPower += selectedCard.magicPower;
                   totalUtilityPower += selectedCard.utilityPower;
 
-                  var imageUrl = `/assets/${selectedImageName}`;
+                  var imageUrl = `/assets/person/${selectedImageName}`;
                   var imageContainer =
                     document.getElementById(containerIdHagisun);
                   var image = document.createElement("img");
@@ -716,7 +683,7 @@ import Hero from "../components/Hero.astro";
                   totalMagicPower += selectedCard.magicPower;
                   totalUtilityPower += selectedCard.utilityPower;
 
-                  var imageUrl = `/assets/${selectedImageName}`;
+                  var imageUrl = `/assets/person/${selectedImageName}`;
                   var imageContainer =
                     document.getElementById(containerIdHagishi);
                   var image = document.createElement("img");
@@ -779,7 +746,7 @@ import Hero from "../components/Hero.astro";
                 var selectedImageName = availableImages[randomIndex];
                 availableImages.splice(randomIndex, 1);
 
-                var imageUrl = `/assets/${selectedImageName}`;
+                var imageUrl = `/assets/person/${selectedImageName}`;
                 var imageContainer = document.getElementById(containerIdAll);
                 var image = document.createElement("img");
                 image.src = imageUrl;
