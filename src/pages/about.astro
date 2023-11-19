@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 import ContactCTA from "../components/ContactCTA.astro";
 import Hero from "../components/Hero.astro";
+import Calendar from "../components/Calendar.html";
 ---
 
 <style>
@@ -131,6 +132,10 @@ import Hero from "../components/Hero.astro";
           title="About"
           tagline="Thanks for stopping by. Read below to learn more about myself and my background."
         >
+          <h6>Choose Your Date of Birth</h6>
+          <div class="content">
+            <Calendar />
+          </div>
           <div id="adWall"></div>
           <button id="nextButton">Next</button>
 
