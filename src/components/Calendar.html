@@ -20,7 +20,6 @@
         width: 30px;
         height: 30px;
         background-color: rgba(171, 97, 255, 0.767);
-        border: 1px solid #ffffff;
         text-align: center;
         line-height: 30px;
         display: flex;
@@ -28,6 +27,7 @@
         justify-content: center;
         font-size: 10px;
         color: #ffffff;
+        margin: 1px;
       }
 
       .selected-day {
@@ -138,29 +138,29 @@
           }
 
           if (i === 1) {
-            //在第一個日期之前插入空白的 dayDiv
+            // 在第一個日期之前插入空白的 dayDiv
             for (let j = 0; j < firstDayOfWeekSelectedMonth; j++) {
               let emptyDayDiv = document.createElement("div");
               emptyDayDiv.setAttribute("class", "day-box empty");
               currentWeekContainer.appendChild(emptyDayDiv);
             }
-            //先放入空白div放入currentWeekContainer 才將有數字的div放入currentWeekContainer
+            // 先放入空白div放入currentWeekContainer 才將有數字的div放入currentWeekContainer
             currentWeekContainer.appendChild(dayDiv);
-
-            // dayDiv.innerHTML = weekdays[dayOfWeek];
           } else {
             // 其他日期
             dayDiv.innerHTML = i;
 
-            //將dayDiv放到  currentWeekContainer之下
+            // 將dayDiv放到  currentWeekContainer之下
             currentWeekContainer.appendChild(dayDiv);
             if (selectedDay === i) {
               dayDiv.classList.add("selected-day");
             }
-            // 如果是一行的最後一個，插入換行的 div
-            if (dayOfWeek === 6 || i === lastDaySelectedMonth) {
+            // 如果是最後一天
+            if (i === lastDaySelectedMonth) {
               // 判斷是否需要補齊空白的 day-box
+              // 最後一天不是星期六的話，就需要補空格
               if (i === lastDaySelectedMonth && dayOfWeek < 6) {
+                // 讓k從1~6遍歷，假設dayOfWeek=5星期五只會遍歷一次增加一個空格
                 for (let k = dayOfWeek + 1; k <= 6; k++) {
                   let emptyDayDiv = document.createElement("div");
                   emptyDayDiv.setAttribute("class", "day-box empty");
@@ -197,7 +197,7 @@
         let docFrag = document.createDocumentFragment();
         //當您需要執行多個操作來構建或修改 DOM 節點時，將這些操作放在 DocumentFragment 中，最後再將整個 DocumentFragment 插入到文檔中。這樣可以減少重排（reflow）和重繪（repaint）的次數
 
-        for (let i = 2010; i <= 2030; i++) {
+        for (let i = 1920; i <= 2030; i++) {
           //新增年
           let opt = document.createElement("option");
           opt.setAttribute("value", i);
