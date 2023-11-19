@@ -381,6 +381,8 @@ import Hero from "../components/Hero.astro";
               "Yui.png",
               "Mesoyei.png",
               "Médicis_Monroe.png",
+              "Spoke.png",
+              "Delsa.png",
             ];
             var imageNamesHagishi = [
               "Wavo.png",
@@ -416,7 +418,11 @@ import Hero from "../components/Hero.astro";
               "Yui.png",
               "Mesoyei.png",
             ];
-            var imageNamesMutav = ["Médicis_Monroe.png"];
+            var imageNamesMutav = [
+              "Médicis_Monroe.png",
+              "Spoke.png",
+              "Delsa.png",
+            ];
 
             var containerIdAll = "cardImagesAll";
             var containerIdHagisun = "cardImagesHagisun";
@@ -516,7 +522,7 @@ import Hero from "../components/Hero.astro";
               var selectedCardAttributes = [];
 
               var availableImages = imageNamesMutav.slice();
-              for (var i = 0; i < 1; i++) {
+              for (var i = 0; i < 3; i++) {
                 var randomIndex = Math.floor(
                   Math.random() * availableImages.length
                 );
@@ -768,38 +774,6 @@ import Hero from "../components/Hero.astro";
             });
           }
         );
-
-        // const cards = [
-        //   { name: "Wavo", physicPower: 55, magicPower: 2999, utilityPower: 46 },
-        //   { name: "Chiaki", physicPower: 876, magicPower: 513, utilityPower: 764 },
-        //   { name: "Sayuri", physicPower: 916, magicPower: 456, utilityPower: 695 },
-        //   { name: "Hitomi", physicPower: 892, magicPower: 349, utilityPower: 632 },
-        //   { name: "Akimoto_Yuko", physicPower: 246, magicPower: 0, utilityPower: 1201 },
-        //   { name: "Etsuko", physicPower: 769, magicPower: 0, utilityPower: 1164 },
-        //   { name: "Masako", physicPower: 1453, magicPower: 131, utilityPower: 0 },
-        //   { name: "Sorane", physicPower: 859, magicPower: 461, utilityPower: 603 },
-        //   { name: "Kyu", physicPower: 311, magicPower: 843, utilityPower: 0 },
-        //   { name: "Riuri", physicPower: 689, magicPower: 0, utilityPower: 431 },
-        //   { name: "Natsumi", physicPower: 653, magicPower: 0, utilityPower: 649 },
-        //   { name: "Kamira", physicPower: 390, magicPower: 886, utilityPower: 60 },
-        //   { name: "Kazuko", physicPower: 714, magicPower: 564, utilityPower: 243 },
-        //   { name: "Miyu", physicPower: 346, magicPower: 864, utilityPower: 0 },
-        //   { name: "Valmet", physicPower: 594, magicPower: 0, utilityPower: 623 },
-        //   { name: "Mayo", physicPower: 564, magicPower: 411, utilityPower: 925 },
-        //   { name: "Samui", physicPower: 395, magicPower: 516, utilityPower: 511 },
-        //   { name: "Paprika", physicPower: 154, magicPower: 431, utilityPower: 131 },
-        //   { name: "Caleigh", physicPower: 601, magicPower: 26, utilityPower: 201 },
-        //   { name: "Doire_Evewch", physicPower: 567, magicPower: 32, utilityPower: 165 },
-        //   { name: "Z", physicPower: 423, magicPower: 0, utilityPower: 246 },
-        //   { name: "Branwen", physicPower: 372, magicPower: 419, utilityPower: 294 },
-        //   { name: "Lucrece_Yurophas", physicPower: 531, magicPower: 13, utilityPower: 264 },
-        //   { name: "Uiobbeci", physicPower: 32, magicPower: 503, utilityPower: 61 },
-        //   { name: "Draeny_Chevrem", physicPower: 583, magicPower: 94, utilityPower: 394 },
-        //   { name: "Nianca_K794", physicPower: 53, magicPower: 0, utilityPower: 241 },
-        //   { name: "Yui", physicPower: 16, magicPower: 0, utilityPower: 164 },
-        //   { name: "Mesoyei", physicPower: 565, magicPower: 43, utilityPower: 349 },
-        //   { name: "Médicis_Monroe", physicPower: 1264, magicPower: 261, utilityPower: 110 },
-        // ];
       });
     </script>
   </body>
