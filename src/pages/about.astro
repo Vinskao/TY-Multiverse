@@ -4,8 +4,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 import Hero from "../components/Hero.astro";
 import Calendar from "../components/Calendar.html";
+import Star from "../components/Star.html";
 ---
 
+<meta charset="UTF-8" />
 <style>
   #adWall {
     display: flex;
@@ -135,6 +137,7 @@ import Calendar from "../components/Calendar.html";
           <h6>Choose Your Date of Birth:</h6>
           <div class="content">
             <Calendar />
+            <Star />
           </div>
           <div id="adWall"></div>
           <!-- 生成五張圖 -->
@@ -316,7 +319,6 @@ import Calendar from "../components/Calendar.html";
       <ContactCTA />
     </div>
   </BaseLayout>
-
   <script>
     //EventTarget.addEventListener() 方法将指定的监听器注册到 EventTarget 上，当该对象触发指定的事件时，指定的回调函数就会被执行。
     const subfolder = document.getElementById("subfolder");
