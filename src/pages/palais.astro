@@ -59,7 +59,7 @@ import Hero from "../components/Hero.astro";
       }
       #attrHagisun,
       #attrHagishi,
-      #attrForthgate,
+      #attrRapeharem,
       #attrMutav {
         margin: 0;
         padding: 0;
@@ -70,19 +70,19 @@ import Hero from "../components/Hero.astro";
       #totalPhysicPowerHagisun,
       #totalMagicPowerHagisun,
       #totalUtilityPowerHagisun,
-      #totalPhysicPowerForthgate,
-      #totalMagicPowerForthgate,
-      #totalUtilityPowerForthgate,
+      #totalPhysicPowerRapeharem,
+      1 #totalMagicPowerRapeharem,
+      #totalUtilityPowerRapeharem,
       #totalPhysicPowerMutav,
       #totalMagicPowerMutav,
       #totalUtilityPowerMutav,
       #totalHagishi,
       #totalHagisun,
-      #totalForthgate,
+      #totalRapeharem,
       #totalMutav,
       #attrHagisun,
       #attrHagishi,
-      #attrForthgate,
+      #attrRapeharem,
       #attrMutav {
         flex: 1;
         font-size: 12px;
@@ -114,7 +114,7 @@ import Hero from "../components/Hero.astro";
         align-items: center;
         z-index: 999;
       }
-      #cardImagesForthgate,
+      #cardImagesRapeharem,
       #cardImagesHagisun,
       #cardImagesHagishi,
       #cardImagesMutav {
@@ -171,8 +171,8 @@ import Hero from "../components/Hero.astro";
             <button id="getHagisunButton" onclick="getHagisun()"
               >初桑戰隊</button
             >
-            <button id="getForthgateButton" onclick="getForthgate()"
-              >肆門戰隊</button
+            <button id="getRapeharemButton" onclick="getRapeharem()"
+              >姦閣戰隊</button
             >
             <button id="getMutavButton" onclick="getMutav()">Phénix戰隊</button>
             <button id="getAllButton" onclick="getAll()">隨機戰隊</button>
@@ -201,17 +201,17 @@ import Hero from "../components/Hero.astro";
           </div>
           <div id="attrHagisun">Hagisun 屬性：</div>
 
-          <h6>肆門戰隊:</h6>
+          <h6>姦閣戰隊:</h6>
           <div id="system">
-            <div id="cardImagesForthgate"></div>
+            <div id="cardImagesRapeharem"></div>
           </div>
           <div class="powers-container">
-            <div id="totalPhysicPowerForthgate">Forthgate 的物理能力：0</div>
-            <div id="totalMagicPowerForthgate">Forthgate 的魔法能力：0</div>
-            <div id="totalUtilityPowerForthgate">Forthgate 的戰術能力：0</div>
-            <div id="totalForthgate">Forthgate 的總能力：0</div>
+            <div id="totalPhysicPowerRapeharem">Rapeharem 的物理能力：0</div>
+            <div id="totalMagicPowerRapeharem">Rapeharem 的魔法能力：0</div>
+            <div id="totalUtilityPowerRapeharem">Rapeharem 的戰術能力：0</div>
+            <div id="totalRapeharem">Rapeharem 的總能力：0</div>
           </div>
-          <div id="attrForthgate">Forthgate 屬性：</div>
+          <div id="attrRapeharem">Rapeharem 屬性：</div>
 
           <h6>Phénix戰隊:</h6>
           <div id="system">
@@ -383,6 +383,8 @@ import Hero from "../components/Hero.astro";
               "Médicis_Monroe.png",
               "Spoke.png",
               "Delsa.png",
+              "Ann.png",
+              "Shuan.png",
             ];
             var imageNamesHagishi = [
               "Wavo.png",
@@ -404,7 +406,7 @@ import Hero from "../components/Hero.astro";
               "Valmet.png",
               "Mayo.png",
             ];
-            var imageNamesForthgate = [
+            var imageNamesRapeharem = [
               "Samui.png",
               "Paprika.png",
               "Caleigh.png",
@@ -417,6 +419,9 @@ import Hero from "../components/Hero.astro";
               "Nianca_K794.png",
               "Yui.png",
               "Mesoyei.png",
+              "Ann.png",
+              "Shuan.png",
+              1,
             ];
             var imageNamesMutav = [
               "Médicis_Monroe.png",
@@ -426,13 +431,13 @@ import Hero from "../components/Hero.astro";
 
             var containerIdAll = "cardImagesAll";
             var containerIdHagisun = "cardImagesHagisun";
-            var containerIdForthgate = "cardImagesForthgate";
+            var containerIdRapeharem = "cardImagesRapeharem";
             var containerIdMutav = "cardImagesMutav";
             var containerIdHagishi = "cardImagesHagishi";
 
-            function getForthgate() {
+            function getRapeharem() {
               var cardImagesContainer =
-                document.getElementById(containerIdForthgate);
+                document.getElementById(containerIdRapeharem);
               cardImagesContainer.innerHTML = "";
               var totalPhysicPower = 0;
               var totalMagicPower = 0;
@@ -440,7 +445,7 @@ import Hero from "../components/Hero.astro";
               var selectedCardNames = [];
               var selectedCardAttributes = [];
 
-              var availableImages = imageNamesForthgate.slice();
+              var availableImages = imageNamesRapeharem.slice();
               for (var i = 0; i < 6; i++) {
                 var randomIndex = Math.floor(
                   Math.random() * availableImages.length
@@ -459,7 +464,7 @@ import Hero from "../components/Hero.astro";
 
                   var imageUrl = `/assets/person/${selectedImageName}`;
                   var imageContainer =
-                    document.getElementById(containerIdForthgate);
+                    document.getElementById(containerIdRapeharem);
                   var image = document.createElement("img");
                   image.src = imageUrl;
                   image.alt = "Card";
@@ -474,41 +479,41 @@ import Hero from "../components/Hero.astro";
               }
 
               var totalPhysicPowerElement = document.getElementById(
-                "totalPhysicPowerForthgate"
+                "totalPhysicPowerRapeharem"
               );
               var totalMagicPowerElement = document.getElementById(
-                "totalMagicPowerForthgate"
+                "totalMagicPowerRapeharem"
               );
               var totalUtilityPowerElement = document.getElementById(
-                "totalUtilityPowerForthgate"
+                "totalUtilityPowerRapeharem"
               );
-              var totalForthgateElement =
-                document.getElementById("totalForthgate");
-              var attrForthgateElement =
-                document.getElementById("attrForthgate");
+              var totalRapeharemElement =
+                document.getElementById("totalRapeharem");
+              var attrRapeharemElement =
+                document.getElementById("attrRapeharem");
 
-              // Update Forthgate's physical, magic, and utility power values
+              // Update Rapeharem's physical, magic, and utility power values
               totalPhysicPowerElement.textContent =
-                "Forthgate 的物理能力：" + totalPhysicPower;
+                "Rapeharem 的物理能力：" + totalPhysicPower;
               totalMagicPowerElement.textContent =
-                "Forthgate 的魔法能力：" + totalMagicPower;
+                "Rapeharem 的魔法能力：" + totalMagicPower;
               totalUtilityPowerElement.textContent =
-                "Forthgate 的戰術能力：" + totalUtilityPower;
+                "Rapeharem 的戰術能力：" + totalUtilityPower;
 
-              attrForthgateElement.textContent =
-                "Forthgate 屬性：" + selectedCardAttributes.join(", ");
+              attrRapeharemElement.textContent =
+                "Rapeharem 屬性：" + selectedCardAttributes.join(", ");
 
               // Calculate and update the total power value
               var totalPower =
                 totalPhysicPower + totalMagicPower + totalUtilityPower;
-              totalForthgateElement.textContent =
-                "Forthgate 的總能力：" + totalPower;
+              totalRapeharemElement.textContent =
+                "Rapeharem 的總能力：" + totalPower;
             }
 
-            var getForthgateButton =
-              document.getElementById("getForthgateButton");
-            getForthgateButton.addEventListener("click", function () {
-              getForthgate();
+            var getRapeharemButton =
+              document.getElementById("getRapeharemButton");
+            getRapeharemButton.addEventListener("click", function () {
+              getRapeharem();
             });
 
             function getMutav() {
