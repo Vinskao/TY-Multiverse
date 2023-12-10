@@ -20,11 +20,14 @@ import Hero from "../components/Hero.astro";
         padding-left: -50px;
         margin-left: -50px;
       }
-      h4 {
-        text-align: left;
-      }
-      #buttons {
+
+      .title {
         text-align: center;
+        flex-direction: row;
+        display: flex;
+        z-index: 999;
+        padding-left: 30px;
+
       }
       #cardList li {
         margin: 0;
@@ -81,7 +84,7 @@ import Hero from "../components/Hero.astro";
       #totalMagicPowerHagisun,
       #totalUtilityPowerHagisun,
       #totalPhysicPowerRapeharem,
-      1 #totalMagicPowerRapeharem,
+      #totalMagicPowerRapeharem,
       #totalUtilityPowerRapeharem,
       #totalPhysicPowerMutav,
       #totalMagicPowerMutav,
@@ -98,10 +101,6 @@ import Hero from "../components/Hero.astro";
         font-size: 12px;
         margin: 0;
         padding: 0;
-      }
-
-      h4 {
-        padding-left: 50px;
       }
       main.wrapper {
         margin: 5%;
@@ -175,23 +174,12 @@ import Hero from "../components/Hero.astro";
               </ul>
             </div>
           </div>
-
-          <div id="buttons">
-            <button id="getHagishiButton" onclick="getHagishi()"
-              >八食戰隊</button
-            >
-            <button id="getHagisunButton" onclick="getHagisun()"
-              >初桑戰隊</button
-            >
-            <button id="getRapeharemButton" onclick="getRapeharem()"
-              >姦閣戰隊</button
-            >
-            <button id="getMutavButton" onclick="getMutav()">Phénix戰隊</button>
-            <button id="getAllButton" onclick="getAll()">隨機戰隊</button>
-          </div>
           <div class="system-container">
           <div id="system">
-            <h4>八食</h4>
+            <div class="title">
+              <button id="getHagishiButton" onclick="getHagishi()">+八食</button>
+              <h4>八食</h4>
+            </div>
             <div id="cardImagesHagishi"></div>
             <div class="powers-container">
               <div id="totalPhysicPowerHagishi">Hagishi 的物理能力：0</div>
@@ -204,7 +192,11 @@ import Hero from "../components/Hero.astro";
           
 
           <div id="system">
-            <h4>初桑</h4>
+            <div class="title">
+              <button id="getHagisunButton" onclick="getHagisun()">+初桑</button>
+              <h4>初桑</h4>
+
+            </div>
             <div id="cardImagesHagisun"></div>
             <div class="powers-container">
               <div id="totalPhysicPowerHagisun">Hagisun 的物理能力：0</div>
@@ -217,7 +209,12 @@ import Hero from "../components/Hero.astro";
           
 
           <div id="system">
-            <h4>姦閣</h4>
+            <div class="title">
+              <button id="getRapeharemButton" onclick="getRapeharem()">+姦閣</button>
+
+              <h4>姦閣</h4>
+
+            </div>
             <div id="cardImagesRapeharem"></div>
             <div class="powers-container">
               <div id="totalPhysicPowerRapeharem">Rapeharem 的物理能力：0</div>
@@ -229,7 +226,10 @@ import Hero from "../components/Hero.astro";
           </div>
           
           <div id="system">
-            <h4>Phénix</h4>
+            <div class="title">
+              <button id="getMutavButton" onclick="getMutav()">+Phénix</button>
+              <h4>Phénix</h4>
+            </div>
             <div id="cardImagesMutav"></div>
             <div class="powers-container">
               <div id="totalPhysicPowerMutav">Mutav 的物理能力：0</div>
@@ -242,7 +242,11 @@ import Hero from "../components/Hero.astro";
           
 
           <div id="system">
-            <h4>隨機</h4>
+            <div class="title">
+              <button id="getAllButton" onclick="getAll()">+隨機</button>
+              <h4>隨機</h4>
+
+            </div>
             <div id="cardImagesAll"></div>
           </div>
         </div>
