@@ -1,16 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
+import Hagishi from  "../components/Hagishi.html";
 import Hero from "../components/Hero.astro";
 import Galwall from "../components/Galwall.html";
-
+import Libertad from  "../components/Libertad.html";
 ---
 
 <!DOCTYPE html>
 <meta charset="UTF-8" />
 <html>
   <head>
-    <script></script>
     <style>
 
       .system-container {
@@ -141,156 +140,18 @@ import Galwall from "../components/Galwall.html";
         overflow-x: auto;
         padding-right: 90px;
       }
-
-      #cardImagesAll {
-        white-space: nowrap;
-        overflow-x: auto;
-      }
       
     </style>
+
     <script
+      async
       src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     ></script>
     <script
+      async
       defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
-  </head>
-  <body>
-    <BaseLayout title="Palais | Wavo Yuropha" description="Learn about TY's palais">
-      <div class="stack gap-20">
-        <main class="wrapper stack gap-8">
-          <Hero
-            title="Palais"
-            tagline="Welcome to Lily Palais."
-            align="start"
-          />
-          <Galwall />
-
-
-          <div class="container">
-            <div class="left-container">
-              <div id="cardInfoContainer">
-                <!-- 卡片信息将在这里生成 -->
-              </div>
-            </div>
-            <div class="right-container">
-              <ul id="cardList">
-                <!-- 卡片将在这里生成 -->
-              </ul>
-            </div>
-          </div>
-          <div class="system-container">
-            <div id="system">
-              <div class="title">
-                <button id="getHagishiButton" onclick="getHagishi()">+八食</button>
-                <h4>八食</h4>
-              </div>
-              <div id="cardImagesHagishi"></div>
-              <div class="powers-container">
-                <div id="totalPhysicPowerHagishi">Hagishi 力：0</div>
-                <div id="totalMagicPowerHagishi">Hagishi 魔：0</div>
-                <div id="totalUtilityPowerHagishi">Hagishi 術：0</div>
-                <div id="totalHagishi">總能力：0</div>
-                <div id="attrHagishi">屬性：</div>
-              </div>
-            </div>
-            
-
-            <div id="system">
-              <div class="title">
-                <button id="getHagisunButton" onclick="getHagisun()">+初桑</button>
-                <h4>初桑</h4>
-
-              </div>
-              <div id="cardImagesHagisun"></div>
-              <div class="powers-container">
-                <div id="totalPhysicPowerHagisun">Hagisun 力：0</div>
-                <div id="totalMagicPowerHagisun">Hagisun 魔：0</div>
-                <div id="totalUtilityPowerHagisun">Hagisun 術：0</div>
-                <div id="totalHagisun">總能力：0</div>
-                <div id="attrHagisun">屬性：</div>
-              </div>
-            </div>
-            
-
-            <div id="system">
-              <div class="title">
-                <button id="getRapeharemButton" onclick="getRapeharem()">+姦閣</button>
-                <h4>姦閣</h4>
-              </div>
-              <div id="cardImagesRapeharem"></div>
-              <div class="powers-container">
-                <div id="totalPhysicPowerRapeharem">Rapeharem 力：0</div>
-                <div id="totalMagicPowerRapeharem">Rapeharem 魔：0</div>
-                <div id="totalUtilityPowerRapeharem">Rapeharem 術：0</div>
-                <div id="totalRapeharem">總能力：0</div>
-                <div id="attrRapeharem">屬性：</div>
-              </div>
-            </div>
-            
-            <div id="system">
-              <div class="title">
-                <button id="getMutavButton" onclick="getMutav()">+Jardin des Dieux</button>
-                <h4>Jardin des Dieux</h4>
-              </div>
-              <div id="cardImagesMutav"></div>
-              <div class="powers-container">
-                <div id="totalPhysicPowerMutav">Jardin des Dieux 力：0</div>
-                <div id="totalMagicPowerMutav">Jardin des Dieux 魔：0</div>
-                <div id="totalUtilityPowerMutav">Jardin des Dieux 術：0</div>
-                <div id="totalMutav">總能力：0</div>
-                <div id="attrMutav">屬性：</div>
-              </div>
-            </div>
-
-            <div id="system">
-              <div class="title">
-                <button id="getLibertadButton" onclick="getLibertad()">+Libertad</button>
-                <h4>Libertad</h4>
-              </div>
-              <div id="cardImagesLibertad"></div>
-              <div class="powers-container">
-                <div id="totalPhysicPowerLibertad">Libertad 力：0</div>
-                <div id="totalMagicPowerLibertad">Libertad 魔：0</div>
-                <div id="totalUtilityPowerLibertad">Libertad 術：0</div>
-                <div id="totalLibertad">總能力：0</div>
-                <div id="attrLibertad">屬性：</div>
-              </div>
-            </div>
-
-            <div id="system">
-              <div class="title">
-                <button id="getAllButton" onclick="getAll()">+隨機</button>
-                <h4>隨機</h4>
-              </div>
-              <div id="cardImagesAll"></div>
-            </div>
-
-          </div>
-
-        </main>
-      </div>
-    </BaseLayout>
-
-    <!-- 全屏遮罩 -->
-
-    <div class="overlay" id="passwordOverlay">
-      <script>
-        var isAuthenticated = false;
-
-        if (!isAuthenticated) {
-          var password = prompt("請輸入密碼", "");
-          if (password === "1") {
-            isAuthenticated = true;
-            document.getElementById("passwordOverlay").style.display = "none";
-          } else {
-            alert("請再輸入一次密碼");
-            location.href = "examples/javascript/16ex2.html";
-          }
-        }
-      </script>
-    </div>
-
+      src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js">
+    </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // var dataPoints = [];
@@ -409,9 +270,6 @@ import Galwall from "../components/Galwall.html";
 
             }));
 
-            // Now you can use 'cards' inside this callback function
-            console.log("Cards data:", cards);
-            // The rest of your code that uses 'cards'
             var imageNamesAll = [
               "Wavo.png",
               "Chiaki.png",
@@ -448,16 +306,16 @@ import Galwall from "../components/Galwall.html";
               "Ann.png",
               "Shuan.png",
             ];
-            var imageNamesHagishi = [
-              "Wavo.png",
-              "Chiaki.png",
-              "Sayuri.png",
-              "Hitomi.png",
-              "Yuko.png",
-              "Etsuko.png",
-              "Masako.png",
-              "Miku.png",
-            ];
+            // var imageNamesHagishi = [
+            //   "Wavo.png",
+            //   "Chiaki.png",
+            //   "Sayuri.png",
+            //   "Hitomi.png",
+            //   "Yuko.png",
+            //   "Etsuko.png",
+            //   "Masako.png",
+            //   "Miku.png",
+            // ];
             var imageNamesHagisun = [
               "Sorane.png",
               "Kyu.png",
@@ -488,100 +346,99 @@ import Galwall from "../components/Galwall.html";
               "Spoke.png",
               "Delsa.png",
             ];
-            var imageNamesLibertad = [
-              "Miyu.png",
-              "Z.png",
-
-            ];
+            // var imageNamesLibertad = [
+            //   "Miyu.png",
+            //   "Z.png",
+            // ];
 
             var containerIdAll = "cardImagesAll";
             var containerIdHagisun = "cardImagesHagisun";
             var containerIdRapeharem = "cardImagesRapeharem";
             var containerIdMutav = "cardImagesMutav";
-            var containerIdHagishi = "cardImagesHagishi";
-            var containerIdLibertad = "cardImagesLibertad";
+            // var containerIdHagishi = "cardImagesHagishi";
+            // var containerIdLibertad = "cardImagesLibertad";
 
 
-            function getLibertad() {
-              var cardImagesContainer =
-                document.getElementById(containerIdLibertad);
-              cardImagesContainer.innerHTML = "";
-              var totalPhysicPower = 0;
-              var totalMagicPower = 0;
-              var totalUtilityPower = 0;
-              var selectedCardNames = [];
-              var selectedCardAttributes = [];
+            // function getLibertad() {
+            //   var cardImagesContainer =
+            //     document.getElementById(containerIdLibertad);
+            //   cardImagesContainer.innerHTML = "";
+            //   var totalPhysicPower = 0;
+            //   var totalMagicPower = 0;
+            //   var totalUtilityPower = 0;
+            //   var selectedCardNames = [];
+            //   var selectedCardAttributes = [];
 
-              var availableImages = imageNamesLibertad.slice();
-              for (var i = 0; i < 6; i++) {
-                var randomIndex = Math.floor(
-                  Math.random() * availableImages.length
-                );
-                var selectedImageName = availableImages[randomIndex];
-                availableImages.splice(randomIndex, 1);
+            //   var availableImages = imageNamesLibertad.slice();
+            //   for (var i = 0; i < 6; i++) {
+            //     var randomIndex = Math.floor(
+            //       Math.random() * availableImages.length
+            //     );
+            //     var selectedImageName = availableImages[randomIndex];
+            //     availableImages.splice(randomIndex, 1);
 
-                var selectedCard = cards.find(
-                  (card) => card.name === selectedImageName.split(".")[0]
-                );
+            //     var selectedCard = cards.find(
+            //       (card) => card.name === selectedImageName.split(".")[0]
+            //     );
 
-                if (selectedCard) {
-                  totalPhysicPower += selectedCard.physic_power;
-                  totalMagicPower += selectedCard.magic_power;
-                  totalUtilityPower += selectedCard.utility_power;
+            //     if (selectedCard) {
+            //       totalPhysicPower += selectedCard.physic_power;
+            //       totalMagicPower += selectedCard.magic_power;
+            //       totalUtilityPower += selectedCard.utility_power;
 
-                  var imageUrl = `/assets/person/${selectedImageName}`;
-                  var imageContainer =
-                    document.getElementById(containerIdLibertad);
-                  var image = document.createElement("img");
-                  image.src = imageUrl;
-                  image.alt = "Card";
-                  image.style.width = "200px";
-                  image.style.height = "auto";
-                  image.style.marginRight = "-95px";
-                  imageContainer.appendChild(image);
+            //       var imageUrl = `/assets/person/${selectedImageName}`;
+            //       var imageContainer =
+            //         document.getElementById(containerIdLibertad);
+            //       var image = document.createElement("img");
+            //       image.src = imageUrl;
+            //       image.alt = "Card";
+            //       image.style.width = "200px";
+            //       image.style.height = "auto";
+            //       image.style.marginRight = "-95px";
+            //       imageContainer.appendChild(image);
 
-                  selectedCardNames.push(selectedCard.name);
-                  selectedCardAttributes.push(selectedCard.attributes);
-                }
-              }
+            //       selectedCardNames.push(selectedCard.name);
+            //       selectedCardAttributes.push(selectedCard.attributes);
+            //     }
+            //   }
 
-              var totalPhysicPowerElement = document.getElementById(
-                "totalPhysicPowerLibertad"
-              );
-              var totalMagicPowerElement = document.getElementById(
-                "totalMagicPowerLibertad"
-              );
-              var totalUtilityPowerElement = document.getElementById(
-                "totalUtilityPowerLibertad"
-              );
-              var totalLibertadElement =
-                document.getElementById("totalLibertad");
-              var attrLibertadElement =
-                document.getElementById("attrLibertad");
+            //   var totalPhysicPowerElement = document.getElementById(
+            //     "totalPhysicPowerLibertad"
+            //   );
+            //   var totalMagicPowerElement = document.getElementById(
+            //     "totalMagicPowerLibertad"
+            //   );
+            //   var totalUtilityPowerElement = document.getElementById(
+            //     "totalUtilityPowerLibertad"
+            //   );
+            //   var totalLibertadElement =
+            //     document.getElementById("totalLibertad");
+            //   var attrLibertadElement =
+            //     document.getElementById("attrLibertad");
 
-              // Update Libertad's physical, magic, and utility power values
-              totalPhysicPowerElement.textContent =
-                "Libertad 力：" + totalPhysicPower;
-              totalMagicPowerElement.textContent =
-                "Libertad 魔：" + totalMagicPower;
-              totalUtilityPowerElement.textContent =
-                "Libertad 術：" + totalUtilityPower;
+            //   // Update Libertad's physical, magic, and utility power values
+            //   totalPhysicPowerElement.textContent =
+            //     "Libertad 力：" + totalPhysicPower;
+            //   totalMagicPowerElement.textContent =
+            //     "Libertad 魔：" + totalMagicPower;
+            //   totalUtilityPowerElement.textContent =
+            //     "Libertad 術：" + totalUtilityPower;
 
-              attrLibertadElement.textContent =
-                "屬性：" + selectedCardAttributes.join(", ");
+            //   attrLibertadElement.textContent =
+            //     "屬性：" + selectedCardAttributes.join(", ");
 
-              // Calculate and update the total power value
-              var totalPower =
-                totalPhysicPower + totalMagicPower + totalUtilityPower;
-              totalLibertadElement.textContent =
-                "總能力：" + totalPower;
-            }
+            //   // Calculate and update the total power value
+            //   var totalPower =
+            //     totalPhysicPower + totalMagicPower + totalUtilityPower;
+            //   totalLibertadElement.textContent =
+            //     "總能力：" + totalPower;
+            // }
 
-            var getLibertadButton =
-              document.getElementById("getLibertadButton");
-            getLibertadButton.addEventListener("click", function () {
-              getLibertad();
-            });
+            // var getLibertadButton =
+            //   document.getElementById("getLibertadButton");
+            // getLibertadButton.addEventListener("click", function () {
+            //   getLibertad();
+            // });
 
             function getRapeharem() {
               var cardImagesContainer =
@@ -819,85 +676,85 @@ import Galwall from "../components/Galwall.html";
               getHagisun();
             });
 
-            function getHagishi() {
-              var cardImagesContainer =
-                document.getElementById(containerIdHagishi);
-              cardImagesContainer.innerHTML = "";
-              var totalPhysicPower = 0;
-              var totalMagicPower = 0;
-              var totalUtilityPower = 0;
-              var selectedCardNames = []; // 存储选中的卡片名称
-              var selectedCardAttributes = []; // 存储选中的卡片属性
+            // function getHagishi() {
+            //   var cardImagesContainer =
+            //     document.getElementById(containerIdHagishi);
+            //   cardImagesContainer.innerHTML = "";
+            //   var totalPhysicPower = 0;
+            //   var totalMagicPower = 0;
+            //   var totalUtilityPower = 0;
+            //   var selectedCardNames = []; // 存储选中的卡片名称
+            //   var selectedCardAttributes = []; // 存储选中的卡片属性
 
-              var availableImages = imageNamesHagishi.slice();
-              for (var i = 0; i < 4; i++) {
-                var randomIndex = Math.floor(
-                  Math.random() * availableImages.length
-                );
-                var selectedImageName = availableImages[randomIndex];
-                availableImages.splice(randomIndex, 1);
-                selectedCardNames.push(selectedImageName.split(".")[0]);
+            //   var availableImages = imageNamesHagishi.slice();
+            //   for (var i = 0; i < 4; i++) {
+            //     var randomIndex = Math.floor(
+            //       Math.random() * availableImages.length
+            //     );
+            //     var selectedImageName = availableImages[randomIndex];
+            //     availableImages.splice(randomIndex, 1);
+            //     selectedCardNames.push(selectedImageName.split(".")[0]);
 
-                var selectedCard = cards.find(
-                  (card) => card.name === selectedImageName.split(".")[0]
-                );
+            //     var selectedCard = cards.find(
+            //       (card) => card.name === selectedImageName.split(".")[0]
+            //     );
 
-                if (selectedCard) {
-                  totalPhysicPower += selectedCard.physic_power;
-                  totalMagicPower += selectedCard.magic_power;
-                  totalUtilityPower += selectedCard.utility_power;
+            //     if (selectedCard) {
+            //       totalPhysicPower += selectedCard.physic_power;
+            //       totalMagicPower += selectedCard.magic_power;
+            //       totalUtilityPower += selectedCard.utility_power;
 
-                  var imageUrl = `/assets/person/${selectedImageName}`;
-                  var imageContainer =
-                    document.getElementById(containerIdHagishi);
-                  var image = document.createElement("img");
-                  image.src = imageUrl;
-                  image.alt = "Card";
-                  image.style.width = "200px";
-                  image.style.height = "auto";
-                  image.style.marginRight = "-95px";
-                  imageContainer.appendChild(image);
-                }
-              }
+            //       var imageUrl = `/assets/person/${selectedImageName}`;
+            //       var imageContainer =
+            //         document.getElementById(containerIdHagishi);
+            //       var image = document.createElement("img");
+            //       image.src = imageUrl;
+            //       image.alt = "Card";
+            //       image.style.width = "200px";
+            //       image.style.height = "auto";
+            //       image.style.marginRight = "-95px";
+            //       imageContainer.appendChild(image);
+            //     }
+            //   }
 
-              var totalPhysicPowerElement = document.getElementById(
-                "totalPhysicPowerHagishi"
-              );
-              var totalMagicPowerElement = document.getElementById(
-                "totalMagicPowerHagishi"
-              );
-              var totalUtilityPowerElement = document.getElementById(
-                "totalUtilityPowerHagishi"
-              );
-              var totalHagishiElement = document.getElementById("totalHagishi");
-              var attrHagishiElement = document.getElementById("attrHagishi");
+            //   var totalPhysicPowerElement = document.getElementById(
+            //     "totalPhysicPowerHagishi"
+            //   );
+            //   var totalMagicPowerElement = document.getElementById(
+            //     "totalMagicPowerHagishi"
+            //   );
+            //   var totalUtilityPowerElement = document.getElementById(
+            //     "totalUtilityPowerHagishi"
+            //   );
+            //   var totalHagishiElement = document.getElementById("totalHagishi");
+            //   var attrHagishiElement = document.getElementById("attrHagishi");
 
-              // 更新 Hagishi 的物理和魔法能力值
-              totalPhysicPowerElement.textContent =
-                "Hagishi 力：" + totalPhysicPower;
-              totalMagicPowerElement.textContent =
-                "Hagishi 魔：" + totalMagicPower;
-              totalUtilityPowerElement.textContent =
-                "Hagishi 術：" + totalUtilityPower;
+            //   // 更新 Hagishi 的物理和魔法能力值
+            //   totalPhysicPowerElement.textContent =
+            //     "Hagishi 力：" + totalPhysicPower;
+            //   totalMagicPowerElement.textContent =
+            //     "Hagishi 魔：" + totalMagicPower;
+            //   totalUtilityPowerElement.textContent =
+            //     "Hagishi 術：" + totalUtilityPower;
 
-              // 获取选中卡片的属性
-              selectedCardAttributes = cards
-                .filter((card) => selectedCardNames.includes(card.name))
-                .map((card) => card.attributes);
-              attrHagishiElement.textContent =
-                "屬性：" + selectedCardAttributes.join(", ");
+            //   // 获取选中卡片的属性
+            //   selectedCardAttributes = cards
+            //     .filter((card) => selectedCardNames.includes(card.name))
+            //     .map((card) => card.attributes);
+            //   attrHagishiElement.textContent =
+            //     "屬性：" + selectedCardAttributes.join(", ");
 
-              // 计算并更新总能力值
-              var totalPower =
-                totalPhysicPower + totalMagicPower + totalUtilityPower;
-              totalHagishiElement.textContent =
-                "總能力：" + totalPower;
-            }
+            //   // 计算并更新总能力值
+            //   var totalPower =
+            //     totalPhysicPower + totalMagicPower + totalUtilityPower;
+            //   totalHagishiElement.textContent =
+            //     "總能力：" + totalPower;
+            // }
 
-            var getHagishiButton = document.getElementById("getHagishiButton");
-            getHagishiButton.addEventListener("click", function () {
-              getHagishi();
-            });
+            // var getHagishiButton = document.getElementById("getHagishiButton");
+            // getHagishiButton.addEventListener("click", function () {
+            //   getHagishi();
+            // });
 
             function getAll() {
               var cardImagesContainer = document.getElementById(containerIdAll);
@@ -929,5 +786,143 @@ import Galwall from "../components/Galwall.html";
         );
       });
     </script>
+  </head>
+  <body>
+    <BaseLayout title="Palais | Wavo Yuropha" description="Learn about TY's palais">
+      <div class="stack gap-20">
+        <main class="wrapper stack gap-8">
+          <Hero
+            title="Palais"
+            tagline="Welcome to Lily Palais."
+            align="start"
+          />
+            <Galwall />
+            <div class="container">
+              <div class="left-container">
+                <div id="cardInfoContainer">
+                  <!-- 卡片信息将在这里生成 -->
+                </div>
+              </div>
+              <div class="right-container">
+                <ul id="cardList">
+                  <!-- 卡片将在这里生成 -->
+                </ul>
+              </div>
+            </div>
+            <div class="system-container">
+              <Hagishi />
+              <!-- <div id="system">
+                <div class="title">
+                  <button id="getHagishiButton" onclick="getHagishi()">+八食</button>
+                  <h4>八食</h4>
+                </div>
+                <div id="cardImagesHagishi"></div>
+                <div class="powers-container">
+                  <div id="totalPhysicPowerHagishi">Hagishi 力：0</div>
+                  <div id="totalMagicPowerHagishi">Hagishi 魔：0</div>
+                  <div id="totalUtilityPowerHagishi">Hagishi 術：0</div>
+                  <div id="totalHagishi">總能力：0</div>
+                  <div id="attrHagishi">屬性：</div>
+                </div>
+              </div> -->
+              
+
+              <div id="system">
+                <div class="title">
+                  <button id="getHagisunButton" onclick="getHagisun()">+初桑</button>
+                  <h4>初桑</h4>
+
+                </div>
+                <div id="cardImagesHagisun"></div>
+                <div class="powers-container">
+                  <div id="totalPhysicPowerHagisun">Hagisun 力：0</div>
+                  <div id="totalMagicPowerHagisun">Hagisun 魔：0</div>
+                  <div id="totalUtilityPowerHagisun">Hagisun 術：0</div>
+                  <div id="totalHagisun">總能力：0</div>
+                  <div id="attrHagisun">屬性：</div>
+                </div>
+              </div>
+              
+
+              <div id="system">
+                <div class="title">
+                  <button id="getRapeharemButton" onclick="getRapeharem()">+姦閣</button>
+                  <h4>姦閣</h4>
+                </div>
+                <div id="cardImagesRapeharem"></div>
+                <div class="powers-container">
+                  <div id="totalPhysicPowerRapeharem">Rapeharem 力：0</div>
+                  <div id="totalMagicPowerRapeharem">Rapeharem 魔：0</div>
+                  <div id="totalUtilityPowerRapeharem">Rapeharem 術：0</div>
+                  <div id="totalRapeharem">總能力：0</div>
+                  <div id="attrRapeharem">屬性：</div>
+                </div>
+              </div>
+              <Libertad />
+
+              <div id="system">
+                <div class="title">
+                  <button id="getMutavButton" onclick="getMutav()">+Jardin des Dieux</button>
+                  <h4>Jardin des Dieux</h4>
+                </div>
+                <div id="cardImagesMutav"></div>
+                <div class="powers-container">
+                  <div id="totalPhysicPowerMutav">Jardin des Dieux 力：0</div>
+                  <div id="totalMagicPowerMutav">Jardin des Dieux 魔：0</div>
+                  <div id="totalUtilityPowerMutav">Jardin des Dieux 術：0</div>
+                  <div id="totalMutav">總能力：0</div>
+                  <div id="attrMutav">屬性：</div>
+                </div>
+              </div>
+              <!-- <div id="system">
+                <div class="title">
+                  <button id="getLibertadButton" onclick="getLibertad()">+Libertad</button>
+                  <h4>Libertad</h4>
+                </div>
+                <div id="cardImagesLibertad"></div>
+                <div class="powers-container">
+                  <div id="totalPhysicPowerLibertad">Libertad 力：0</div>
+                  <div id="totalMagicPowerLibertad">Libertad 魔：0</div>
+                  <div id="totalUtilityPowerLibertad">Libertad 術：0</div>
+                  <div id="totalLibertad">總能力：0</div>
+                  <div id="attrLibertad">屬性：</div>
+                </div>
+              </div> -->
+
+              <div id="system">
+                <div class="title">
+                  <button id="getAllButton" onclick="getAll()">+隨機</button>
+                  <h4>隨機</h4>
+                </div>
+                <div id="cardImagesAll"></div>
+              </div>
+
+            </div>
+          </Hero>
+        </main>
+      </div>
+    </BaseLayout>
+
+    <!-- 全屏遮罩 -->
+
+    <div class="overlay" id="passwordOverlay">
+      <script>
+        var isAuthenticated = false;
+
+        if (!isAuthenticated) {
+          var password = prompt("請輸入密碼", "");
+          if (password === "1") {
+            isAuthenticated = true;
+            document.getElementById("passwordOverlay").style.display = "none";
+          } else {
+            alert("請再輸入一次密碼");
+            location.href = "examples/javascript/16ex2.html";
+          }
+        }
+      </script>
+    </div>
+
+    
+
   </body>
 </html>
