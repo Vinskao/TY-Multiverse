@@ -1,0 +1,118 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<head>
+  <script type="text/javascript">
+    function clearForm() {
+      var inputs = document.getElementsByTagName("input");
+      for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].type === "text") {
+          inputs[i].value = "";
+        }
+      }
+    }
+
+    function handleAction(prodaction) {
+      var form = document.getElementById("productForm");
+      var formData = new FormData(form);
+
+      fetch("http://localhost:8080/pages/tyProduct.controller", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Handle the response data
+          if (data.delete !== undefined) {
+            document.getElementById("deleteResult").innerHTML =
+              "Delete Product Table Success: " + data.delete + " row deleted";
+            clearForm();
+          } else if (data.insert !== undefined) {
+            document.getElementById("insertResult").innerHTML =
+              "Insert Product Table Success: " + data.insert.id;
+            clearForm();
+          } else if (data.update !== undefined) {
+            document.getElementById("updateResult").innerHTML =
+              "Update Product Table Success: " + data.update.id;
+            clearForm();
+          } else {
+            document.getElementById("actionError").innerHTML =
+              data.errors.action || "";
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+  </script>
+</head>
+<body>
+  <BaseLayout title="Product" description="Learn about Product">
+    <div class="stack gap-20">
+      <h3 id="welcomeMessage"></h3>
+
+      <h3><a href="http://localhost:3000/about/">Login</a></h3>
+      <h3><a href="http://localhost:3000/product">Product</a></h3>
+
+      <form
+        id="productForm"
+        action="http://localhost:8080/pages/product.controller"
+        method="post"
+      >
+        <table>
+          <tr>
+            <td>ID :</td>
+            <td><input type="text" name="id" value="" /></td>
+          </tr>
+          <tr>
+            <td>Name :</td>
+            <td><input type="text" name="name" value="" /></td>
+          </tr>
+          <tr>
+            <td>Price :</td>
+            <td><input type="text" name="price" value="" /></td>
+          </tr>
+          <tr>
+            <td>Make :</td>
+            <td><input type="text" name="make" value="" /></td>
+          </tr>
+          <tr>
+            <td>Expire :</td>
+            <td><input type="text" name="expire" value="" /></td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                type="button"
+                onclick="handleAction('Insert')"
+                value="Insert"
+              />
+              <input
+                type="button"
+                onclick="handleAction('Update')"
+                value="Update"
+              />
+            </td>
+            <td>
+              <input
+                type="button"
+                onclick="handleAction('Delete')"
+                value="Delete"
+              />
+              <input
+                type="button"
+                onclick="handleAction('Select')"
+                value="Select"
+              />
+              <input type="button" value="Clear" onclick="clearForm()" />
+            </td>
+          </tr>
+        </table>
+      </form>
+      <h3><span class="error" id="actionError"></span></h3>
+
+      <div id="deleteResult"></div>
+      <div id="insertResult"></div>
+      <div id="updateResult"></div>
+    </div>
+  </BaseLayout>
+</body>
