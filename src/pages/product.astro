@@ -1,16 +1,21 @@
 ---
+import vue from "@astrojs/vue";
+import ProductType from "../components/ProductType.vue"
+import 'vue@3';
 ---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product</title>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script>
+    <script type="text/javascript" src="https://unpkg.com/vue@3"></script>
+    <ProductType />
+    <!-- will automatically use the production build when deployed for production. The .prod.js file is the production build, and the .global.js file is the development build. -->
+    
+
+    <!-- <script>
       import { createApp } from 'vue';
 
       const app = createApp({
@@ -141,8 +146,8 @@
         </table>
         <script>app.clearForm();</script>
       </div>
-    </div>
+    </div> -->
+  </head>
 
-    
-  </body>
+
 </html>

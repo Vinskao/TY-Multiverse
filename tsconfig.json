@@ -1,7 +1,10 @@
 {
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
-    "types": ["node", "jquery"]
-
-  },
+    "types": [
+      "node",
+      "jquery"
+    ],
+    "jsx": "preserve"
+  }
 }
