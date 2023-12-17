@@ -10,8 +10,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vue": "^4.0.3",
+    "@astrojs/vue": "^4.0.4",
     "@google-cloud/storage": "^7.5.0",
+    "@vue/component-compiler-utils": "^3.3.0",
     "astro": "^4.0.0",
     "axios": "^1.6.2",
     "bootstrap": "^5.3.2",
@@ -22,12 +23,15 @@
     "firebase": "^10.5.2",
     "fs": "^0.0.1-security",
     "jquery": "^3.7.1",
-    "vue": "^3.3.11"
+    "postcss": "^8.4.32",
+    "vue-loader": "^17.3.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.14",
     "@types/jquery": "^3.5.29",
-    "@types/node": "^20.7.1"
+    "@types/node": "^20.7.1",
+    "@vue/cli-plugin-typescript": "^5.0.8",
+    "vue": "^3.3.12"
   },
   "description": "All commands are run from the root of the project, from a terminal:",
   "main": "index.js",
