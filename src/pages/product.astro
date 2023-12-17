@@ -1,14 +1,9 @@
----
-import ProductType from "../components/ProductType.vue"
----
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product</title>
-    <!-- <ProductType /> -->
 
     <script type="module">
       import { createApp, ref, onMounted } from 'vue';
@@ -33,7 +28,7 @@ import ProductType from "../components/ProductType.vue"
 
           const fetchData = () => {
             // 使用 Fetch API 发送请求获取数据
-            fetch("http://192.168.74.54:8080/pages/ajax/products", {
+            fetch("http://localhost:8080/pages/ajax/products", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -73,6 +68,28 @@ import ProductType from "../components/ProductType.vue"
       });
 
       app.mount("#app");
+
+      const fetchDataAjax = () => {
+        fetch("http://localhost:8080/pages/ajax/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // Add data to send to the backend if needed
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.success);
+            if (data.success === false) {
+              console.log(data);
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      };
     </script>
 
   </head>
@@ -83,7 +100,7 @@ import ProductType from "../components/ProductType.vue"
       <h3>Product Table</h3>
 
       <form
-        action="/tyProduct.controller"
+        action="http://localhost:8080/pages/product.controller"
         method="post"
         @submit.prevent="handleSubmit"
       >
@@ -91,27 +108,22 @@ import ProductType from "../components/ProductType.vue"
           <tr>
             <td>ID :</td>
             <td><input type="text" name="id" v-model="param.id" /></td>
-            <!-- <td>{{ errors.id }}</td> -->
           </tr>
           <tr>
             <td>Name :</td>
             <td><input type="text" name="name" v-model="param.name" /></td>
-            <!-- <td>{{ errors.name }}</td> -->
           </tr>
           <tr>
             <td>Price :</td>
             <td><input type="text" name="price" v-model="param.price" /></td>
-            <!-- <td>{{ errors.price }}</td> -->
           </tr>
           <tr>
             <td>Make :</td>
             <td><input type="text" name="make" v-model="param.make" /></td>
-            <!-- <td>{{ errors.make }}</td> -->
           </tr>
           <tr>
             <td>Expire :</td>
             <td><input type="text" name="expire" v-model="param.expire" /></td>
-            <!-- <td>{{ errors.expire }}</td> -->
           </tr>
           <tr>
             <td>
@@ -147,37 +159,17 @@ import ProductType from "../components/ProductType.vue"
         </table>
       </form>
 
-      <!-- <h3><span class="error">{{ errors.action }}</span></h3> -->
-      <div v-if="deleteData !== undefined">
-        <!-- <h3>Delete Product Table Success : {{ deleteData }} row deleted</h3> -->
-        <!-- <script>app.clearForm();</script> -->
-      </div>
+      <button onclick="fetchDataAjax()">Ajax</button>
+
+      <div v-if="deleteData !== undefined"></div>
 
       <div v-if="insertData !== undefined">
         <h3>Insert Product Table Success</h3>
-        <!-- <table border="1"> -->
-          <!-- <tr><td>Id</td><td>{{ insertData.id }}</td></tr>
-          <tr><td>Name</td><td>{{ insertData.name }}</td></tr>
-          <tr><td>Price</td><td>{{ insertData.price }}</td></tr>
-          <tr><td>Make</td><td>{{ insertData.make }}</td></tr>
-          <tr><td>Expire</td><td>{{ insertData.expire }}</td></tr> -->
-        </table>
-        <!-- <script>app.clearForm();</script> -->
       </div>
 
       <div v-if="updateData !== undefined">
         <h3>Update Product Table Success</h3>
-        <table border="1">
-          <!-- <tr><td>Id</td><td>{{ updateData.id }}</td></tr>
-          <tr><td>Name</td><td>{{ updateData.name }}</td></tr>
-          <tr><td>Price</td><td>{{ updateData.price }}</td></tr>
-          <tr><td>Make</td><td>{{ updateData.make }}</td></tr>
-          <tr><td>Expire</td><td>{{ updateData.expire }}</td></tr> -->
-        </table>
-        <!-- <script>app.clearForm();</script> -->
       </div>
     </div>
-  </head>
-
-
+  </body>
 </html>
