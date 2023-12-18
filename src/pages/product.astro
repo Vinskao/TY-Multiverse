@@ -1,3 +1,6 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +10,8 @@
 
     <script type="module">
       import { createApp, ref, onMounted } from 'vue';
-
+      import axios from 'https://www.unpkg.com/axios@1.6.2/dist/axios.min.js';
+      import Swal from 'https://www.unpkg.com/sweetalert2@11.10.1/dist/sweetalert2.all.min.js';
       const app = createApp({
         setup() {
           const param = ref({});
@@ -16,6 +20,22 @@
           const insertData = ref(undefined);
           const updateData = ref(undefined);
           const prodaction = ref("");
+
+          const openIframe = (url) => {
+            const iframe = document.getElementById("myIframe");
+            iframe.src = url;
+            iframe.style.display = "block";
+          };
+          const closeIframe = () => {
+            const iframe = document.getElementById("myIframe");
+            iframe.src = ""; // 清空 src 屬性以停止載入
+            iframe.style.display = "none";
+          };
+
+          const handleSubmit = () => {
+            closeIframe();
+            clearForm();
+          };
 
           const clearForm = () => {
             var inputs = document.getElementsByTagName("input");
@@ -63,6 +83,9 @@
             prodaction,
             clearForm,
             fetchData,
+            openIframe,
+            closeIframe,
+            handleSubmit,
           };
         }
       });
@@ -90,18 +113,207 @@
             console.error("Error:", error);
           });
       };
+      function find() {
+          let request = {
+            start: 0,
+            rows: 50,
+          };
+  
+          Swal.fire({
+            icon: "warning",
+            text: "Loading...",
+            allowOutsideClick: true,
+            confirmButtonText: "OK",
+            showCancelButton: true,
+          });
+          axios
+            .post("http://localhost:8080/pages/ajax/products/find", request)
+            .then(function (response) {
+              console.log(response);
+              console.log(response.data.count);
+              console.log(response.data.list);
+              if (response.data.list) {
+                for (i = 0; i < response.data.list.length; i++) {
+                  console.log(i, response.data.list[i]);
+                }
+                setTimeout(function () {
+                  Swal.close();
+                }, 900);
+              }
+            })
+            .catch(function (error) {})
+            .finally(function () {});
+        }
+        function remove() {
+          Swal.fire({
+            icon: "question",
+            text: "Sure???",
+            allowOutsideClick: true,
+            confirmButtonText: "OK",
+            cancelButtonText: "Cancel",
+            showCancelButton: true,
+          });
+          axios
+            .delete("http://localhost:8080/pages/ajax/products/1002", request)
+            .then(function (response) {
+              if (result.isConfirmed) {
+                Swal.fire({
+                  icon: "warning",
+                  text: "Loading...",
+                  allowOutsideClick: true,
+                  confirmButtonText: "OK",
+                  showCancelButton: true,
+                });
+              }
+              setTimeout(function () {
+                Swal.close();
+              }, 1005);
+            })
+            .catch(function (error) {
+              console.log("error", error);
+              Swal.fire({
+                icon: "error",
+                text: "失敗刪除:" + error.message,
+              });
+            })
+            .finally(function () {});
+        }
+        function modify() {
+          Swal.fire({
+            icon: "warning",
+            text: "Loading...",
+            allowOutsideClick: true,
+            confirmButtonText: "OK",
+          }).then(function (result) {});
+  
+          let request = {
+            id: 10053,
+            name: "ho",
+            price: 14561456.23,
+            make: "2023-12-15",
+            expire: 21,
+          };
+          axios
+            .put("http://localhost:8080/pages/ajax/products/1000", request)
+            .then(function (response) {
+              if (response.data.success) {
+                console.log("message: ", response.data.message);
+                Swal.fire({
+                  icon: "success",
+                  text: "成功修改:" + response.data.message,
+                }).then(function (result) {});
+              }
+              // else {
+              //   console.log("error", error);
+              // }
+              setTimeout(function () {
+                Swal.close();
+              }, 1000);
+            })
+            .catch(function (error) {
+              Swal.fire({
+                icon: "error",
+                text: "go away " + error.message,
+                confirmButtonText: "OK",
+              }).then(function (result) {});
+            })
+            .finally(function () {});
+        }
+  
+        function create() {
+          Swal.fire({
+            icon: "warning",
+            text: "Loading...",
+            allowOutsideClick: true,
+            confirmButtonText: "OK",
+          }).then(function (result) {});
+          let request = {
+            id: 1000,
+            name: "whores",
+            price: 14561456.23,
+            make: "2023-12-15",
+            expire: 21,
+          };
+          axios
+            .post("http://192.168.74.54:8080/pages/ajax/products", request)
+            .then(function (response) {
+              console.log("response: ", response);
+              if (response.data.success) {
+                console.log("message: ", response.data.message);
+                //只要後端設定為key，前端可以用.呼
+                Swal.fire({
+                  icon: "success",
+                  text: "成功新增:" + response.data.message,
+                }).then(function (result) {});
+              }
+              setTimeout(function () {
+                Swal.close();
+              }, 1000);
+            })
+            .catch(function (error) {
+              console.log("error", error);
+              Swal.fire({
+                icon: "error",
+                text: "go away" + error.message,
+                confirmButtonText: "OK",
+              }).then(function (result) {});
+            })
+            .finally(function () {});
+        }
+        function findById() {
+          Swal.fire({
+            icon: "warning",
+            text: "Loading...",
+            allowOutsideClick: true,
+            confirmButtonText: "OK",
+          }).then(function (result) {});
+          axios
+            .get("http://192.168.74.54:8080/pages/ajax/products/199")
+            .then(function (response) {
+              console.log("response", response.data);
+              if (response.data.list) {
+                console.log(response.data.list[0].id);
+                console.log(response.data.list[0].name);
+                console.log(response.data.list[0].price);
+                console.log(response.data.list[0].make);
+                console.log(response.data.list[0].expire);
+                //.後面接屬性
+                const responseDataString = JSON.stringify(response.data.list[0]);
+                Swal.fire({
+                  icon: "success",
+                  text: responseDataString,
+                }).then(function (result) {});
+              }
+              setTimeout(function () {
+                Swal.close();
+              }, 900);
+            })
+            .catch(function (error) {
+              console.log("error", error);
+              Swal.fire({
+                icon: "error",
+                text: "go away" + error.message,
+                confirmButtonText: "OK",
+              }).then(function (result) {});
+            })
+            .finally(function () {});
+          //實例化 Promise 時會帶入兩個參數，分別是 resolve 與 reject，而當若結果回傳的是 resolve 則會跑 then，反之若是 reject 就是 catch。
+        }
     </script>
 
   </head>
   <body>
+    <BaseLayout title="About | Tianyi Kao" description="About Tianyi Kao">
     <div id="app">
       <h3>Welcome</h3>
-
       <h3>Product Table</h3>
+      <iframe id="myIframe" style="display: none;" @load="clearForm"></iframe>
+
 
       <form
         action="http://localhost:8080/pages/product.controller"
         method="post"
+        target="myIframe"
         @submit.prevent="handleSubmit"
       >
         <table>
@@ -125,7 +337,7 @@
             <td>Expire :</td>
             <td><input type="text" name="expire" v-model="param.expire" /></td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td>
               <input
                 type="submit"
@@ -155,13 +367,21 @@
               />
               <input type="button" value="Clear" @click="clearForm" />
             </td>
-          </tr>
+          </tr> -->
+
         </table>
       </form>
-
+      <button onclick="findById()">findById</button>
+      <button onclick="create()">create</button>
+      <button onclick="modify()">modify</button>
+      <button onclick="remove()">remove</button>
+      <button onclick="find()">find</button>
       <button onclick="fetchDataAjax()">Ajax</button>
+      <script>
+        
+      </script>
 
-      <div v-if="deleteData !== undefined"></div>
+      <!-- <div v-if="deleteData !== undefined"></div>
 
       <div v-if="insertData !== undefined">
         <h3>Insert Product Table Success</h3>
@@ -169,7 +389,8 @@
 
       <div v-if="updateData !== undefined">
         <h3>Update Product Table Success</h3>
-      </div>
+      </div> -->
     </div>
+    </BaseLayout>
   </body>
 </html>
