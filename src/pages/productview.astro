@@ -1,0 +1,48 @@
+---
+import { find, findById, create, remove, modify } from '../scripts/ProductView.js';
+---
+
+<div>
+  <button data-function="findById">findById</button>
+  <button data-function="create">create</button>
+  <button data-function="modify">modify</button>
+  <button data-function="remove">remove</button>
+  <button data-function="find">find</button>
+</div>
+
+<script type="module" defer>
+  console.log(1);
+  document.addEventListener("DOMContentLoaded", function() {
+    console.log(2);
+    document.querySelectorAll('button').forEach(function(button) {
+      console.log(3);
+      button.addEventListener('click', function() {
+        console.log(4);
+        const functionName = button.getAttribute('data-function');
+        if (functionName != null && functionName.length != 0) {
+          console.log(5);
+          switch (functionName) {
+            case 'findById':
+              findById();
+              break;
+            case 'create':
+              create();
+              break;
+            case 'modify':
+              modify();
+              break;
+            case 'remove':
+              remove();
+              break;
+            case 'find':
+              find();
+              break;
+            default:
+              console.error(`Function '${functionName}' not found.`);
+              console.log(6);
+          }
+        }
+      });
+    });
+  });
+</script>
