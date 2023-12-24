@@ -1,149 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Galwall</title>
-  <style>
-    #adContainer {
-      display: flex;
-      width: 3700px; /* Set the width to accommodate all images (100px * 21) */
-      overflow: hidden;
-    }
-
-    .ad {
-      min-width: 100px;
-      height: auto;
-      margin-right: -100px;
-
-    }
-
-    @keyframes slideLeft {
-      0%, 100% {
-        transform: translateX(0%);
-      }
-      50% {
-        transform: translateX(-100%);
-      }
-    }
-  </style>
-</head>
-<body>
-  <div id="adContainer"></div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const adContainer = document.getElementById("adContainer");
-      const numVisibleAds = 35;
-      const imageList1 = [
-        "/assets/person/Miku.png",
-        "/assets/person/Wavo.png",
-        "/assets/person/Chiaki.png",
-        "/assets/person/Sayuri.png",
-        "/assets/person/Hitomi.png",
-        "/assets/person/Yuko.png",
-        "/assets/person/Etsuko.png",
-        "/assets/person/Masako.png",
-        "/assets/person/Sorane.png",
-        "/assets/person/Kyu.png",
-        "/assets/person/Riuri.png",
-        "/assets/person/Natsumi.png",
-        "/assets/person/Kamira.png",
-        "/assets/person/Kazuko.png",
-        "/assets/person/Miyu.png",
-        "/assets/person/Valmet.png",
-        "/assets/person/Mayo.png",
-        "/assets/person/Samui.png",
-        "/assets/person/Paprika.png",
-        "/assets/person/Caleigh.png",
-        "/assets/person/Doire.png",
-        "/assets/person/Z.png",
-        "/assets/person/Branwen.png",
-        "/assets/person/Lucrece.png",
-        "/assets/person/Uiobbeci.png",
-        "/assets/person/Draeny.png",
-        "/assets/person/Nianca.png",
-        "/assets/person/Yui.png",
-        "/assets/person/Mesoyei.png",
-        "/assets/person/Monroe.png",
-        "/assets/person/Spoke.png",
-        "/assets/person/Delsa.png",
-        "/assets/person/Ann.png",
-        "/assets/person/Shuan.png",
-        "/assets/person/Kristae.png",
-      ];
-
-      const imageList2 = [
-       "/assets/person/Kristae.png",
-        "/assets/person/Shuan.png",
-        "/assets/person/Ann.png",
-        "/assets/person/Delsa.png",
-        "/assets/person/Spoke.png",
-        "/assets/person/Monroe.png",
-        "/assets/person/Mesoyei.png",
-        "/assets/person/Yui.png",
-        "/assets/person/Nianca.png",
-        "/assets/person/Draeny.png",
-        "/assets/person/Uiobbeci.png",
-        "/assets/person/Lucrece.png",
-        "/assets/person/Branwen.png",
-        "/assets/person/Z.png",
-        "/assets/person/Doire.png",
-        "/assets/person/Caleigh.png",
-        "/assets/person/Paprika.png",
-        "/assets/person/Samui.png",
-        "/assets/person/Mayo.png",
-        "/assets/person/Valmet.png",
-        "/assets/person/Miyu.png",
-        "/assets/person/Kazuko.png",
-        "/assets/person/Kamira.png",
-        "/assets/person/Natsumi.png",
-        "/assets/person/Riuri.png",
-        "/assets/person/Kyu.png",
-        "/assets/person/Sorane.png",
-        "/assets/person/Masako.png",
-        "/assets/person/Etsuko.png",
-        "/assets/person/Yuko.png",
-        "/assets/person/Hitomi.png",
-        "/assets/person/Sayuri.png",
-        "/assets/person/Chiaki.png",
-      ];
-
-      function createAdDiv(imageURL) {
-        const adDiv = document.createElement("div");
-        adDiv.className = "ad";
-        const adImage = document.createElement("img");
-        adImage.src = imageURL;
-        adImage.width = 200;
-        adDiv.appendChild(adImage);
-        return adDiv;
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Galwall</title>
+    <style>
+      #adContainer {
+        display: flex;
+        width: 3700px; /* Set the width to accommodate all images (100px * 21) */
+        overflow: hidden;
       }
 
-      function loadAds(imageList) {
-        adContainer.innerHTML = "";
-        for (let i = 0; i < numVisibleAds * 1; i++) { 
-          const imageURL = imageList[i % numVisibleAds];
-          const adDiv = createAdDiv(imageURL);
-          adContainer.appendChild(adDiv);
+      .ad {
+        min-width: 100px;
+        height: auto;
+        margin-right: -100px;
+      }
+
+      @keyframes slideLeft {
+        0%,
+        100% {
+          transform: translateX(0%);
+        }
+        50% {
+          transform: translateX(-100%);
         }
       }
+    </style>
+  </head>
+  <body>
+    <div id="adContainer"></div>
 
-      function startAnimation() {
-        adContainer.style.animation = "slideLeft 30s linear infinite";
-      }
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const adContainer = document.getElementById("adContainer");
+        const numVisibleAds = 35;
+        const imageList1 = [
+          "/assets/person/Miku.png",
+          "/assets/person/Wavo.png",
+          "/assets/person/Chiaki.png",
+          "/assets/person/Sayuri.png",
+          "/assets/person/Hitomi.png",
+          "/assets/person/Yuko.png",
+          "/assets/person/Etsuko.png",
+          "/assets/person/Masako.png",
+          "/assets/person/Sorane.png",
+          "/assets/person/Kyu.png",
+          "/assets/person/Riuri.png",
+          "/assets/person/Natsumi.png",
+          "/assets/person/Kamira.png",
+          "/assets/person/Kazuko.png",
+          "/assets/person/Miyu.png",
+          "/assets/person/Valmet.png",
+          "/assets/person/Mayo.png",
+          "/assets/person/Samui.png",
+          "/assets/person/Paprika.png",
+          "/assets/person/Caleigh.png",
+          "/assets/person/Doire.png",
+          "/assets/person/Z.png",
+          "/assets/person/Branwen.png",
+          "/assets/person/Lucrece.png",
+          "/assets/person/Uiobbeci.png",
+          "/assets/person/Draeny.png",
+          "/assets/person/Nianca.png",
+          "/assets/person/Yui.png",
+          "/assets/person/Mesoyei.png",
+          "/assets/person/Monroe.png",
+          "/assets/person/Spoke.png",
+          "/assets/person/Delsa.png",
+          "/assets/person/Ann.png",
+          "/assets/person/Shuan.png",
+          "/assets/person/Kristae.png",
+          "/assets/person/Taisy.png",
+        ];
 
-      function restartAnimation() {
-        const currentImageList = adContainer.innerHTML.includes("poker/0.jpg") ? imageList2 : imageList1;
-        loadAds(currentImageList);
+        const imageList2 = [
+          "/assets/person/Taisy.png",
+          "/assets/person/Kristae.png",
+          "/assets/person/Shuan.png",
+          "/assets/person/Ann.png",
+          "/assets/person/Delsa.png",
+          "/assets/person/Spoke.png",
+          "/assets/person/Monroe.png",
+          "/assets/person/Mesoyei.png",
+          "/assets/person/Yui.png",
+          "/assets/person/Nianca.png",
+          "/assets/person/Draeny.png",
+          "/assets/person/Uiobbeci.png",
+          "/assets/person/Lucrece.png",
+          "/assets/person/Branwen.png",
+          "/assets/person/Z.png",
+          "/assets/person/Doire.png",
+          "/assets/person/Caleigh.png",
+          "/assets/person/Paprika.png",
+          "/assets/person/Samui.png",
+          "/assets/person/Mayo.png",
+          "/assets/person/Valmet.png",
+          "/assets/person/Miyu.png",
+          "/assets/person/Kazuko.png",
+          "/assets/person/Kamira.png",
+          "/assets/person/Natsumi.png",
+          "/assets/person/Riuri.png",
+          "/assets/person/Kyu.png",
+          "/assets/person/Sorane.png",
+          "/assets/person/Masako.png",
+          "/assets/person/Etsuko.png",
+          "/assets/person/Yuko.png",
+          "/assets/person/Hitomi.png",
+          "/assets/person/Sayuri.png",
+          "/assets/person/Chiaki.png",
+        ];
+
+        function createAdDiv(imageURL) {
+          const adDiv = document.createElement("div");
+          adDiv.className = "ad";
+          const adImage = document.createElement("img");
+          adImage.src = imageURL;
+          adImage.width = 200;
+          adDiv.appendChild(adImage);
+          return adDiv;
+        }
+
+        function loadAds(imageList) {
+          adContainer.innerHTML = "";
+          for (let i = 0; i < numVisibleAds * 1; i++) {
+            const imageURL = imageList[i % numVisibleAds];
+            const adDiv = createAdDiv(imageURL);
+            adContainer.appendChild(adDiv);
+          }
+        }
+
+        function startAnimation() {
+          adContainer.style.animation = "slideLeft 30s linear infinite";
+        }
+
+        function restartAnimation() {
+          const currentImageList = adContainer.innerHTML.includes("poker/0.jpg")
+            ? imageList2
+            : imageList1;
+          loadAds(currentImageList);
+          startAnimation();
+        }
+
+        // Initial load and start animation
+        loadAds(imageList1);
         startAnimation();
-      }
 
-      // Initial load and start animation
-      loadAds(imageList1);
-      startAnimation();
-
-      // Restart animation when the animation ends
-      adContainer.addEventListener("animationend", restartAnimation);
-    });
-  </script>
-</body>
+        // Restart animation when the animation ends
+        adContainer.addEventListener("animationend", restartAnimation);
+      });
+    </script>
+  </body>
 </html>

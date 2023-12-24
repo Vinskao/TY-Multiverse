@@ -9,17 +9,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <BaseLayout title="About | Tianyi Kao" description="About Tianyi Kao">
     <div class="stack gap-20">
         <main class="wrapper about">
-          <div>
-            <button id="findById">findById</button>
-            <button id="create">create</button>
-            <button id="modify">modify</button>
-            <button id="remove">remove</button>
-            <button id="find">find</button>
-          </div>
-
           <!-- Table section -->
           <div>
-            <h3>Data Table</h3>
+            <h3>Product Table</h3>
+            <div>
+              <button id="findById">findById</button>
+              <button id="create">create</button>
+              <button id="modify">modify</button>
+              <button id="remove">remove</button>
+              <button id="find">find</button>
+            </div>
             <table id="dataTable">
               
             </table>
@@ -83,12 +82,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         console.log("find called");
         let request = {
           start: 0,
-          rows: 5,
+          rows: 100,
         };
   
         handleLoading(
           axios
-            .post("http://192.168.0.125:8080/pages/ajax/products/find", request)
+            .post("http://192.168.1.110:8080/pages/ajax/products/find", request)
             .then(function (response) {
               console.log("response", response);
               console.log("count", response.data.count);
@@ -128,7 +127,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             };
             handleLoading(
               axios
-                .delete("http://192.168.0.125:8080/pages/ajax/products/1002", request)
+                .delete("http://192.168.1.110:8080/pages/ajax/products/1002", request)
                 .then(function (response) {
                   Swal.fire({
                     icon: "success",
@@ -164,16 +163,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         });
   
         let request = {
-          id: 1003,
-          name: "this is another demo",
-          price: 6.78,
-          make: "2021-2-3",
-          expire: 90,
+          id: 1002,
+          name: "mini",
+          price: 66.78,
+          make: "2025-2-3",
+          expire: 90667,
         };
   
         handleLoading(
           axios
-            .put("http://192.168.0.125:8080/pages/ajax/products/1003", request)
+            .put("http://192.168.1.110:8080/pages/ajax/products/1003", request)
             .then(function (response) {
               console.log("response", response);
               if (response.data.success) {
@@ -218,7 +217,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         };
         handleLoading(
           axios
-            .post("http://192.168.0.125:8080/pages/ajax/products", request)
+            .post("http://192.168.1.110:8080/pages/ajax/products", request)
             .then(function (response) {
               console.log("response", response);
               if (response.data.success) {
@@ -255,7 +254,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         });
   
         axios
-          .get("http://192.168.0.125:8080/pages/ajax/products/2")
+          .get("http://192.168.1.110:8080/pages/ajax/products/2")
           .then(function (response) {
             console.log("response", response);
             if (response.data.list) {
