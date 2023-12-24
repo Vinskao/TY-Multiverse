@@ -1,16 +1,32 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
+<meta charset="UTF-8">
 <head>
 
 </head>
 <body>
-  <div>
-    <button id="findById">findById</button>
-    <button id="create">create</button>
-    <button id="modify">modify</button>
-    <button id="remove">remove</button>
-    <button id="find">find</button>
-  </div>
+  <BaseLayout title="About | Tianyi Kao" description="About Tianyi Kao">
+    <div class="stack gap-20">
+        <main class="wrapper about">
+          <div>
+            <button id="findById">findById</button>
+            <button id="create">create</button>
+            <button id="modify">modify</button>
+            <button id="remove">remove</button>
+            <button id="find">find</button>
+          </div>
+
+          <!-- Table section -->
+          <div>
+            <h3>Data Table</h3>
+            <table id="dataTable">
+              
+            </table>
+          </div>
+        </main>
+      </div>
+  </BaseLayout>
   
   <script type="module" defer>
     import axios from "https://cdn.skypack.dev/pin/axios@v1.6.2-N5VjRwdVe2W3vBaCZP91/mode=imports,min/optimized/axios.js";
@@ -40,10 +56,31 @@
       modifyButton.addEventListener('click', modify);
       removeButton.addEventListener('click', remove);
       findButton.addEventListener('click', find);
+
+      function createTable(data) {
+        const table = document.getElementById("dataTable");
+        table.innerHTML = ""; // Clear existing table content
+
+        // Create header row
+        const headerRow = table.insertRow();
+        Object.keys(data.list[0]).forEach((key) => {
+          const th = document.createElement("th");
+          th.textContent = key;
+          headerRow.appendChild(th);
+        });
+
+        // Create data rows
+        data.list.forEach((item) => {
+          const row = table.insertRow();
+          Object.values(item).forEach((value) => {
+            const cell = row.insertCell();
+            cell.textContent = value;
+          });
+        });
+      }
   
       function find() {
         console.log("find called");
-        console.log(3);
         let request = {
           start: 0,
           rows: 5,
@@ -51,7 +88,7 @@
   
         handleLoading(
           axios
-            .post("http://192.168.1.110:8080/pages/ajax/products/find", request)
+            .post("http://192.168.0.125:8080/pages/ajax/products/find", request)
             .then(function (response) {
               console.log("response", response);
               console.log("count", response.data.count);
@@ -59,14 +96,23 @@
               if (response.data.list) {
                 for (let i = 0; i < response.data.list.length; i++) {
                   console.log(i, response.data.list[i]);
+                  createTable(response.data);
                 }
               }
             })
-            .catch(function (error) {})
+            .catch(function (error) {
+              console.log("error", error);
+              Swal.fire({
+                icon: "error",
+                text: "查詢錯誤：" + error.message,
+                confirmButtonText: "確定",
+              });
+            })
         );
       }
   
       function remove() {
+        console.log("remove called");
         Swal.fire({
           icon: "question",
           text: "確定要刪除嗎？",
@@ -82,7 +128,7 @@
             };
             handleLoading(
               axios
-                .delete("http://192.168.1.110:8080/pages/ajax/products/1002", request)
+                .delete("http://192.168.0.125:8080/pages/ajax/products/1002", request)
                 .then(function (response) {
                   Swal.fire({
                     icon: "success",
@@ -110,6 +156,7 @@
       }
   
       function modify() {
+        console.log("modify called");
         Swal.fire({
           text: "Loading.......",
           allowOutsideClick: false,
@@ -126,7 +173,7 @@
   
         handleLoading(
           axios
-            .put("http://192.168.1.110:8080/pages/ajax/products/1003", request)
+            .put("http://192.168.0.125:8080/pages/ajax/products/1003", request)
             .then(function (response) {
               console.log("response", response);
               if (response.data.success) {
@@ -155,6 +202,7 @@
       }
   
       function create() {
+        console.log("create called");
         Swal.fire({
           text: "Loading.......",
           allowOutsideClick: false,
@@ -170,7 +218,7 @@
         };
         handleLoading(
           axios
-            .post("http://192.168.1.110:8080/pages/ajax/products", request)
+            .post("http://192.168.0.125:8080/pages/ajax/products", request)
             .then(function (response) {
               console.log("response", response);
               if (response.data.success) {
@@ -199,6 +247,7 @@
       }
   
       function findById() {
+        console.log("findById called");
         Swal.fire({
           text: "Loading.......",
           allowOutsideClick: false,
@@ -206,7 +255,7 @@
         });
   
         axios
-          .get("http://192.168.1.110:8080/pages/ajax/products/2")
+          .get("http://192.168.0.125:8080/pages/ajax/products/2")
           .then(function (response) {
             console.log("response", response);
             if (response.data.list) {
@@ -230,8 +279,6 @@
             });
           });
       }
-  
-      // Rest of your code...
     });
   </script>
 </body>
