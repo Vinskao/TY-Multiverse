@@ -6,7 +6,7 @@ import Hero from "../components/Hero.astro";
 import Calendar from "../components/Calendar.html";
 import Star from "../components/Star.html";
 import Adwall from "../components/Adwall.html";
-import SecureLogin from "../components/SecureLogin.html";
+import Hamburger from "../components/Hamburger.astro";
 
 
 ---
@@ -140,10 +140,11 @@ import SecureLogin from "../components/SecureLogin.html";
         >
           <h6>Choose Your Date of Birth:</h6>
           <div class="content">
+            <Hamburger />
+
             <Calendar />
             <Star />
             <Adwall />
-            <SecureLogin />
 
           </div>
           
@@ -281,5 +282,8 @@ import SecureLogin from "../components/SecureLogin.html";
     iSpan.addEventListener("mouseleave", () => {
       subfolder.style.display = "none";
     });
+  </script>
+  <script>
+    import "../scripts/menu.js";
   </script>
 </body>
