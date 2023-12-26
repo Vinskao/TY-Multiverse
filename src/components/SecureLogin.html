@@ -25,9 +25,11 @@
               />
             </td>
             <td>
-              <span id="errorUsername" v-if="!username && errorMessages.xxx1"
-                >{{ errorMessages.xxx1 }}</span
-              >
+              <span
+                id="errorUsername"
+                v-if="!username && errorMessages.xxx1"
+                v-html="errorMessages.xxx1"
+              ></span>
             </td>
           </tr>
           <tr>
@@ -42,9 +44,11 @@
               />
             </td>
             <td>
-              <span id="errorPassword" v-if="!password && errorMessages.xxx2"
-                >{{ errorMessages.xxx2 }}</span
-              >
+              <span
+                id="errorPassword"
+                v-if="!password && errorMessages.xxx2"
+                v-html="errorMessages.xxx2"
+              ></span>
             </td>
           </tr>
           <tr>
@@ -89,26 +93,26 @@
 
             axios
               .post(
-                "http://192.168.1.110:8080/secure/login/ajex.controller",
+                "http://192.168.1.112:8080/secure/login/ajex.controller",
                 request
               )
               .then((response) => {
                 //使用了 function，這將導致 this 的上下文不是 Vue 實例，而是 window。這樣，您無法訪問 Vue 實例中的 this.username 和 this.password。解決這個問題的方法是使用箭頭函數，因為箭頭函數不會創建自己的 this 上下文，而是繼承父級上下文的 this
-                console.log("response", response);
-                const data = response.data;
                 if (!this.username && !this.password) {
-                  this.errorMessages.xxx1 = "帳號必填";
-                  this.errorMessages.xxx2 = "密碼必填";
+                  this.errorMessages.xxx1 = "<span>帳號必填</span>";
+                  this.errorMessages.xxx2 = "<span>密碼必填</span>";
                   return;
                 }
                 if (response.data.success) {
-                  console.log("message", response.data.message);
                   Swal.fire({
                     icon: "success",
                     text: response.data.message,
                     confirmButtonText: "確定",
+                  }).then(function (result) {
+                    if (result.isConfirmed) {
+                      window.location.assign("/productwelcome/");
+                    }
                   });
-                  window.location.assign("/productwelcome/");
                 } else {
                   Swal.fire({
                     icon: "error",
@@ -125,7 +129,7 @@
                   icon: "error",
                   text: "查詢錯誤：" + error.message,
                   confirmButtonText: "確定",
-                }).then(function (result) {});
+                });
               });
           },
         },
@@ -133,5 +137,13 @@
 
       app.mount("#app");
     </script>
+    <style>
+      #errorPassword span {
+        color: red;
+      }
+      #errorUsername span {
+        color: red;
+      }
+    </style>
   </body>
 </html>
