@@ -112,7 +112,7 @@ import ProductAjax from "../components/product-ajax.html";
   
         handleLoading(
           axios
-            .post("http://192.168.1.112:8080/pages/ajax/products/find", request)
+            .post("http://192.168.24.60:8080/pages/ajax/products/find", request)
             .then(function (response) {
               console.log("response", response);
               console.log("count", response.data.count);
@@ -152,7 +152,7 @@ import ProductAjax from "../components/product-ajax.html";
             };
             handleLoading(
               axios
-                .delete("http://192.168.1.112:8080/pages/ajax/products/1002", request)
+                .delete("http://192.168.24.60:8080/pages/ajax/products/1002", request)
                 .then(function (response) {
                   Swal.fire({
                     icon: "success",
@@ -197,7 +197,7 @@ import ProductAjax from "../components/product-ajax.html";
   
         handleLoading(
           axios
-            .put("http://192.168.1.112:8080/pages/ajax/products/1003", request)
+            .put("http://192.168.24.60:8080/pages/ajax/products/1003", request)
             .then(function (response) {
               console.log("response", response);
               if (response.data.success) {
@@ -242,7 +242,7 @@ import ProductAjax from "../components/product-ajax.html";
         };
         handleLoading(
           axios
-            .post("http://192.168.1.112:8080/pages/ajax/products", request)
+            .post("http://192.168.24.60:8080/pages/ajax/products", request)
             .then(function (response) {
               console.log("response", response);
               if (response.data.success) {
@@ -279,7 +279,7 @@ import ProductAjax from "../components/product-ajax.html";
         });
   
         axios
-          .get("http://192.168.1.112:8080/pages/ajax/products/2")
+          .get("http://192.168.24.60:8080/pages/ajax/products/2")
           .then(function (response) {
             console.log("response", response);
             if (response.data.list) {
